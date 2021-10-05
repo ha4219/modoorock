@@ -4,6 +4,7 @@ import {
   SafeAreaView,
   StyleSheet,
   Text,
+  Platform
 } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -36,22 +37,23 @@ const LoginStack = () => (
   </Stack.Navigator>
 );
 
-const TabStack = () => (
-  <Tab.Navigator
-    // tabBarOption={{showLabel: true}}
-    barStyle={{backgroundColor:'red'}}
-    // tabBar={state => <TabBar {...state} />}
-    >
-    <Tab.Screen name="Home" component={HomeStack} />
-    <Tab.Screen name="Test" component={TestStack} />
-    <Tab.Screen name="Login" component={LoginStack} />
-  </Tab.Navigator>
-);
+const TabStack = () => {
+  console.log('???');
+  return (
+    <Tab.Navigator tabBar={state => <TabBar {...state} />}>
+      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Test" component={Test} />
+      <Tab.Screen name="Login" component={LoginScreen} />
+    </Tab.Navigator>
+  );
+};
 
 const Router = () => {
   const routeNameRef = useRef();
   return (
-    <KeyboardAvoidingView style={styles.keyboard}>
+    <KeyboardAvoidingView
+      style={styles.keyboard}
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <SafeAreaView style={styles.container}>
         <NavigationContainer
           ref={navigationRef}

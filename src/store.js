@@ -11,6 +11,7 @@ const middleware = [];
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
+  timeout: 0,
 };
 
 middleware.push(createLogger());
