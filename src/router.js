@@ -71,8 +71,7 @@ const Router = () => {
         >
           <Stack.Navigator
             initialRouteName={'Home'}
-            // screenOptions={{headerMode: false}}
-          >
+            screenOptions={{headerMode: false}}>
             <Fragment>
               <Stack.Screen name="Tab" component={TabStack} />
               <Stack.Screen name="Home" component={Home} />
