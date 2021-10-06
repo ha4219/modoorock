@@ -3,7 +3,6 @@ import { Text, View, StyleSheet } from 'react-native';
 import {BottomNavigation, BottomNavigationTab} from '@ui-kitten/components';
 
 const TabBar = ({navigation, state}) => {
-  console.log("tabbar....", navigation, state);
   const changeTab = idx => {
     const selectedTabRoute = state.routes[idx];
     navigation.navigate(selectedTabRoute.name);
@@ -12,7 +11,7 @@ const TabBar = ({navigation, state}) => {
   return (
     <BottomNavigation
       appearance="noIndicator"
-      // styles={styles.test}
+      styles={styles.test}
       // selectedIndex={selectedIndex}
       selectedIndex={state.index}
       onSelect={changeTab}>

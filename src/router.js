@@ -4,7 +4,7 @@ import {
   SafeAreaView,
   StyleSheet,
   Text,
-  Platform
+  Platform,
 } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -20,30 +20,29 @@ const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const HomeStack = () => (
-  <Stack.Navigator initialRouteName="Home" screenOptions={{headerMode: false}}>
+  <Stack.Navigator initialRouteName="Home">
     <Stack.Screen name="Home" component={Home} />
   </Stack.Navigator>
 );
 
 const TestStack = () => (
-  <Stack.Navigator initialRouteName="Test" screenOptions={{headerMode: false}}>
+  <Stack.Navigator initialRouteName="Test">
     <Stack.Screen name="Test" component={Test} />
   </Stack.Navigator>
 );
 
 const LoginStack = () => (
-  <Stack.Navigator initialRouteName="Login" screenOptions={{headerMode: false}}>
+  <Stack.Navigator initialRouteName="Login">
     <Stack.Screen name="Login" component={LoginScreen} />
   </Stack.Navigator>
 );
 
 const TabStack = () => {
-  console.log('???');
   return (
     <Tab.Navigator tabBar={state => <TabBar {...state} />}>
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Test" component={Test} />
-      <Tab.Screen name="Login" component={LoginScreen} />
+      <Tab.Screen name="Home" component={HomeStack} />
+      <Tab.Screen name="Test" component={TestStack} />
+      <Tab.Screen name="Login" component={LoginStack} />
     </Tab.Navigator>
   );
 };
@@ -70,10 +69,11 @@ const Router = () => {
           //   }
           //   routeNameRef.current = currentRouteName;
           // }}
-        >
+          >
           <Stack.Navigator
-            initialRouteName={'Home'}
-            screenOptions={{headerMode: false}}>
+            initialRouteName={'Login'}
+            // screenOptions={{headerMode: false}}
+            >
             <Fragment>
               <Stack.Screen name="Tab" component={TabStack} />
               <Stack.Screen name="Home" component={Home} />

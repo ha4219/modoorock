@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, TextInput, StyleSheet } from 'react-native';
 
-const TextInputField = (state) => {
+const TextInputField = state => {
   const [value, setValue] = React.useState('');
   return (
     <View style={styles.container}>
@@ -10,7 +10,8 @@ const TextInputField = (state) => {
         onChangeText={setValue}
         value={value}
         autoCapitalize="none"
-        placeholder={state.state.defaultValue}
+        placeholder={state.defaultValue}
+        secureTextEntry={state.secureTextEntry}
       />
       <Text style={styles.error}>{state.error}</Text>
     </View>
@@ -19,13 +20,15 @@ const TextInputField = (state) => {
 
 const styles = StyleSheet.create({
   container: {
-    margin: 20,
-    backgroundColor: '#ffffff',
+    margin: 5,
     alignItems: 'center',
   },
   input: {
-    height: 40,
-    width: '80%',
+    backgroundColor: 'white',
+    height: 50,
+    width: '90%',
+    borderWidth: 0.3,
+    borderRadius: 8,
   },
   error: {
     color: 'red',
