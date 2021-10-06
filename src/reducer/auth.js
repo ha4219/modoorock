@@ -1,4 +1,4 @@
-import {LOGIN} from '../constants/actions';
+import {LOGIN, SIGNUP, SIGNUPERROR} from '../constants/actions';
 
 export const initialState = {
   user: {},
@@ -14,6 +14,10 @@ export default (state=initialState, action) => {
   switch (action.type) {
     case LOGIN:
       return {...state, isLoggedIn: true};
+    case SIGNUP:
+      return {...state, success: {}, error: {}};
+    case SIGNUPERROR:
+      return {...state, success: {}, error: action.type};
     default:
       return state;
   }
