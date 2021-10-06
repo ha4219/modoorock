@@ -5,12 +5,19 @@ import TextInputField from '../components/TextInputField';
 import Button from '../components/Button';
 
 const LoginScreen = ({navigation}) => {
+  const [id, setId] = React.useState('');
+  const [pw, setPw] = React.useState('');
   return (
     <View style={styles.container}>
       <Image style={styles.img} source={require('../assets/img.png')} />
       <View style={styles.subContainer}>
-        <TextInputField state={{defaultValue: '아이디'}} />
-        <TextInputField defaultValue="비밀번호" secureTextEntry={true} />
+        <TextInputField defaultValue="아이디" value={id} setValue={setId} />
+        <TextInputField
+          defaultValue="비밀번호"
+          secureTextEntry={true}
+          value={pw}
+          setValue={setPw}
+        />
         <View style={styles.subContainer1}>
           <Text> 자동 로그인 / 아이디 찾기 / 비밀번호 찾기</Text>
         </View>
@@ -24,7 +31,10 @@ const LoginScreen = ({navigation}) => {
           <Image style={styles.itemImg} source={require('../assets/img.png')} />
           <Image style={styles.itemImg} source={require('../assets/img.png')} />
         </View>
-        <Button name={'회원가입'} />
+        <Button
+          name={'회원가입'}
+          onPress={() => navigation.navigate('Signup')}
+        />
       </View>
     </View>
   );

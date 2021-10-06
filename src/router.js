@@ -14,6 +14,7 @@ import Home from './screens/Home';
 import LoginScreen from './screens/LoginScreen';
 import Test from './screens/Test';
 import TabBar from './components/TabBar';
+import SignupScreen from './screens/SignupScreen';
 import {navigationRef} from './helpers/NavigationHelper';
 
 const Stack = createStackNavigator();
@@ -79,6 +80,7 @@ const Router = () => {
               <Stack.Screen name="Home" component={Home} />
               <Stack.Screen name="Test" component={Test} />
               <Stack.Screen name="Login" component={LoginScreen} />
+              <Stack.Screen name="Signup" component={SignupScreen} />
             </Fragment>
           </Stack.Navigator>
         </NavigationContainer>

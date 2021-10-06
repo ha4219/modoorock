@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import { Text, View, TextInput, StyleSheet } from 'react-native';
 
 const TextInputField = state => {
-  const [value, setValue] = React.useState('');
   return (
     <View style={styles.container}>
       <TextInput
         style={styles.input}
-        onChangeText={setValue}
-        value={value}
+        onChangeText={state.setValue}
+        value={state.value}
         autoCapitalize="none"
         placeholder={state.defaultValue}
         secureTextEntry={state.secureTextEntry}
