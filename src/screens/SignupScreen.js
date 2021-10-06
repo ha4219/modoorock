@@ -13,10 +13,15 @@ const SignupScreen = () => {
   const [ph, setPh] = React.useState('');
   return (
     <View>
-      <TextInputField value={id} setValue={setId} />
-      <TextInputField value={pw} setValue={setPw} secureTextEntry={true} />
-      <TextInputField value={name} setValue={setName} />
-      <TextInputField value={ph} setValue={setPh} />
+      <TextInputField value={id} setValue={setId} defaultValue={'아이디'} />
+      <TextInputField
+        value={pw}
+        setValue={setPw}
+        secureTextEntry={true}
+        defaultValue={'비밀번호'}
+      />
+      <TextInputField value={name} setValue={setName} defaultValue={'이름'} />
+      <TextInputField value={ph} setValue={setPh} defaultValue={'전화번호'} />
       <Button name={'가입'} />
     </View>
   );
