@@ -36,3 +36,5 @@ allprojects {
         maven { url 'https://www.jitpack.io' }
     }
 }
+
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
