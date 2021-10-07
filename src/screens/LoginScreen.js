@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, Image } from 'react-native';
+import {useDispatch} from 'react-redux';
 
 import TextInputField from '../components/TextInputField';
 import Button from '../components/Button';
+import {doLogin} from '../actions/auth';
 
 const LoginScreen = ({navigation}) => {
+  const dispatch = useDispatch();
+
   const [id, setId] = React.useState('');
   const [pw, setPw] = React.useState('');
+
+  const onPress = () => {
+    dispatch(doLogin({id, pw}));
+    setId('성공!');
+  };
   return (
     <View style={styles.container}>
       <Image style={styles.img} source={require('../assets/img.png')} />
@@ -21,7 +30,7 @@ const LoginScreen = ({navigation}) => {
         <View style={styles.subContainer1}>
           <Text> 자동 로그인 / 아이디 찾기 / 비밀번호 찾기</Text>
         </View>
-        <Button name={'로그인'} />
+        <Button name={'로그인'} onPress={onPress}/>
         <View style={styles.subContainer1}>
           <Text>-------간편 로그인-------</Text>
         </View>

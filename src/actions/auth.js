@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import {SIGNUP, SIGNUPERROR} from '../constants/actions';
+import {SIGNUP, SIGNUPERROR, LOGIN, LOGINERROR} from '../constants/actions';
 import APIHelper from '../helpers/APIHelper';
 
 export const doSignup =
@@ -16,7 +16,7 @@ export const doSignup =
         name: name,
         phone: ph,
     });
-    console.log('success!!',res.toString());
+    console.log('success!!',res);
   } catch (err) {
     console.log('ERRPR', err, err.status);
     if (err && err.status === 401) {
@@ -25,6 +25,25 @@ export const doSignup =
     dispatch({type: SIGNUPERROR});
   }
 };
+
+export const doLogin =
+  ({id, pw}) =>  
+  async dispatch => {
+    try{
+      dispatch({type:LOGIN});
+      const res = await APIHelper.post(
+        '/user/login',
+        {
+          id: id,
+          password: pw,
+        }
+      );
+      console.log('login!!!', res);
+    }catch(err){
+      console.log('ERROR',err);
+      dispatch({type: LOGINERROR});
+    }
+  };
 
 export const test = () => async dispatch => {
   try {
@@ -35,4 +54,4 @@ export const test = () => async dispatch => {
   } catch (err) {
     console.log(err);
   }
-}
+};
