@@ -9,14 +9,14 @@ export const doSignup =
   try {
     dispatch({type: SIGNUP});
     const res = await APIHelper.post(
-      '/api/v1/signup',
+      '/user/register',
       {
         id: id,
         password: pw,
         name: name,
-        // phone: ph,
+        phone: ph,
     });
-    console.log(res.toString());
+    console.log('success!!',res.toString());
   } catch (err) {
     console.log('ERRPR', err, err.status);
     if (err && err.status === 401) {
