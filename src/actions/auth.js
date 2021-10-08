@@ -6,6 +6,7 @@ import APIHelper from '../helpers/APIHelper';
 export const doSignup =
   ({id, pw, name, ph}) =>
   async dispatch => {
+    console.log('dongha', APIHelper);
   try {
     dispatch({type: SIGNUP});
     const res = await APIHelper.post(

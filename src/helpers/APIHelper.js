@@ -7,7 +7,7 @@ const API = axios.create({
 
 API.interceptors.request.use(
   function (config) {
-    console.log(config);
+    console.log('api request',config);
     return config;
   },
   function (error) {

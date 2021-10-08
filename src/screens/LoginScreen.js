@@ -14,11 +14,10 @@ const LoginScreen = ({navigation}) => {
 
   const onPress = () => {
     dispatch(doLogin({id, pw}));
-    setId('성공!');
   };
   return (
     <View style={styles.container}>
-      <Image style={styles.img} source={require('../assets/img.png')} />
+      <Image style={styles.img} source={require('../assets/logo.png')} />
       <View style={styles.subContainer}>
         <TextInputField defaultValue="아이디" value={id} setValue={setId} />
         <TextInputField
@@ -57,6 +56,8 @@ const styles = StyleSheet.create({
   },
   img: {
     marginBottom: 50,
+    aspectRatio: 1,
+    width: '100%',
   },
   imgContainer: {
     flexDirection: 'row',
