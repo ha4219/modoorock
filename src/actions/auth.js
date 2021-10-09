@@ -6,6 +6,7 @@ import {
   LOGIN,
   LOGINERROR,
   LOGINSUCCESS,
+  LOGOUT,
 } from '../constants/actions';
 import APIHelper from '../helpers/APIHelper';
 
@@ -34,26 +35,31 @@ export const doSignup =
 };
 
 export const doLogin =
-  ({id, pw}) =>  
+  ({id, pw}) =>
   async dispatch => {
-    try{
+    try {
       dispatch({type:LOGIN});
-      const res = await APIHelper.post(
-        '/user/login',
-        {
-          id: id,
-          password: pw,
-        }
-      );
+      const res = await APIHelper.post('/user/login', {
+        id: id,
+        password: pw,
+      });
       const data = res.data;
       const {name: name} = data;
       console.log(data, res.data, name);
       dispatch({type: LOGINSUCCESS, payload: data});
-    }catch(err){
-      console.log('ERROR',err);
+    } catch (err){
+      console.log('ERROR', err);
       dispatch({type: LOGINERROR});
     }
   };
+
+export const doLogOut = () => async dispatch => {
+  try {
+    dispatch({type: LOGOUT});
+  } catch (e) {
+    console.log(e);
+  }
+};
 
 export const test = () => async dispatch => {
   try {

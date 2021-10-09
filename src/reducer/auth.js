@@ -4,6 +4,7 @@ import {
   SIGNUPERROR,
   LOGINSUCCESS,
   LOGINERROR,
+  LOGOUT,
 } from '../constants/actions';
 
 export const initialState = {
@@ -16,7 +17,8 @@ export const initialState = {
   success: {},
 };
 
-export default (state=initialState, action) => {
+export default (state = initialState, action) => {
+  console.log(action.type);
   switch (action.type) {
     case LOGIN:
       return {...state, isLoggedIn: true};
@@ -28,7 +30,9 @@ export default (state=initialState, action) => {
       return {...state, isLoggedIn: true};
     case LOGINERROR:
       return {...state, isLoggedIn: false};
+    case LOGOUT:
+      return {...state, isLoggedIn: false};
     default:
-      return state;
+      return initialState;
   }
 };

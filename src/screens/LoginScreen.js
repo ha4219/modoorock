@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
     marginBottom: 50,
     aspectRatio: 1,
     width: '100%',
+    resizeMode: 'contain',
   },
   imgContainer: {
     flexDirection: 'row',
