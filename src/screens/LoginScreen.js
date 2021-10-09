@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, Image } from 'react-native';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 import TextInputField from '../components/TextInputField';
 import Button from '../components/Button';
@@ -12,8 +12,12 @@ const LoginScreen = ({navigation}) => {
   const [id, setId] = React.useState('');
   const [pw, setPw] = React.useState('');
 
+  const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+
   const onPress = () => {
     dispatch(doLogin({id, pw}));
+    console.log("onPress", isLoggedIn);
+    navigation.navigate('Home');
   };
   return (
     <View style={styles.container}>

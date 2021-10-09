@@ -1,6 +1,12 @@
 import axios from 'axios';
 
-import {SIGNUP, SIGNUPERROR, LOGIN, LOGINERROR} from '../constants/actions';
+import {
+  SIGNUP,
+  SIGNUPERROR,
+  LOGIN,
+  LOGINERROR,
+  LOGINSUCCESS,
+} from '../constants/actions';
 import APIHelper from '../helpers/APIHelper';
 
 export const doSignup =
@@ -17,7 +23,7 @@ export const doSignup =
         name: name,
         phone: ph,
     });
-    console.log('success!!',res);
+    console.log('success!!',res.data);
   } catch (err) {
     console.log('ERRPR', err, err.status);
     if (err && err.status === 401) {
@@ -39,7 +45,10 @@ export const doLogin =
           password: pw,
         }
       );
-      console.log('login!!!', res);
+      const data = res.data;
+      const {name: name} = data;
+      console.log(data, res.data, name);
+      dispatch({type: LOGINSUCCESS, payload: data});
     }catch(err){
       console.log('ERROR',err);
       dispatch({type: LOGINERROR});

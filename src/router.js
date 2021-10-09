@@ -9,6 +9,7 @@ import {
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {useSelector} from 'react-redux';
 
 import Home from './screens/Home';
 import LoginScreen from './screens/LoginScreen';
@@ -50,6 +51,9 @@ const TabStack = () => {
 
 const Router = () => {
   const routeNameRef = useRef();
+
+  const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+
   return (
     <KeyboardAvoidingView
       style={styles.keyboard}
@@ -72,16 +76,27 @@ const Router = () => {
           // }}
           >
           <Stack.Navigator
-            initialRouteName={'Login'}
+            initialRouteName={'Home'}
             // screenOptions={{headerMode: false}}
             >
-            <Fragment>
-              <Stack.Screen name="Tab" component={TabStack} />
-              <Stack.Screen name="Home" component={Home} />
-              <Stack.Screen name="Test" component={Test} />
-              <Stack.Screen name="Login" component={LoginScreen} />
-              <Stack.Screen name="Signup" component={SignupScreen} />
-            </Fragment>
+            {isLoggedIn ? (
+              <Fragment>
+                <Stack.Screen name="Tab" component={TabStack} />
+                <Stack.Screen name="Home" component={Home} />
+                <Stack.Screen name="Test" component={Test} />
+                <Stack.Screen name="Login" component={LoginScreen} />
+                <Stack.Screen name="Signup" component={SignupScreen} />
+              </Fragment>
+            ) : (
+              <Fragment>
+                <Stack.Screen name="Tab" component={TabStack} />
+                <Stack.Screen name="Home" component={Home} />
+                <Stack.Screen name="Test" component={Test} />
+                <Stack.Screen name="Login" component={LoginScreen} />
+                <Stack.Screen name="Signup" component={SignupScreen} />
+              </Fragment>
+            )}
+            
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaView>
