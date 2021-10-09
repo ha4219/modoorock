@@ -16,6 +16,7 @@ import LoginScreen from './screens/LoginScreen';
 import Test from './screens/Test';
 import TabBar from './components/TabBar';
 import SignupScreen from './screens/SignupScreen';
+import CameraScreen from './screens/CameraScreen';
 import {navigationRef} from './helpers/NavigationHelper';
 
 const Stack = createStackNavigator();
@@ -89,6 +90,7 @@ const Router = () => {
                 <Stack.Screen name="Tab" component={TabStack} />
                 <Stack.Screen name="Home" component={Home} />
                 <Stack.Screen name="Test" component={Test} />
+                <Stack.Screen name="Camera" component={CameraScreen} />
               </Fragment>
             ) : (
               <Fragment>

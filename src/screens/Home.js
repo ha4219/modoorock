@@ -26,6 +26,10 @@ const Home = ({navigation}) => {
             <Button title="Test" onPress={() => navigation.navigate('Test')} />
             <Button title="tab" onPress={() => navigation.navigate('Tab')} />
             <Button title="LOGOUT" onPress={() => dispatch(doLogOut())} />
+            <Button
+              title="CAMERA"
+              onPress={() => navigation.navigate('Camera')}
+            />
           </React.Fragment>
         ) : (
           <Button title="login" onPress={() => navigation.navigate('Login')} />
