@@ -11,6 +11,7 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		5C9A89012711F1210039054F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C9A89002711F1210039054F /* Launch Screen.storyboard */; };
 		689C72A3FD34748022B1E4EB /* libPods-modoorock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4330B44CC03C2ED3C41C939 /* libPods-modoorock.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		823AF60B4ECF6A5476DC461F /* libPods-modoorock-modoorockTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A2BF3C7B617F4C3586C3D81 /* libPods-modoorock-modoorockTests.a */; };
@@ -40,6 +41,7 @@
 		224516055958C299E9F39499 /* Pods-modoorock.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-modoorock.release.xcconfig"; path = "Target Support Files/Pods-modoorock/Pods-modoorock.release.xcconfig"; sourceTree = "<group>"; };
 		3A2BF3C7B617F4C3586C3D81 /* libPods-modoorock-modoorockTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-modoorock-modoorockTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D66E778FF2849EBA845E7AC /* Pods-modoorock-modoorockTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-modoorock-modoorockTests.debug.xcconfig"; path = "Target Support Files/Pods-modoorock-modoorockTests/Pods-modoorock-modoorockTests.debug.xcconfig"; sourceTree = "<group>"; };
+		5C9A89002711F1210039054F /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = modoorock/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E4330B44CC03C2ED3C41C939 /* libPods-modoorock.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-modoorock.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBC266DA4A9A5B00FC7DD6AF /* Pods-modoorock.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-modoorock.debug.xcconfig"; path = "Target Support Files/Pods-modoorock/Pods-modoorock.debug.xcconfig"; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				5C9A89002711F1210039054F /* Launch Screen.storyboard */,
 			);
 			name = modoorock;
 			sourceTree = "<group>";
@@ -145,7 +148,6 @@
 				4D66E778FF2849EBA845E7AC /* Pods-modoorock-modoorockTests.debug.xcconfig */,
 				0FDB3DD692A8C2E62BF2C20B /* Pods-modoorock-modoorockTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -243,6 +245,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C9A89012711F1210039054F /* Launch Screen.storyboard in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
