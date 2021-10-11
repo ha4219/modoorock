@@ -4,18 +4,21 @@ import {RNCamera} from 'react-native-camera';
 
 const CameraScreen = () => {
   return (
-    <RNCamera
-      style={styles.camera}
-      type={RNCamera.Constants.Type.back}
-      captureAudio={false}
-    />
+    <View>
+      <RNCamera
+        style={styles.camera}
+        type={RNCamera.Constants.Type.back}
+        captureAudio={false}
+      />
+      <Text>hihisadfkljsadlfjs;dak;jflsd;ajfl;</Text>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   camera: {
     width: '100%',
-    height: '100%',
+    height: 200,
   },
 });
 

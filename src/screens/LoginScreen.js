@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 
 import TextInputField from '../components/TextInputField';
 import Button from '../components/Button';
-import {doLogin, doFindId, doFindPw} from '../actions/auth';
+import {doLogin, doFindId, doFindPw, getSession} from '../actions/auth';
 import {FindIdModal, FindPwModal} from '../components/FindModal';
 import {toast} from '../components/Toast';
 

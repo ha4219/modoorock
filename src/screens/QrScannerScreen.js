@@ -11,17 +11,20 @@ const QrScannerScreen = () => {
     return;
   };
   return (
-    <QRCodeScanner
-      onRead={onBarCodeRead}
-      flashMode={RNCamera.Constants.FlashMode.torch}
-    />
+    <View>
+      <QRCodeScanner
+        cameraStyle={styles.camera}
+        onRead={onBarCodeRead}
+        flashMode={RNCamera.Constants.FlashMode.torch}
+      />
+      <Text>hihihi</Text>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   camera: {
-    width: '100%',
-    height: '100%',
+    width: 400,
   },
 });
 

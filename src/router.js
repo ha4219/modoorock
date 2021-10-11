@@ -19,6 +19,10 @@ import SignupScreen from './screens/SignupScreen';
 import CameraScreen from './screens/CameraScreen';
 import {navigationRef} from './helpers/NavigationHelper';
 import QrScannerScreen from './screens/QrScannerScreen';
+import CameraImogeScreen from './screens/CameraImogeScreen';
+import QnaScreen from './screens/QnaScreen';
+import NoticeScreen from './screens/NoticeScreen';
+
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -60,7 +64,6 @@ const Router = () => {
   const dispatch = useDispatch();
 
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
-  console.log('이게 맞아?',isLoggedIn);
   return (
     <KeyboardAvoidingView
       style={styles.keyboard}
@@ -93,6 +96,9 @@ const Router = () => {
                 <Stack.Screen name="Test" component={Test} />
                 <Stack.Screen name="Camera" component={CameraScreen} />
                 <Stack.Screen name="Qr" component={QrScannerScreen} />
+                <Stack.Screen name="Imoge" component={CameraImogeScreen} />
+                <Stack.Screen name="Qna" component={QnaScreen} />
+                <Stack.Screen name="Notice" component={NoticeScreen} />
               </Fragment>
             ) : (
               <Fragment>

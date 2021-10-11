@@ -4,7 +4,7 @@ import {useDispatch} from 'react-redux';
 
 import TextInputField from '../components/TextInputField';
 import Button from '../components/Button';
-import {doSignup, test} from '../actions/auth';
+import {doSignup, getSession} from '../actions/auth';
 
 const SignupScreen = () => {
   const dispatch = useDispatch();

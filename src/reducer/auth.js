@@ -19,7 +19,7 @@ export const initialState = {
 };
 
 export default (state = initialState, action) => {
-  console.log(action.type);
+  console.log('auth test', state, action);
   switch (action.type) {
     case LOGINSUCCESS:
       return {...state, isLoggedIn: true};

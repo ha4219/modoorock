@@ -48,6 +48,14 @@ const Home = ({navigation}) => {
               onPress={() => navigation.navigate('Camera')}
             />
             <Button title="QR" onPress={() => navigation.navigate('Qr')} />
+            <Button
+              title="Imoge"
+              onPress={() => navigation.navigate('Imoge')}
+            />
+            <Button
+              title="Notice"
+              onPress={() => navigation.navigate('Notice')}
+            />
           </React.Fragment>
         ) : (
           <Button title="login" onPress={() => navigation.navigate('Login')} />

@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 import {
   SIGNUP,
   SIGNUPERROR,
@@ -9,8 +7,11 @@ import {
   LOGOUT,
   FINDID,
   FINDPW,
+  GETSESSION,
+  SESSIONSUCCESS,
+  SESSIONERROR,
 } from '../constants/actions';
-import APIHelper from '../helpers/APIHelper';
+import APIHelper, {setCookie} from '../helpers/APIHelper';
 
 export const doSignup =
   ({id, pw, name, ph}) =>
@@ -44,6 +45,9 @@ export const doLogin =
         id: id,
         password: pw,
       });
+      console.log('header', res.headers);
+      // const [cookie] = res.headers['set-cookie'];
+      // setCookie(cookie);
       const data = res.data;
       const {name: name} = data;
       console.log(data, res.data, name);
@@ -92,6 +96,17 @@ export const doLogOut = () => async dispatch => {
     console.log(e);
   }
 };
+
+export const getSession = () => async dispatch => {
+  try {
+    console.log(GETSESSION, 'session hi');
+    dispatch({type: GETSESSION});
+    const res = APIHelper.get('/user/session');
+    console.log(SESSIONSUCCESS,res);
+  } catch (e) {
+    console.log(SESSIONERROR,e);
+  }
+}
 
 export const test = () => async dispatch => {
   try {
