@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, Image } from 'react-native';
+import {Text, View, StyleSheet, Image, Pressable} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 
 import TextInputField from '../components/TextInputField';
 import Button from '../components/Button';
-import {doLogin} from '../actions/auth';
+import {doLogin, doFindId, doFindPw} from '../actions/auth';
+import {FindIdModal, FindPwModal} from '../components/FindModal';
 
 const LoginScreen = ({navigation}) => {
   const dispatch = useDispatch();
@@ -12,15 +13,31 @@ const LoginScreen = ({navigation}) => {
   const [id, setId] = React.useState('');
   const [pw, setPw] = React.useState('');
 
+  const [findId, setFindId] = React.useState(false);
+  const [findPw, setFindPw] = React.useState(false);
+
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
 
   const onPress = () => {
     dispatch(doLogin({id, pw}));
-    console.log("onPress", isLoggedIn);
-    navigation.navigate('Home');
+    if (isLoggedIn) {
+      navigation.navigate('Home');
+    }
   };
   return (
     <View style={styles.container}>
+      <FindIdModal
+        visible={findId}
+        onClose={setFindId}
+        name={'아이디 찾기'}
+        onRequest={doFindId}
+      />
+      <FindPwModal
+        visible={findPw}
+        onClose={setFindPw}
+        name={'비밀번호 설정'}
+        onRequest={doFindPw}
+      />
       <Image style={styles.img} source={require('../assets/logo.png')} />
       <View style={styles.subContainer}>
         <TextInputField defaultValue="아이디" value={id} setValue={setId} />
@@ -31,9 +48,14 @@ const LoginScreen = ({navigation}) => {
           setValue={setPw}
         />
         <View style={styles.subContainer1}>
-          <Text> 자동 로그인 / 아이디 찾기 / 비밀번호 찾기</Text>
+          <Pressable onPress={() => setFindId(true)}>
+            <Text>아이디 찾기</Text>
+          </Pressable>
+          <Pressable onPress={() => setFindPw(true)}>
+            <Text>비밀번호 찾기</Text>
+          </Pressable>
         </View>
-        <Button name={'로그인'} onPress={onPress}/>
+        <Button name={'로그인'} onPress={onPress} />
         <View style={styles.subContainer1}>
           <Text>-------간편 로그인-------</Text>
         </View>
@@ -57,6 +79,11 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 20,
     alignItems: 'center',
+    justifyContent: 'center',
+  },
+  center: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   img: {
     marginBottom: 50,

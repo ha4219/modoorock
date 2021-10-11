@@ -7,6 +7,8 @@ import {
   LOGINERROR,
   LOGINSUCCESS,
   LOGOUT,
+  FINDID,
+  FINDPW,
 } from '../constants/actions';
 import APIHelper from '../helpers/APIHelper';
 
@@ -24,7 +26,6 @@ export const doSignup =
         name: name,
         phone: ph,
     });
-    console.log('success!!',res.data);
   } catch (err) {
     console.log('ERRPR', err, err.status);
     if (err && err.status === 401) {
@@ -52,6 +53,37 @@ export const doLogin =
       dispatch({type: LOGINERROR});
     }
   };
+
+export const doFindId = ph => async dispatch => {
+  try {
+    dispatch({type: FINDID});
+    const res = await APIHelper.post('/user/findid', {
+      phone: ph,
+    });
+    const data = res.data;
+    return data;
+  } catch (e){
+    console.log(e);
+    return 'ERROR';
+  }
+};
+
+export const doFindPw =
+  ({value1, value2, value3}) =>
+  async dispatch => {
+  try {
+    dispatch({type: FINDPW});
+    const res = await APIHelper.post('/user/findpassword', {
+      name: value1,
+      phone: value2,
+      password: value3,
+    });
+    return res.status;
+  } catch (e) {
+    console.log(e);
+    return 'ERROR';
+  }
+};
 
 export const doLogOut = () => async dispatch => {
   try {

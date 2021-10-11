@@ -5,3 +5,5 @@ export const SIGNUPERROR = 'SIGNUPERROR';
 export const LOGINERROR = 'LOGINERROR';
 export const LOGINSUCCESS = 'LOGINSUCCESS';
 export const LOGOUT = 'LOGOUT';
+export const FINDID = 'FINDID';
+export const FINDPW = 'FINDPW';

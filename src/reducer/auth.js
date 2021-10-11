@@ -5,6 +5,7 @@ import {
   LOGINSUCCESS,
   LOGINERROR,
   LOGOUT,
+  FINDID,
 } from '../constants/actions';
 
 export const initialState = {
@@ -20,8 +21,10 @@ export const initialState = {
 export default (state = initialState, action) => {
   console.log(action.type);
   switch (action.type) {
-    case LOGIN:
+    case LOGINSUCCESS:
       return {...state, isLoggedIn: true};
+    case LOGIN:
+      return {...state};
     case SIGNUP:
       return {...state, success: {}, error: {}};
     case SIGNUPERROR:
@@ -32,6 +35,8 @@ export default (state = initialState, action) => {
       return {...state, isLoggedIn: false};
     case LOGOUT:
       return {...state, isLoggedIn: false};
+    case FINDID:
+      return {...state};
     default:
       return initialState;
   }
