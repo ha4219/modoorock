@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {Tab, TabView} from '@ui-kitten/components';
+import {PERMISSIONS, RESULTS, request} from 'react-native-permissions';
 
 import styles from './Home.style';
 import TabBar from '../components/TabBar';
@@ -17,6 +18,22 @@ const Home = ({navigation}) => {
   const dispatch = useDispatch();
   const [idx, setIdx] = React.useState(0);
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+
+  const check = () => async() => {
+    try {
+      const result = await request(PERMISSIONS.ANDROID.CAMERA);
+      if (result === RESULTS.GRANTED) {
+        console.log('ok');
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  React.useEffect(() => {
+    check();
+  }, []);
+
   return (
     <SafeAreaView>
       <View>
@@ -30,6 +47,7 @@ const Home = ({navigation}) => {
               title="CAMERA"
               onPress={() => navigation.navigate('Camera')}
             />
+            <Button title="QR" onPress={() => navigation.navigate('Qr')} />
           </React.Fragment>
         ) : (
           <Button title="login" onPress={() => navigation.navigate('Login')} />

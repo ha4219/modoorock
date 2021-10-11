@@ -18,6 +18,7 @@ import TabBar from './components/TabBar';
 import SignupScreen from './screens/SignupScreen';
 import CameraScreen from './screens/CameraScreen';
 import {navigationRef} from './helpers/NavigationHelper';
+import QrScannerScreen from './screens/QrScannerScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -91,6 +92,7 @@ const Router = () => {
                 <Stack.Screen name="Home" component={Home} />
                 <Stack.Screen name="Test" component={Test} />
                 <Stack.Screen name="Camera" component={CameraScreen} />
+                <Stack.Screen name="Qr" component={QrScannerScreen} />
               </Fragment>
             ) : (
               <Fragment>

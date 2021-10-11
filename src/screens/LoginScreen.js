@@ -51,10 +51,10 @@ const LoginScreen = ({navigation}) => {
           setValue={setPw}
         />
         <View style={styles.subContainer1}>
-          <Pressable onPress={() => setFindId(true)}>
+          <Pressable style={styles.find} onPress={() => setFindId(true)}>
             <Text>아이디 찾기</Text>
           </Pressable>
-          <Pressable onPress={() => setFindPw(true)}>
+          <Pressable style={styles.find} onPress={() => setFindPw(true)}>
             <Text>비밀번호 찾기</Text>
           </Pressable>
         </View>
@@ -112,6 +112,10 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
+    flexDirection: 'row',
+  },
+  find:{
+    padding:5,
   },
   button: {
     border: 1,

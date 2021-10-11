@@ -27,7 +27,7 @@ export const FindIdModal = props => {
 
   return (
     <View>
-      <Modal animationType="slide" visible={props.visible}>
+      <Modal animationType="slide" visible={props.visible} transparent={true}>
         {viewResult ? (
           <View Style={styles.modalView}>
             <Text>{data}</Text>
@@ -77,7 +77,7 @@ export const FindPwModal = props => {
 
   return (
     <View>
-      <Modal animationType="slide" visible={props.visible}>
+      <Modal animationType="slide" visible={props.visible} transparent={true}>
         {viewResult ? (
           <View Style={styles.modalView}>
             <Text>{data}</Text>
