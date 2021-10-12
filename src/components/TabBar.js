@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import {BottomNavigation, BottomNavigationTab} from '@ui-kitten/components';
 
 const TabBar = ({navigation, state}) => {
@@ -9,23 +9,24 @@ const TabBar = ({navigation, state}) => {
   };
   const {idx: selectedIndex} = state;
   return (
-    <BottomNavigation
-      appearance="noIndicator"
-      styles={styles.test}
-      // selectedIndex={selectedIndex}
-      selectedIndex={state.index}
-      onSelect={changeTab}>
-      <BottomNavigationTab title="Home" />
-      <BottomNavigationTab title="Test" />
-      <BottomNavigationTab title="Login" />
-    </BottomNavigation>
+    <View style={styles.container}>
+      <TouchableOpacity onPress={()=>navigation.jumpTo('HomeStack')}>
+        <Text>Home</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={()=>navigation.jumpTo('TestStack')}>
+        <Text>test</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={()=>navigation.jumpTo('LoginStack')}>
+        <Text>Login</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  test: {
-    backgroundColor: 'red',
-    flex: 1,
+  container: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 });
 

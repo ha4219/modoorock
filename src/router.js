@@ -12,6 +12,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {useSelector, useDispatch} from 'react-redux';
 
 import Home from './screens/Home';
+import HomeScreen from './screens/HomeScreen';
 import LoginScreen from './screens/LoginScreen';
 import Test from './screens/Test';
 import TabBar from './components/TabBar';
@@ -27,32 +28,30 @@ const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const HomeStack = () => (
-  <Stack.Navigator initialRouteName="Home">
-    <Stack.Screen name="Home" component={Home} />
+  <Stack.Navigator initialRouteName="Home" screenOptions={{headerMode: false}}>
+    <Tab.Screen name="Home" component={Home} options={{headerShown: false}} />
   </Stack.Navigator>
 );
 
 const TestStack = () => (
-  <Stack.Navigator initialRouteName="Test">
-    <Stack.Screen name="Test" component={Test} />
+  <Stack.Navigator initialRouteName="Test" screenOptions={{headerMode: false}}>
+    <Stack.Screen
+      name="Test"
+      component={Test}
+      screenOptions={{headerMode: false}}
+    />
   </Stack.Navigator>
 );
 
 const LoginStack = () => (
-  <Stack.Navigator initialRouteName="Login">
-    <Stack.Screen name="Login" component={LoginScreen} />
+  <Stack.Navigator initialRouteName="Login" screenOptions={{headerMode: false}}>
+    <Stack.Screen
+      name="Login"
+      component={LoginScreen}
+      screenOptions={{headerMode: false}}
+    />
   </Stack.Navigator>
 );
-
-const TabStack = () => {
-  return (
-    <Tab.Navigator tabBar={state => <TabBar {...state} />}>
-      <Tab.Screen name="Home" component={HomeStack} />
-      <Tab.Screen name="Test" component={TestStack} />
-      <Tab.Screen name="Login" component={LoginStack} />
-    </Tab.Navigator>
-  );
-};
 
 const defaultProps = {
   isLoggedIn: false,
@@ -83,30 +82,38 @@ const Router = () => {
           //   }
           //   routeNameRef.current = currentRouteName;
           // }}
-          >
-          <Stack.Navigator
-            initialRouteName={'Home'}
-            // screenOptions={{headerMode: false}}
+        >
+          {isLoggedIn ? (
+            <Tab.Navigator
+              tabBar={state => (
+                <TabBar {...state} screenOptions={{headerMode: false}} />
+              )}>
+              <Tab.Screen
+                name="HomeStack"
+                component={HomeStack}
+                screenOptions={{headerMode: false}}
+              />
+              <Tab.Screen
+                name="TestStack"
+                component={TestStack}
+                screenOptions={{headerMode: false}}
+              />
+              <Tab.Screen
+                name="LoginStack"
+                component={LoginStack}
+                screenOptions={{headerMode: false}}
+              />
+            </Tab.Navigator>
+          ) : (
+            <Stack.Navigator
+              initialRouteName={'Home'}
+              // screenOptions={{headerMode: false}}
             >
-            {isLoggedIn ? (
-              <Fragment>
-                <Stack.Screen name="Tab" component={TabStack} />
-                <Stack.Screen name="Home" component={Home} />
-                <Stack.Screen name="Test" component={Test} />
-                <Stack.Screen name="Camera" component={CameraScreen} />
-                <Stack.Screen name="Qr" component={QrScannerScreen} />
-                <Stack.Screen name="Imoge" component={CameraImogeScreen} />
-                <Stack.Screen name="Qna" component={QnaScreen} />
-                <Stack.Screen name="Notice" component={NoticeScreen} />
-              </Fragment>
-            ) : (
-              <Fragment>
-                <Stack.Screen name="Home" component={Home} />
-                <Stack.Screen name="Login" component={LoginScreen} />
-                <Stack.Screen name="Signup" component={SignupScreen} />
-              </Fragment>
-            )}
-          </Stack.Navigator>
+              <Stack.Screen name="Home" component={Home} />
+              <Stack.Screen name="Login" component={LoginScreen} />
+              <Stack.Screen name="Signup" component={SignupScreen} />
+            </Stack.Navigator>
+          )}
         </NavigationContainer>
       </SafeAreaView>
     </KeyboardAvoidingView>
