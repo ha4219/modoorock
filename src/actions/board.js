@@ -32,11 +32,13 @@ export const getNoticeList =
     console.log('hihi', notiType);
     try {
       dispatch({type: NOTICELIST});
-      const res = await APIHelper.get('/attraction/getattractionlist', {
-        area: 'total',
+      const res = await APIHelper.post('/faq/getfaqlist', {
+        type: notiType,
       });
-      console.log(res);
+      console.log(res.data);
+      return res.data;
     } catch (e) {
       console.log(e);
+      return [];
     }
   };

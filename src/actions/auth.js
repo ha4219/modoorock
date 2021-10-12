@@ -46,8 +46,9 @@ export const doLogin =
         password: pw,
       });
       console.log('header', res.headers);
-      // const [cookie] = res.headers['set-cookie'];
-      // setCookie(cookie);
+      const cookie = res.data;
+      console.log('cookie!!', cookie);
+      setCookie(cookie);
       const data = res.data;
       const {name: name} = data;
       console.log(data, res.data, name);

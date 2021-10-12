@@ -6,6 +6,7 @@ import {
   LOGINERROR,
   LOGOUT,
   FINDID,
+  NOTICELIST,
 } from '../constants/actions';
 
 export const initialState = {
@@ -36,6 +37,8 @@ export default (state = initialState, action) => {
     case LOGOUT:
       return {...state, isLoggedIn: false};
     case FINDID:
+      return {...state};
+    case NOTICELIST:
       return {...state};
     default:
       return initialState;

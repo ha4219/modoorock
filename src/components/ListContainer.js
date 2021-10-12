@@ -8,7 +8,7 @@ const ListContainer = props => {
     <FlatList
       data={props.data}
       renderItem={ListItem}
-      keyExtractor={item => String(item.id)}
+      keyExtractor={item => String(item.idx)}
     />
   );
 };

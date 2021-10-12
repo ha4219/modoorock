@@ -4,7 +4,6 @@ import Config from 'react-native-config';
 const API = axios.create({
   baseURL: Config.API_URL,
   withCredentials: true,
-  exposedHeaders: ['JSESSIONID'],
 });
 
 API.interceptors.request.use(
@@ -29,7 +28,7 @@ API.interceptors.response.use(
 
 export const setCookie = cookie => {
   console.log(cookie);
-  API.defaults.headers.Cookies = JSON.parse(cookie);
+  API.defaults.headers.Cookies = 'JSESSIONID=' + cookie;
 };
 
 export default API;
