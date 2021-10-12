@@ -23,7 +23,6 @@ import CameraImogeScreen from './screens/CameraImogeScreen';
 import QnaScreen from './screens/QnaScreen';
 import NoticeScreen from './screens/NoticeScreen';
 
-
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
