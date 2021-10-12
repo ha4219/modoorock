@@ -22,7 +22,9 @@ import {navigationRef} from './helpers/NavigationHelper';
 import QrScannerScreen from './screens/QrScannerScreen';
 import CameraImogeScreen from './screens/CameraImogeScreen';
 import QnaScreen from './screens/QnaScreen';
-import NoticeScreen from './screens/NoticeScreen';
+import NoticeScreen from './screens/profile/NoticeScreen';
+import MissionScreen from './screens/mission/MissionScreen';
+import ProfileScreen from './screens/profile/ProfileScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -43,11 +45,30 @@ const TestStack = () => (
   </Stack.Navigator>
 );
 
-const LoginStack = () => (
-  <Stack.Navigator initialRouteName="Login" screenOptions={{headerMode: false}}>
+const ProfileStack = () => (
+  <Stack.Navigator
+    initialRouteName="Profile"
+    screenOptions={{headerMode: false}}>
     <Stack.Screen
-      name="Login"
-      component={LoginScreen}
+      name="Profile"
+      component={ProfileScreen}
+      screenOptions={{headerMode: false}}
+    />
+    <Stack.Screen
+      name="Notice"
+      component={NoticeScreen}
+      screenOptions={{headerMode: false}}
+    />
+  </Stack.Navigator>
+);
+
+const MissionStack = () => (
+  <Stack.Navigator
+    initialRouteName="Mission"
+    screenOptions={{headerMode: false}}>
+    <Stack.Screen
+      name="Mission"
+      component={MissionScreen}
       screenOptions={{headerMode: false}}
     />
   </Stack.Navigator>
@@ -99,8 +120,13 @@ const Router = () => {
                 screenOptions={{headerMode: false}}
               />
               <Tab.Screen
-                name="LoginStack"
-                component={LoginStack}
+                name="MissionStack"
+                component={MissionStack}
+                screenOptions={{headerMode: false}}
+              />
+              <Tab.Screen
+                name="ProfileStack"
+                component={ProfileStack}
                 screenOptions={{headerMode: false}}
               />
             </Tab.Navigator>
@@ -123,7 +149,6 @@ const Router = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'pink',
   },
   keyboard: {
     flex: 1,

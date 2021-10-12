@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import {Text, View, Button, StyleSheet, ActivityIndicator} from 'react-native';
 import {useDispatch} from 'react-redux';
 
-import {getNoticeList} from '../actions/board';
-import ListContainer from '../components/ListContainer';
+import {getNoticeList} from '../../actions/board';
+import ListContainer from '../../components/ListContainer';
 
 const NoticeScreen = ({navigation}) => {
   const dispatch = useDispatch();
