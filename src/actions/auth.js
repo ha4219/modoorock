@@ -45,11 +45,13 @@ export const doLogin =
         id: id,
         password: pw,
       });
-      const [cookie] = res.headers['set-cookie'];
-      const data = cookie.split(' ')[0];
-      setCookie(data);
-      dispatch({type: LOGINSUCCESS, payload: data});
-      // dispatch({type: LOGINSUCCESS});
+      console.log('headers', res.headers);
+      // const [cookie] = res.headers['set-cookie'];
+      // const data = cookie.split(' ')[0];
+      // setCookie(data);
+      // dispatch({type: LOGINSUCCESS, payload: data});
+      // return data;
+      dispatch({type: LOGINSUCCESS});
     } catch (err){
       console.log('ERROR', err);
       dispatch({type: LOGINERROR});

@@ -31,7 +31,27 @@ const Tab = createBottomTabNavigator();
 
 const HomeStack = () => (
   <Stack.Navigator initialRouteName="Home" screenOptions={{headerMode: false}}>
-    <Tab.Screen name="Home" component={Home} options={{headerShown: false}} />
+    <Stack.Screen name="Home" component={Home} options={{headerShown: false}} />
+    <Stack.Screen
+      name="Camera"
+      component={CameraScreen}
+      options={{headerShown: false}}
+    />
+    <Stack.Screen
+      name="Qr"
+      component={QrScannerScreen}
+      options={{headerShown: false}}
+    />
+    <Stack.Screen
+      name="Imoge"
+      component={CameraImogeScreen}
+      options={{headerShown: false}}
+    />
+    <Stack.Screen
+      name="Qna"
+      component={QnaScreen}
+      options={{headerShown: false}}
+    />
   </Stack.Navigator>
 );
 

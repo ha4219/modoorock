@@ -44,7 +44,6 @@ const Home = ({navigation}) => {
         {isLoggedIn ? (
           <React.Fragment>
             <Button title="Test" onPress={() => navigation.navigate('Test')} />
-            <Button title="tab" onPress={() => navigation.navigate('Tab')} />
             <Button title="LOGOUT" onPress={() => dispatch(doLogOut())} />
             <Button
               title="CAMERA"
