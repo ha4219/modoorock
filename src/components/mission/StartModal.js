@@ -7,7 +7,11 @@ import Button from '../Button';
 
 const StartModal = props => {
   return (
-    <Modal animationType="slide" visible={props.visible} transparent={false}>
+    <Modal
+      animationType="slide"
+      visible={props.visible}
+      transparent={false}
+      onRequestClose={props.onRequestClose}>
       <View style={styles.container}>
         <QrScanner onRead={props.onRead} />
         <View style={styles.subContainer}>

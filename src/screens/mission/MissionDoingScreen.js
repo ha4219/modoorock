@@ -12,7 +12,11 @@ const MissionDoingScreen = ({route, navigation}) => {
 
   return (
     <View>
-      <StartModal visible={game} onRead={onRead} />
+      <StartModal
+        visible={game}
+        onRead={onRead}
+        onRequestClose={() => setGame(false)}
+      />
       <Text>MissionDoingScreen</Text>
       <Text>{route.params.id}</Text>
       <Button name="게임시작" onPress={() => setGame(true)} />
