@@ -1,17 +1,23 @@
 import React from 'react';
-import {StyleSheet, Text, View, ImageBackground} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ImageBackground,
+  TouchableOpacity,
+} from 'react-native';
 
 const Box = ({uri, content, onPress}) => {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <ImageBackground
         source={{uri: uri}}
         imageStyle={{borderRadius: 10}}
         resizeMode="cover"
         style={styles.img}>
-      <Text>{content}</Text>
+        <Text>{content}</Text>
       </ImageBackground>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -29,6 +35,8 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     borderRadius: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 

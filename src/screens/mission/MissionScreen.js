@@ -3,7 +3,7 @@ import {StyleSheet, Text, View, Image, ScrollView} from 'react-native';
 
 import Box from '../../components/Box';
 
-const MissionScreen = () => {
+const MissionScreen = ({navigation}) => {
   const [contents, setContents] = React.useState([1,]);
   return (
     <View style={styles.container}>
@@ -14,36 +14,42 @@ const MissionScreen = () => {
               'https://images.unsplash.com/photo-1607166452427-7e4477079cb9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Ym94fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60'
             }
             content={'hi'}
+            onPress={() => navigation.navigate('Doing', {id: 1})}
           />
           <Box
             uri={
               'https://images.unsplash.com/photo-1607166452427-7e4477079cb9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Ym94fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60'
             }
             content={'hi'}
+            onPress={() => navigation.navigate('Doing', {id: 2})}
           />
           <Box
             uri={
               'https://images.unsplash.com/photo-1607166452427-7e4477079cb9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Ym94fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60'
             }
             content={'hi'}
+            onPress={() => navigation.navigate('Doing', {id: 3})}
           />
           <Box
             uri={
               'https://images.unsplash.com/photo-1607166452427-7e4477079cb9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Ym94fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60'
             }
             content={'hi'}
+            onPress={() => navigation.navigate('Doing', {id: 4})}
           />
           <Box
             uri={
               'https://images.unsplash.com/photo-1607166452427-7e4477079cb9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Ym94fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60'
             }
             content={'hi'}
+            onPress={() => navigation.navigate('Doing', {id: 5})}
           />
           <Box
             uri={
               'https://images.unsplash.com/photo-1607166452427-7e4477079cb9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Ym94fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60'
             }
             content={'hi'}
+            onPress={() => navigation.navigate('Doing', {id: 6})}
           />
         </ScrollView>
       ) : (
@@ -61,7 +67,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 50,
+    // marginBottom: ,
   },
   img: {
     aspectRatio: 1,

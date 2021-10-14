@@ -24,6 +24,7 @@ import CameraImogeScreen from './screens/CameraImogeScreen';
 import QnaScreen from './screens/QnaScreen';
 import NoticeScreen from './screens/profile/NoticeScreen';
 import MissionScreen from './screens/mission/MissionScreen';
+import MissionDoingScreen from './screens/mission/MissionDoingScreen';
 import ProfileScreen from './screens/profile/ProfileScreen';
 
 const Stack = createStackNavigator();
@@ -89,6 +90,11 @@ const MissionStack = () => (
     <Stack.Screen
       name="Mission"
       component={MissionScreen}
+      screenOptions={{headerMode: false}}
+    />
+    <Stack.Screen
+      name="Doing"
+      component={MissionDoingScreen}
       screenOptions={{headerMode: false}}
     />
   </Stack.Navigator>
