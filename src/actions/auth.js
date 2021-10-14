@@ -1,3 +1,5 @@
+import AsyncStorage from '@react-native-community/async-storage';
+
 import {
   SIGNUP,
   SIGNUPERROR,
@@ -12,6 +14,14 @@ import {
   SESSIONERROR,
 } from '../constants/actions';
 import APIHelper, {setCookie} from '../helpers/APIHelper';
+
+const storeHeader = async (key, value) => {
+  try {
+    await AsyncStorage.setItem(key, value);
+  } catch (e) {
+    console.log(e);
+  }
+}
 
 export const doSignup =
   ({id, pw, name, ph}) =>
@@ -46,12 +56,13 @@ export const doLogin =
         password: pw,
       });
       console.log('headers', res.headers);
-      // const [cookie] = res.headers['set-cookie'];
-      // const data = cookie.split(' ')[0];
-      // setCookie(data);
-      // dispatch({type: LOGINSUCCESS, payload: data});
-      // return data;
-      dispatch({type: LOGINSUCCESS});
+      const [cookie] = res.headers['set-cookie'];
+      const data = cookie.split(' ')[0];
+      setCookie(data);
+      await storeHeader('cookie', data);
+      dispatch({type: LOGINSUCCESS, payload: res.header});
+      return data;
+      // dispatch({type: LOGINSUCCESS});
     } catch (err){
       console.log('ERROR', err);
       dispatch({type: LOGINERROR});

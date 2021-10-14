@@ -15,6 +15,7 @@ export const initialState = {
   isLoggingIn: false,
   isResettingPassword: false,
   isUpdating: true,
+  header: '',
   error: {},
   success: {},
 };
@@ -23,7 +24,7 @@ export default (state = initialState, action) => {
   console.log('auth test', state, action);
   switch (action.type) {
     case LOGINSUCCESS:
-      return {...state, isLoggedIn: true};
+      return {...state, isLoggedIn: true, header: action.payload};
     case LOGIN:
       return {...state};
     case SIGNUP:
