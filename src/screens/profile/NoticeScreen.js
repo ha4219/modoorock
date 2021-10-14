@@ -12,7 +12,7 @@ const NoticeScreen = ({navigation}) => {
   const [data, setData] = React.useState([]);
 
   const dofun = () => {
-    dispatch(getNoticeList({notiType: 'test'})).then(items => {
+    dispatch(getNoticeList({notiType: '전체'})).then(items => {
       setData(items);
     });
     setLoading(false);

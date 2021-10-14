@@ -23,48 +23,48 @@ const ProfileScreen = ({navigation}) => {
       </View>
       <View style={styles.subContainer2}>
         <TouchableOpacity style={styles.credit}>
-          <Image source={require('../../assets/personIcon.png')}/>
+          <Image source={require('../../assets/personIcon.png')} />
           <Text>모든 결제</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.credit}>
-          <Image source={require('../../assets/personIcon.png')}/>
+          <Image source={require('../../assets/personIcon.png')} />
           <Text>신규 결제</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.credit}>
-          <Image source={require('../../assets/personIcon.png')}/>
+          <Image source={require('../../assets/personIcon.png')} />
           <Text>리뷰 작성</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.list}>
         <TouchableOpacity style={styles.item}>
           <Text style={styles.txt}>고객센터</Text>
-          <Image source={require('../../assets/label.png')}/>
+          <Image source={require('../../assets/label.png')} />
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.item}
-          onPress={() => navigation.jumpTo('Notice')}>
+          onPress={() => navigation.navigate('Notice')}>
           <Text style={styles.txt}>공지사항</Text>
-          <Image source={require('../../assets/label.png')}/>
+          <Image source={require('../../assets/label.png')} />
         </TouchableOpacity>
         <TouchableOpacity style={styles.item}>
           <Text style={styles.txt}>자주 묻는 질문 FAQ</Text>
-          <Image source={require('../../assets/label.png')}/>
+          <Image source={require('../../assets/label.png')} />
         </TouchableOpacity>
         <TouchableOpacity style={styles.item}>
           <Text style={styles.txt}>문의하기</Text>
-          <Image source={require('../../assets/label.png')}/>
+          <Image source={require('../../assets/label.png')} />
         </TouchableOpacity>
         <TouchableOpacity style={styles.item}>
           <Text style={styles.txt}>모두락 정보</Text>
-          <Image source={require('../../assets/label.png')}/>
+          <Image source={require('../../assets/label.png')} />
         </TouchableOpacity>
         <TouchableOpacity style={styles.item}>
           <Text style={styles.txt}>회사소개</Text>
-          <Image source={require('../../assets/label.png')}/>
+          <Image source={require('../../assets/label.png')} />
         </TouchableOpacity>
         <TouchableOpacity style={styles.item}>
           <Text style={styles.txt}>서비스 소개</Text>
-          <Image source={require('../../assets/label.png')}/>
+          <Image source={require('../../assets/label.png')} />
         </TouchableOpacity>
       </View>
     </View>

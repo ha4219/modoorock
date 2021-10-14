@@ -28,7 +28,7 @@ API.interceptors.response.use(
 
 export const setCookie = cookie => {
   console.log(cookie);
-  API.defaults.headers.Cookies = 'JSESSIONID=' + cookie;
+  API.defaults.headers.Cookie = cookie;
 };
 
 export default API;

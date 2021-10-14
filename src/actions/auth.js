@@ -45,13 +45,9 @@ export const doLogin =
         id: id,
         password: pw,
       });
-      console.log('header', res.headers);
-      const cookie = res.data;
-      console.log('cookie!!', cookie);
-      setCookie(cookie);
-      const data = res.data;
-      const {name: name} = data;
-      console.log(data, res.data, name);
+      const [cookie] = res.headers['set-cookie'];
+      const data = cookie.split(' ')[0];
+      setCookie(data);
       dispatch({type: LOGINSUCCESS, payload: data});
     } catch (err){
       console.log('ERROR', err);
