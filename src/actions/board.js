@@ -42,3 +42,19 @@ export const getNoticeList =
       return [];
     }
   };
+
+
+export const test =
+  () =>
+  async dispatch => {
+    console.log("testtest");
+    try {
+      const res = await APIHelper.post('/user/session', {
+      });
+      console.log(res.data);
+      return res;
+    } catch (e) {
+      console.log(e);
+      return [];
+    }
+  };

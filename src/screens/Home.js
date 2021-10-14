@@ -13,6 +13,7 @@ import {PERMISSIONS, RESULTS, request} from 'react-native-permissions';
 import styles from './Home.style';
 import TabBar from '../components/TabBar';
 import {doLogOut} from '../actions/auth';
+import {test} from '../actions/board';
 
 const Home = ({navigation}) => {
   const dispatch = useDispatch();
@@ -29,6 +30,8 @@ const Home = ({navigation}) => {
       console.log(e);
     }
   };
+
+
 
   React.useEffect(() => {
     check();
@@ -55,6 +58,10 @@ const Home = ({navigation}) => {
             <Button
               title="Notice"
               onPress={() => navigation.navigate('Notice')}
+            />
+            <Button
+              title="session"
+              onPress={() => dispatch(test())}
             />
           </React.Fragment>
         ) : (

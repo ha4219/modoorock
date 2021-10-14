@@ -40,7 +40,7 @@ export const doLogin =
   ({id, pw}) =>
   async dispatch => {
     try {
-      dispatch({type:LOGIN});
+      dispatch({type: LOGIN});
       const res = await APIHelper.post('/user/login', {
         id: id,
         password: pw,
@@ -49,6 +49,7 @@ export const doLogin =
       const data = cookie.split(' ')[0];
       setCookie(data);
       dispatch({type: LOGINSUCCESS, payload: data});
+      // dispatch({type: LOGINSUCCESS});
     } catch (err){
       console.log('ERROR', err);
       dispatch({type: LOGINERROR});
