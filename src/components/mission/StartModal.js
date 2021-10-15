@@ -17,7 +17,7 @@ const StartModal = props => {
         <View style={styles.subContainer}>
           <TextInputField />
           <Text>미션 번호 혹은 qr코드를 입력해주세요.</Text>
-          <Button name="START" />
+          <Button name="START" onPress={props.onPress} />
         </View>
       </View>
     </Modal>
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   },
   subContainer: {
     paddingTop: 400,
-  }
+  },
 });
 
 export default StartModal;

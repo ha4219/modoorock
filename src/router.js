@@ -10,7 +10,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {useSelector, useDispatch} from 'react-redux';
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Home from './screens/Home';
 import HomeScreen from './screens/HomeScreen';
@@ -26,6 +26,7 @@ import QnaScreen from './screens/QnaScreen';
 import NoticeScreen from './screens/profile/NoticeScreen';
 import MissionScreen from './screens/mission/MissionScreen';
 import MissionDoingScreen from './screens/mission/MissionDoingScreen';
+import ShortAnswerScreen from './screens/mission/ShortAnswerScreen';
 import ProfileScreen from './screens/profile/ProfileScreen';
 
 const Stack = createStackNavigator();
@@ -96,6 +97,11 @@ const MissionStack = () => (
     <Stack.Screen
       name="Doing"
       component={MissionDoingScreen}
+      screenOptions={{headerMode: false}}
+    />
+    <Stack.Screen
+      name="ShortAnswer"
+      component={ShortAnswerScreen}
       screenOptions={{headerMode: false}}
     />
   </Stack.Navigator>
