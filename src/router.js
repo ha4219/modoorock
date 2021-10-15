@@ -28,6 +28,8 @@ import MissionScreen from './screens/mission/MissionScreen';
 import MissionDoingScreen from './screens/mission/MissionDoingScreen';
 import MissionOXScreen from './screens/mission/MissionOXScreen';
 import MissionShortAnswerScreen from './screens/mission/MissionShortAnswerScreen';
+import MissionMultipleChoiceScreen from './screens/mission/MissionMultipleChoiceScreen';
+
 import ProfileScreen from './screens/profile/ProfileScreen';
 
 const Stack = createStackNavigator();
@@ -110,6 +112,11 @@ const MissionStack = () => (
       component={MissionOXScreen}
       screenOptions={{headerMode: false}}
     />
+    <Stack.Screen
+      name="MultipleChoice"
+      component={MissionMultipleChoiceScreen}
+      screenOptions={{headerMode: false}}
+    />
   </Stack.Navigator>
 );
 
@@ -123,6 +130,7 @@ const Router = () => {
 
   React.useEffect(() => {
     () => async () => await AsyncStorage.getItem('cookie').then(data => {
+      console.log('auto login test',data);
         if (data) {
           dispatch(LOGINSUCCESS);
         } else {

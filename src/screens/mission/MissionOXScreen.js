@@ -1,8 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 
-import Button from '../../components/Button';
-import TextInputField from '../../components/TextInputField';
 import MissionImage from '../../components/mission/MissionImage';
 import MissionDescription from '../../components/mission/MissionDescription';
 
