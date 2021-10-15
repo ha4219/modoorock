@@ -6,7 +6,8 @@ import TextInputField from '../../components/TextInputField';
 import MissionImage from '../../components/mission/MissionImage';
 import MissionDescription from '../../components/mission/MissionDescription';
 
-const ShortAnswerScreen = ({route, navigation}) => {
+const MissionShortAnswerScreen = ({route, navigation}) => {
+  const [value, setValue] = React.useState('');
   return (
     <View>
       <View>
@@ -16,7 +17,7 @@ const ShortAnswerScreen = ({route, navigation}) => {
       <MissionImage />
       <MissionDescription content="content"/>
       <View>
-        <TextInputField />
+        <TextInputField setValue={setValue} value={value} />
         <Button name="확인" />
         <Text>TODO힌트보기</Text>
       </View>
@@ -24,6 +25,6 @@ const ShortAnswerScreen = ({route, navigation}) => {
   );
 };
 
-export default ShortAnswerScreen;
+export default MissionShortAnswerScreen;
 
 const styles = StyleSheet.create({});

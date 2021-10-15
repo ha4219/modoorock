@@ -26,7 +26,8 @@ import QnaScreen from './screens/QnaScreen';
 import NoticeScreen from './screens/profile/NoticeScreen';
 import MissionScreen from './screens/mission/MissionScreen';
 import MissionDoingScreen from './screens/mission/MissionDoingScreen';
-import ShortAnswerScreen from './screens/mission/ShortAnswerScreen';
+import MissionOXScreen from './screens/mission/MissionOXScreen';
+import MissionShortAnswerScreen from './screens/mission/MissionShortAnswerScreen';
 import ProfileScreen from './screens/profile/ProfileScreen';
 
 const Stack = createStackNavigator();
@@ -101,7 +102,12 @@ const MissionStack = () => (
     />
     <Stack.Screen
       name="ShortAnswer"
-      component={ShortAnswerScreen}
+      component={MissionShortAnswerScreen}
+      screenOptions={{headerMode: false}}
+    />
+    <Stack.Screen
+      name="OX"
+      component={MissionOXScreen}
       screenOptions={{headerMode: false}}
     />
   </Stack.Navigator>

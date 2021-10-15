@@ -16,7 +16,7 @@ const MissionDoingScreen = ({route, navigation}) => {
         visible={game}
         onRead={onRead}
         onRequestClose={() => setGame(false)}
-        onPress={() => navigation.navigate('ShortAnswer')}
+        onPress={() => navigation.navigate('OX')}
       />
       <Text>MissionDoingScreen</Text>
       <Text>{route.params.id}</Text>
