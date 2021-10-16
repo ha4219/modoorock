@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
-//
+//테스트
 const ListItem = props => {
   return (
     <TouchableOpacity style={styles.container}>
