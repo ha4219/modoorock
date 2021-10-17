@@ -32,8 +32,10 @@ const NoticeScreen = ({navigation}) => {
         </View>
       ) : (
         <React.Fragment>
-          <ListContainer data={data} />
-          <Button title="hi" onPress={dofun} />
+          <View style={styles.border}>
+            <Text style={styles.headtxt}>공지사항</Text>
+          </View>
+          <ListContainer data={data} page={10} />
         </React.Fragment>
       )}
     </View>
@@ -43,11 +45,19 @@ const NoticeScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FFFFFF',
   },
   loading: {
     alignItems: 'center',
     justifyContent: 'center',
   },
+  headtxt: {
+    fontSize: 20,
+    padding: 20,
+  },
+  border: {
+    borderBottomWidth: 0.2,
+  }
 });
 
 export default NoticeScreen;

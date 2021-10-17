@@ -10,7 +10,7 @@ export const getNoticeList =
     console.log('hihi', notiType);
     try {
       dispatch({type: NOTICELIST});
-      const res = await APIHelper.post('/faq/getfaqlist', {
+      const res = await APIHelper.post('/notice/getnoticelist', {
         type: notiType,
       });
       return res.data;

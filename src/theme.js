@@ -1,4 +1,4 @@
 export const theme = {
-  'color-primary': '#000000',
+  'color-primary': '#008FFF',
   'color-subPrimary': '',
 };
