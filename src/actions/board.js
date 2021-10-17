@@ -1,13 +1,15 @@
 import {
   NOTICEPOST,
   NOTICELIST,
+  GETFAQLIST,
+  GETFAQLISTSUCCESS,
+  GETFAQLISTERROR,
 } from '../constants/actions';
 import APIHelper from '../helpers/APIHelper';
 
 export const getNoticeList =
   ({notiType}) =>
   async dispatch => {
-    console.log('hihi', notiType);
     try {
       dispatch({type: NOTICELIST});
       const res = await APIHelper.post('/notice/getnoticelist', {
@@ -20,14 +22,38 @@ export const getNoticeList =
     }
   };
 
-export const doInsertNotice = ({}) => async dispatch => {
-  try {
-    
-  } catch (e) {
-    console.log(e);
-  }
-};
+export const doInsertNotice =
+  ({faqType}) =>
+  async dispatch => {
+    try {
+      dispatch({type: GETFAQLIST});
+      const res = await APIHelper.post('/faq/getfaqlist', {
+        type: faqType,
+      });
+      dispatch({type: GETFAQLISTSUCCESS});
+      return res.data;
+    } catch (e) {
+      console.log(e);
+      dispatch({type: GETFAQLISTERROR});
+    }
+  };
 
+export const getFaqList =
+  ({faqType}) =>
+  async dispatch => {
+    try {
+      console.log('faq test', faqType);
+      dispatch({type: GETFAQLIST});
+      const res = await APIHelper.post('/faq/getfaqlist', {
+        type: faqType,
+      });
+      dispatch({type: GETFAQLISTSUCCESS});
+      return res.data;
+    } catch (e) {
+      console.log(e);
+      dispatch({type: GETFAQLISTERROR});
+    }
+  };
 
 export const test =
   () =>

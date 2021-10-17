@@ -58,6 +58,6 @@ export default (state = initialState, action) => {
     case GETSESSIONERROR:
       return {...state};
     default:
-      return initialState;
+      return state;
   }
 };

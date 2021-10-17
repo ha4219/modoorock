@@ -9,9 +9,9 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import ListItem from './ListItem';
+import {ListItem, FaqListItem} from './ListItem';
 
-const ListContainer = ({data, page}) => {
+const ListContainer = ({data, page, type}) => {
   const [offset, setOffset] = React.useState(0);
   const [maxOffset, setMaxOffset] = React.useState(0);
   const [show, setShow] = React.useState([]);
@@ -52,7 +52,7 @@ const ListContainer = ({data, page}) => {
     if (offset <= 2) {
       return range(0, maxOffset > 4 ? 4 : maxOffset);
     } else if (offset >= maxOffset - 2) {
-      return range(maxOffset - 4, maxOffset);
+      return range(maxOffset - 4>=0 ?maxOffset - 4:0, maxOffset);
     }
     return range(offset - 2, offset + 2);
   };
@@ -62,7 +62,7 @@ const ListContainer = ({data, page}) => {
     return (
       <View style={styles.subBtns}>
         {items.map(item => (
-          <TouchableOpacity onPress={()=>setOffset(item)}>
+          <TouchableOpacity key={item} onPress={() => setOffset(item)}>
             <Text>{item + 1}</Text>
           </TouchableOpacity>
         ))}
@@ -70,28 +70,31 @@ const ListContainer = ({data, page}) => {
     );
   };
 
+  const generateList = () => {
+    if (type === 0) {
+      return show.map(item => <ListItem key={item.idx} item={item} />);
+    } else if (type === 1) {
+      return show.map(item => <FaqListItem key={item.idx} item={item} />);
+    } else {
+      return show.map(item => <ListItem key={item.idx} item={item} />);
+    }
+  };
+
   return (
     <ScrollView>
-      {/* <FlatList
-        data={show}
-        renderItem={ListItem}
-        keyExtractor={item => String(item.idx)}
-      /> */}
-      {show.map(item => (
-        <ListItem item={item} />
-      ))}
+      {generateList()}
       <View style={styles.btns}>
-        <TouchableOpacity onPress={()=>setOffset(0)}>
+        <TouchableOpacity key={-999999} onPress={() => setOffset(0)}>
           <Text>{"<<"}</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={doPrev}>
+        <TouchableOpacity key={-1} onPress={doPrev}>
           <Text>{"<"}</Text>
         </TouchableOpacity>
         {generateBtns()}
-        <TouchableOpacity onPress={doNext}>
+        <TouchableOpacity key={999999} onPress={doNext}>
           <Text>{">"}</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=>setOffset(maxOffset)}>
+        <TouchableOpacity key={1000000} onPress={() => setOffset(maxOffset)}>
           <Text>{">>"}</Text>
         </TouchableOpacity>
       </View>

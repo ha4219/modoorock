@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     height: 50,
     width: '90%',
     borderWidth: 0.3,
-    borderRadius: 8,
+    borderRadius: 4,
   },
   error: {
     color: 'red',

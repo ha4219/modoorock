@@ -32,7 +32,7 @@ const NoticeScreen = ({navigation}) => {
           <ActivityIndicator size="large" />
         </View>
       ) : (
-        <ListContainer data={data} page={10} />
+        <ListContainer data={data} page={10} type={0} />
       )}
     </View>
   );

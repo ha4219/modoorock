@@ -46,7 +46,9 @@ const ProfileScreen = ({navigation}) => {
           <Text style={styles.txt}>공지사항</Text>
           <Image source={require('../../assets/label.png')} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.item}>
+        <TouchableOpacity
+          style={styles.item}
+          onPress={() => navigation.navigate('Faq')}>
           <Text style={styles.txt}>자주 묻는 질문 FAQ</Text>
           <Image source={require('../../assets/label.png')} />
         </TouchableOpacity>

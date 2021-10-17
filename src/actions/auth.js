@@ -59,7 +59,7 @@ export const doLogin =
       const data = cookie.split(' ')[0];
       setCookie(data);
       await storeHeader('cookie', data);
-      dispatch({type: LOGINSUCCESS, payload: res.header});
+      dispatch({type: LOGINSUCCESS, payload: cookie});
       return data;
       // dispatch({type: LOGINSUCCESS});
     } catch (err){

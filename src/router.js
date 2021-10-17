@@ -25,6 +25,7 @@ import QrScannerScreen from './screens/QrScannerScreen';
 import CameraImogeScreen from './screens/CameraImogeScreen';
 import QnaScreen from './screens/QnaScreen';
 import NoticeScreen from './screens/profile/NoticeScreen';
+import FaqScreen from './screens/profile/FaqScreen';
 import MissionScreen from './screens/mission/MissionScreen';
 import MissionDoingScreen from './screens/mission/MissionDoingScreen';
 import MissionOXScreen from './screens/mission/MissionOXScreen';
@@ -84,6 +85,11 @@ const ProfileStack = () => (
     <Stack.Screen
       name="Notice"
       component={NoticeScreen}
+      screenOptions={{headerMode: false}}
+    />
+    <Stack.Screen
+      name="Faq"
+      component={FaqScreen}
       screenOptions={{headerMode: false}}
     />
   </Stack.Navigator>

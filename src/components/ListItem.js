@@ -1,12 +1,34 @@
 import React, { Component } from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, Image} from 'react-native';
 
-const ListItem = props => {
+export const ListItem = props => {
   const [view, setView] = React.useState(false);
   return (
     <TouchableOpacity style={styles.container} onPress={() => setView(!view)}>
       <View style={styles.touch}>
         <Text style={styles.idx}>{props.item.idx}</Text>
+        <Text style={styles.title}>{props.item.title}</Text>
+        {view ? (
+          <Image source={require('../assets/downIcon.png')} />
+        ) : (
+          <Image source={require('../assets/upIcon.png')} />
+        )}
+      </View>
+      {view ? (
+        <View style={styles.content}>
+          <Text>{props.item.content}</Text>
+        </View>
+      ) : <></>}
+    </TouchableOpacity>
+  );
+};
+
+export const FaqListItem = props => {
+  const [view, setView] = React.useState(false);
+  return (
+    <TouchableOpacity style={styles.container} onPress={() => setView(!view)}>
+      <View style={styles.touch}>
+        <Text style={styles.idx}>{props.item.type}</Text>
         <Text style={styles.title}>{props.item.title}</Text>
         {view ? (
           <Image source={require('../assets/downIcon.png')} />
@@ -45,8 +67,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   title: {
-    width: '80%',
-  }
+    width: '60%',
+  },
 });
-
-export default ListItem;
