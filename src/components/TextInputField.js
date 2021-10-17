@@ -20,12 +20,12 @@ const TextInputField = state => {
 const styles = StyleSheet.create({
   container: {
     margin: 5,
-    alignItems: 'center',
+    // alignItems: 'center',
   },
   input: {
     backgroundColor: 'white',
     height: 50,
-    width: '90%',
+    width: '100%',
     borderWidth: 0.3,
     borderRadius: 4,
   },

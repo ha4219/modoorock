@@ -13,17 +13,17 @@ const ButtonItem = ({name, backgroundColor, onPress}) => {
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: 'gray',
-    borderWidth: 0.3,
-    borderRadius: 5,
+    borderWidth: 0.5,
+    borderRadius: 4,
     alignItems: 'center',
     justifyContent: 'center',
-    width: '90%',
+    // width: '90%',
     height: 40,
   },
   container: {
+    flex: 1,
     margin: 5,
-    alignItems: 'center',
+    // alignItems: 'center',
   },
 });
 
