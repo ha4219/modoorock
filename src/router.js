@@ -12,6 +12,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {useSelector, useDispatch} from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import {autoLogin} from './actions/auth';
 import Home from './screens/Home';
 import HomeScreen from './screens/HomeScreen';
 import LoginScreen from './screens/LoginScreen';
@@ -129,14 +130,13 @@ const Router = () => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    () => async () => await AsyncStorage.getItem('cookie').then(data => {
-      console.log('auto login test',data);
-        if (data) {
-          dispatch(LOGINSUCCESS);
-        } else {
-          dispatch(LOGINERROR);
-        }
-      });
+    AsyncStorage.getItem('cookie').then(data => {
+      console.log('get?', data);
+      if (data !== null) {
+        dispatch(autoLogin({data}));
+      }
+    })
+    console.log('hello');
   }, []);
 
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);

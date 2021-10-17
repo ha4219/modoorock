@@ -7,10 +7,16 @@ import {
   LOGOUT,
   FINDID,
   NOTICELIST,
+  GETSESSION,
+  GETSESSIONSUCCESS,
+  GETSESSIONERROR,
 } from '../constants/actions';
 
 export const initialState = {
-  user: {},
+  user: {
+    idx: -1,
+    name: '',
+  },
   isLoggedIn: false,
   isLoggingIn: false,
   isResettingPassword: false,
@@ -22,6 +28,7 @@ export const initialState = {
 
 export default (state = initialState, action) => {
   console.log('auth test', state, action);
+  console.log('action', action);
   switch (action.type) {
     case LOGINSUCCESS:
       return {...state, isLoggedIn: true, header: action.payload};
@@ -40,6 +47,15 @@ export default (state = initialState, action) => {
     case FINDID:
       return {...state};
     case NOTICELIST:
+      return {...state};
+    case GETSESSION:
+      return {...state};
+    case GETSESSIONSUCCESS:
+      return {
+        ...state,
+        user: {idx: action.payload.idx, name: action.payload.name},
+      };
+    case GETSESSIONERROR:
       return {...state};
     default:
       return initialState;
