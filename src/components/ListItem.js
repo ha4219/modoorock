@@ -10,7 +10,7 @@ const ListItem = props => {
         <Text style={styles.title}>{props.item.title}</Text>
         {view ? (
           <Image source={require('../assets/downIcon.png')} />
-        ): (
+        ) : (
           <Image source={require('../assets/upIcon.png')} />
         )}
       </View>

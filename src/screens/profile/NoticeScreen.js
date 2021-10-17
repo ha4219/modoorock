@@ -8,14 +8,13 @@ import ListContainer from '../../components/ListContainer';
 const NoticeScreen = ({navigation}) => {
   const dispatch = useDispatch();
 
-  const [isLoading, setLoading] = React.useState(false);
+  const [isLoading, setLoading] = React.useState(true);
   const [data, setData] = React.useState([]);
 
   const dofun = () => {
     dispatch(getNoticeList({notiType: '전체'})).then(items => {
-      setData(items);
-    });
-    setLoading(false);
+      setData(items.reverse());
+    }).then(()=>setLoading(false));
   };
 
   React.useEffect(() => {
@@ -25,18 +24,15 @@ const NoticeScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
+      <View style={styles.border}>
+        <Text style={styles.headtxt}>공지사항</Text>
+      </View>
       {isLoading ? (
         <View style={styles.loading}>
           <ActivityIndicator size="large" />
-          <Button title="hi" onPress={dofun} />
         </View>
       ) : (
-        <React.Fragment>
-          <View style={styles.border}>
-            <Text style={styles.headtxt}>공지사항</Text>
-          </View>
-          <ListContainer data={data} page={10} />
-        </React.Fragment>
+        <ListContainer data={data} page={10} />
       )}
     </View>
   );
