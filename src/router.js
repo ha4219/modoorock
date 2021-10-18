@@ -71,27 +71,12 @@ const TestStack = () => (
 const ProfileStack = () => (
   <Stack.Navigator
     initialRouteName="Profile"
-    screenOptions={{headerMode: false}}>
-    <Stack.Screen
-      name="Profile"
-      component={ProfileScreen}
-      screenOptions={{headerMode: false}}
-    />
-    <Stack.Screen
-      name="Notice"
-      component={NoticeScreen}
-      screenOptions={{headerMode: false}}
-    />
-    <Stack.Screen
-      name="Faq"
-      component={FaqScreen}
-      screenOptions={{headerMode: false}}
-    />
-    <Stack.Screen
-      name="Qna"
-      component={QnaScreen}
-      screenOptions={{headerMode: false}}
-    />
+    // screenOptions={{headerMode: false}}
+  >
+    <Stack.Screen name="Profile" component={ProfileScreen} />
+    <Stack.Screen name="Notice" component={NoticeScreen} />
+    <Stack.Screen name="Faq" component={FaqScreen} />
+    <Stack.Screen name="Qna" component={QnaScreen} />
   </Stack.Navigator>
 );
 

@@ -112,6 +112,7 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 40,
     flexDirection: 'row',
   },
   find:{

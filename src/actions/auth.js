@@ -55,8 +55,10 @@ export const doLogin =
         id: id,
         password: pw,
       });
-      const cookie = res.config.headers.Cookie;
+      const [cookie] = res.headers['set-cookie'];
+      console.log(cookie);
       const data = cookie.split(' ')[0];
+      console.log('show data', data);
       setCookie(data);
       await storeHeader('cookie', data);
       dispatch({type: LOGINSUCCESS, payload: cookie});
@@ -127,6 +129,12 @@ export const getSession = () => async dispatch => {
     console.log(GETSESSION, 'session hi');
     dispatch({type: GETSESSION});
     const res = await APIHelper.post('/user/session', {});
+    const [cookie] = res.headers['set-cookie'];
+    const data = cookie.split(' ')[0];
+    if (APIHelper.defaults.headers.Cookie !== data) {
+      setCookie(data);
+      await storeHeader('cookie', data);
+    }
     dispatch({type: GETSESSIONSUCCESS, payload: res.data});
     return res;
   } catch (e) {
