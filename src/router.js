@@ -33,6 +33,7 @@ import MissionShortAnswerScreen from './screens/mission/MissionShortAnswerScreen
 import MissionMultipleChoiceScreen from './screens/mission/MissionMultipleChoiceScreen';
 
 import ProfileScreen from './screens/profile/ProfileScreen';
+import AboutUsScreen from './screens/profile/AboutUsScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -69,29 +70,12 @@ const TestStack = () => (
 );
 
 const ProfileStack = () => (
-  <Stack.Navigator
-    initialRouteName="Profile"
-    screenOptions={{headerMode: false}}>
-    <Stack.Screen
-      name="Profile"
-      component={ProfileScreen}
-      screenOptions={{headerMode: false}}
-    />
-    <Stack.Screen
-      name="Notice"
-      component={NoticeScreen}
-      screenOptions={{headerMode: false}}
-    />
-    <Stack.Screen
-      name="Faq"
-      component={FaqScreen}
-      screenOptions={{headerMode: false}}
-    />
-    <Stack.Screen
-      name="Qna"
-      component={QnaScreen}
-      screenOptions={{headerMode: false}}
-    />
+  <Stack.Navigator initialRouteName="Profile">
+    <Stack.Screen name="Profile" component={ProfileScreen} />
+    <Stack.Screen name="Notice" component={NoticeScreen} />
+    <Stack.Screen name="AboutUs" component={AboutUsScreen} />
+    <Stack.Screen name="Faq" component={FaqScreen} />
+    <Stack.Screen name="Qna" component={QnaScreen} />
   </Stack.Navigator>
 );
 
@@ -141,7 +125,7 @@ const Router = () => {
       if (data !== null) {
         dispatch(autoLogin({data}));
       }
-    })
+    });
     console.log('hello');
   }, []);
 

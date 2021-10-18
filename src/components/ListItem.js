@@ -91,6 +91,13 @@ const styles = StyleSheet.create({
   idx: {
     color: '#008FFF',
   },
+  writer: {
+    marginRight: 12,
+    color: '#4d4d4d',
+  },
+  date: {
+    color: '#4d4d4d',
+  },
   touch: {
     flexDirection: 'row',
     justifyContent: 'space-between',

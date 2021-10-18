@@ -37,7 +37,7 @@ export default (state = initialState, action) => {
     case SIGNUP:
       return {...state, success: {}, error: {}};
     case SIGNUPERROR:
-      return {...state, success: {}, error: action.type};
+      return {...state, success: {}, error: {}};
     case LOGINSUCCESS:
       return {...state, isLoggedIn: true};
     case LOGINERROR:
