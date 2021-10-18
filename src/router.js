@@ -25,6 +25,7 @@ import QnaScreen from './screens/QnaScreen';
 import NoticeScreen from './screens/profile/NoticeScreen';
 import MissionScreen from './screens/mission/MissionScreen';
 import ProfileScreen from './screens/profile/ProfileScreen';
+import AboutUsScreen from './screens/profile/AboutUsScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -57,6 +58,11 @@ const ProfileStack = () => (
     <Stack.Screen
       name="Notice"
       component={NoticeScreen}
+      screenOptions={{headerMode: false}}
+    />
+    <Stack.Screen
+      name="AboutUs"
+      component={AboutUsScreen}
       screenOptions={{headerMode: false}}
     />
   </Stack.Navigator>

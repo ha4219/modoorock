@@ -58,7 +58,9 @@ const ProfileScreen = ({navigation}) => {
           <Text style={styles.txt}>모두락 정보</Text>
           <Image source={require('../../assets/label.png')} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.item}>
+        <TouchableOpacity
+          style={styles.item}
+          onPress={() => navigation.navigate('AboutUs')}>
           <Text style={styles.txt}>회사소개</Text>
           <Image source={require('../../assets/label.png')} />
         </TouchableOpacity>
