@@ -70,26 +70,12 @@ const TestStack = () => (
 );
 
 const ProfileStack = () => (
-  <Stack.Navigator
-    initialRouteName="Profile">
-    <Stack.Screen
-      name="Profile"
-      component={ProfileScreen}
-    />
-    <Stack.Screen
-      name="Notice"
-      component={NoticeScreen}
-    />
-    <Stack.Screen
-      name="AboutUs"
-      component={AboutUsScreen}
-      name="Faq"
-      component={FaqScreen}
-    />
-    <Stack.Screen
-      name="Qna"
-      component={QnaScreen}
-    />
+  <Stack.Navigator initialRouteName="Profile">
+    <Stack.Screen name="Profile" component={ProfileScreen} />
+    <Stack.Screen name="Notice" component={NoticeScreen} />
+    <Stack.Screen name="AboutUs" component={AboutUsScreen} />
+    <Stack.Screen name="Faq" component={FaqScreen} />
+    <Stack.Screen name="Qna" component={QnaScreen} />
   </Stack.Navigator>
 );
 
@@ -139,7 +125,7 @@ const Router = () => {
       if (data !== null) {
         dispatch(autoLogin({data}));
       }
-    })
+    });
     console.log('hello');
   }, []);
 
