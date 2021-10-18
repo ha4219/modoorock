@@ -33,6 +33,7 @@ import MissionShortAnswerScreen from './screens/mission/MissionShortAnswerScreen
 import MissionMultipleChoiceScreen from './screens/mission/MissionMultipleChoiceScreen';
 
 import ProfileScreen from './screens/profile/ProfileScreen';
+import AboutUsScreen from './screens/profile/AboutUsScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -83,6 +84,8 @@ const ProfileStack = () => (
       screenOptions={{headerMode: false}}
     />
     <Stack.Screen
+      name="AboutUs"
+      component={AboutUsScreen}
       name="Faq"
       component={FaqScreen}
       screenOptions={{headerMode: false}}
