@@ -33,6 +33,7 @@ import MissionShortAnswerScreen from './screens/mission/MissionShortAnswerScreen
 import MissionMultipleChoiceScreen from './screens/mission/MissionMultipleChoiceScreen';
 
 import ProfileScreen from './screens/profile/ProfileScreen';
+import AboutUsScreen from './screens/profile/AboutUsScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -70,13 +71,25 @@ const TestStack = () => (
 
 const ProfileStack = () => (
   <Stack.Navigator
-    initialRouteName="Profile"
-    // screenOptions={{headerMode: false}}
-  >
-    <Stack.Screen name="Profile" component={ProfileScreen} />
-    <Stack.Screen name="Notice" component={NoticeScreen} />
-    <Stack.Screen name="Faq" component={FaqScreen} />
-    <Stack.Screen name="Qna" component={QnaScreen} />
+    initialRouteName="Profile">
+    <Stack.Screen
+      name="Profile"
+      component={ProfileScreen}
+    />
+    <Stack.Screen
+      name="Notice"
+      component={NoticeScreen}
+    />
+    <Stack.Screen
+      name="AboutUs"
+      component={AboutUsScreen}
+      name="Faq"
+      component={FaqScreen}
+    />
+    <Stack.Screen
+      name="Qna"
+      component={QnaScreen}
+    />
   </Stack.Navigator>
 );
 

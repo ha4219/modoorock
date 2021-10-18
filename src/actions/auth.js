@@ -63,7 +63,6 @@ export const doLogin =
       await storeHeader('cookie', data);
       dispatch({type: LOGINSUCCESS, payload: cookie});
       return data;
-      // dispatch({type: LOGINSUCCESS});
     } catch (err){
       console.log('ERROR', err);
       dispatch({type: LOGINERROR});
