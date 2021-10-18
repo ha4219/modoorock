@@ -23,7 +23,7 @@ import CameraScreen from './screens/CameraScreen';
 import {navigationRef} from './helpers/NavigationHelper';
 import QrScannerScreen from './screens/QrScannerScreen';
 import CameraImogeScreen from './screens/CameraImogeScreen';
-import QnaScreen from './screens/QnaScreen';
+import QnaScreen from './screens/profile/QnaScreen';
 import NoticeScreen from './screens/profile/NoticeScreen';
 import FaqScreen from './screens/profile/FaqScreen';
 import MissionScreen from './screens/mission/MissionScreen';
@@ -53,11 +53,6 @@ const HomeStack = () => (
     <Stack.Screen
       name="Imoge"
       component={CameraImogeScreen}
-      options={{headerShown: false}}
-    />
-    <Stack.Screen
-      name="Qna"
-      component={QnaScreen}
       options={{headerShown: false}}
     />
   </Stack.Navigator>
@@ -90,6 +85,11 @@ const ProfileStack = () => (
     <Stack.Screen
       name="Faq"
       component={FaqScreen}
+      screenOptions={{headerMode: false}}
+    />
+    <Stack.Screen
+      name="Qna"
+      component={QnaScreen}
       screenOptions={{headerMode: false}}
     />
   </Stack.Navigator>

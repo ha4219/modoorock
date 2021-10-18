@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import {ListItem, FaqListItem} from './ListItem';
+import {ListItem, FaqListItem, QnaListItem} from './ListItem';
 
 const ListContainer = ({data, page, type}) => {
   const [offset, setOffset] = React.useState(0);
@@ -75,6 +75,8 @@ const ListContainer = ({data, page, type}) => {
       return show.map(item => <ListItem key={item.idx} item={item} />);
     } else if (type === 1) {
       return show.map(item => <FaqListItem key={item.idx} item={item} />);
+    } else if (type === 2) {
+      return show.map(item => <QnaListItem key={item.idx} item={item} />);
     } else {
       return show.map(item => <ListItem key={item.idx} item={item} />);
     }
@@ -115,9 +117,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     margin: 2,
   },
-  test: {
-    // height:200,
-  }
 });
 
 export default ListContainer;

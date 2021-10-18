@@ -22,13 +22,13 @@ const FaqScreen = ({navigation}) => {
   const [select, setSelect] = React.useState(0);
   const selects = ['전체', '상품', '주문/배송/반품', '멤버쉽', '사이트이용'];
 
-  const dofun = () => {
-    dispatch(getFaqList({faqType: selects[select]}))
-      .then(items => {
-        setData(items.reverse());
-      })
-      .then(() => setLoading(false));
-  };
+  // const dofun = () => {
+  //   dispatch(getFaqList({faqType: selects[select]}))
+  //     .then(items => {
+  //       setData(items.reverse());
+  //     })
+  //     .then(() => setLoading(false));
+  // };
 
   React.useEffect(() => {
     setLoading(true);
@@ -50,7 +50,7 @@ const FaqScreen = ({navigation}) => {
         />
         <View style={styles.select}>
           {selects.map((item, index) => (
-            <TouchableOpacity onPress={() => setSelect(index)}>
+            <TouchableOpacity key={index} onPress={() => setSelect(index)}>
               {index === select ? (
                 <Text style={styles.selected}>{item}</Text>
               ) : (

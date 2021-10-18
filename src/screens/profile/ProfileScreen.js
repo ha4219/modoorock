@@ -7,15 +7,16 @@ import {
   Pressable,
   TouchableOpacity,
 } from 'react-native';
+import {connect} from 'react-redux';
 
-const ProfileScreen = ({navigation}) => {
+const ProfileScreen = ({navigation, name}) => {
   console.log('nav', navigation);
   return (
     <View style={styles.container}>
       <View style={styles.subContainer}>
         <Image source={require('../../assets/personIcon.png')} />
         <View style={styles.subContainer1}>
-          <Text>이름</Text>
+          <Text>{name}</Text>
           <Pressable>
             <Text>개인정보수정</Text>
           </Pressable>
@@ -52,7 +53,9 @@ const ProfileScreen = ({navigation}) => {
           <Text style={styles.txt}>자주 묻는 질문 FAQ</Text>
           <Image source={require('../../assets/label.png')} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.item}>
+        <TouchableOpacity
+          style={styles.item}
+          onPress={() => navigation.navigate('Qna')}>
           <Text style={styles.txt}>문의하기</Text>
           <Image source={require('../../assets/label.png')} />
         </TouchableOpacity>
@@ -112,4 +115,8 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProfileScreen;
+const mapStateToProps = (state, props) => {
+  return {idx: state.auth.user.idx, name: state.auth.user.name};
+};
+
+export default connect(mapStateToProps)(ProfileScreen);
