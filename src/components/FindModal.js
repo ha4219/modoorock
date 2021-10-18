@@ -27,7 +27,11 @@ export const FindIdModal = props => {
 
   return (
     <View>
-      <Modal animationType="slide" visible={props.visible} transparent={true}>
+      <Modal
+        animationType="slide"
+        visible={props.visible}
+        transparent={true}
+        onRequestClose={() => props.onClose()}>
         {viewResult ? (
           <View Style={styles.modalView}>
             <Text>{data}</Text>

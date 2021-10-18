@@ -10,7 +10,9 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {useSelector, useDispatch} from 'react-redux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import {autoLogin} from './actions/auth';
 import Home from './screens/Home';
 import HomeScreen from './screens/HomeScreen';
 import LoginScreen from './screens/LoginScreen';
@@ -21,9 +23,15 @@ import CameraScreen from './screens/CameraScreen';
 import {navigationRef} from './helpers/NavigationHelper';
 import QrScannerScreen from './screens/QrScannerScreen';
 import CameraImogeScreen from './screens/CameraImogeScreen';
-import QnaScreen from './screens/QnaScreen';
+import QnaScreen from './screens/profile/QnaScreen';
 import NoticeScreen from './screens/profile/NoticeScreen';
+import FaqScreen from './screens/profile/FaqScreen';
 import MissionScreen from './screens/mission/MissionScreen';
+import MissionDoingScreen from './screens/mission/MissionDoingScreen';
+import MissionOXScreen from './screens/mission/MissionOXScreen';
+import MissionShortAnswerScreen from './screens/mission/MissionShortAnswerScreen';
+import MissionMultipleChoiceScreen from './screens/mission/MissionMultipleChoiceScreen';
+
 import ProfileScreen from './screens/profile/ProfileScreen';
 import AboutUsScreen from './screens/profile/AboutUsScreen';
 
@@ -32,7 +40,22 @@ const Tab = createBottomTabNavigator();
 
 const HomeStack = () => (
   <Stack.Navigator initialRouteName="Home" screenOptions={{headerMode: false}}>
-    <Tab.Screen name="Home" component={Home} options={{headerShown: false}} />
+    <Stack.Screen name="Home" component={Home} options={{headerShown: false}} />
+    <Stack.Screen
+      name="Camera"
+      component={CameraScreen}
+      options={{headerShown: false}}
+    />
+    <Stack.Screen
+      name="Qr"
+      component={QrScannerScreen}
+      options={{headerShown: false}}
+    />
+    <Stack.Screen
+      name="Imoge"
+      component={CameraImogeScreen}
+      options={{headerShown: false}}
+    />
   </Stack.Navigator>
 );
 
@@ -63,6 +86,13 @@ const ProfileStack = () => (
     <Stack.Screen
       name="AboutUs"
       component={AboutUsScreen}
+      name="Faq"
+      component={FaqScreen}
+      screenOptions={{headerMode: false}}
+    />
+    <Stack.Screen
+      name="Qna"
+      component={QnaScreen}
       screenOptions={{headerMode: false}}
     />
   </Stack.Navigator>
@@ -77,6 +107,26 @@ const MissionStack = () => (
       component={MissionScreen}
       screenOptions={{headerMode: false}}
     />
+    <Stack.Screen
+      name="Doing"
+      component={MissionDoingScreen}
+      screenOptions={{headerMode: false}}
+    />
+    <Stack.Screen
+      name="ShortAnswer"
+      component={MissionShortAnswerScreen}
+      screenOptions={{headerMode: false}}
+    />
+    <Stack.Screen
+      name="OX"
+      component={MissionOXScreen}
+      screenOptions={{headerMode: false}}
+    />
+    <Stack.Screen
+      name="MultipleChoice"
+      component={MissionMultipleChoiceScreen}
+      screenOptions={{headerMode: false}}
+    />
   </Stack.Navigator>
 );
 
@@ -87,6 +137,16 @@ const defaultProps = {
 const Router = () => {
   const routeNameRef = useRef();
   const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    AsyncStorage.getItem('cookie').then(data => {
+      console.log('get?', data);
+      if (data !== null) {
+        dispatch(autoLogin({data}));
+      }
+    })
+    console.log('hello');
+  }, []);
 
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
   return (

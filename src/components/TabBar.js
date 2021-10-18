@@ -13,29 +13,35 @@ const TabBar = ({navigation, state}) => {
       <TouchableOpacity
         style={styles.item}
         onPress={() => navigation.jumpTo('HomeStack')}>
-        <Text>홈</Text>
+        <Image style={styles.img} source={require('../assets/homeIcon.png')} />
+        <Text style={styles.txt}>홈</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.item}
         onPress={() => navigation.jumpTo('TestStack')}>
-        <Text>관광지</Text>
+        <Image style={styles.img} source={require('../assets/mapIcon.png')} />
+        <Text style={styles.txt}>관광지</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.item}
         onPress={() => navigation.jumpTo('TestStack')}>
-        <Image source={require('../assets/locationIcon.png')} />
-        <Text>내근처</Text>
+        <Image style={styles.img} source={require('../assets/gpsIcon.png')} />
+        <Text style={styles.txt}>내근처</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.item}
         onPress={() => navigation.jumpTo('MissionStack')}>
-        <Text>미션</Text>
+        <Image
+          style={styles.img}
+          source={require('../assets/trophyIcon.png')}
+        />
+        <Text style={styles.txt}>미션</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.item}
         onPress={() => navigation.jumpTo('ProfileStack')}>
-        <Image source={require('../assets/personIcon.png')} />
-        <Text>내정보</Text>
+        <Image style={styles.img} source={require('../assets/heartIcon.png')} />
+        <Text style={styles.txt}>내정보</Text>
       </TouchableOpacity>
     </View>
   );
@@ -51,10 +57,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     textAlign: 'center',
     padding: 10,
-    borderWidth: 1,
-    borderRadius: 4,
     width: '20%',
-    backgroundColor: 'gray',
+    fontSize: 10,
+  },
+  txt: {
+    fontSize: 10,
+  },
+  img: {
+    width: 25,
+    height: 25,
+    resizeMode: 'contain',
   },
 });
 

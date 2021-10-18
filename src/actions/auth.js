@@ -1,3 +1,5 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import {
   SIGNUP,
   SIGNUPERROR,
@@ -8,10 +10,18 @@ import {
   FINDID,
   FINDPW,
   GETSESSION,
-  SESSIONSUCCESS,
-  SESSIONERROR,
+  GETSESSIONSUCCESS,
+  GETSESSIONERROR,
 } from '../constants/actions';
 import APIHelper, {setCookie} from '../helpers/APIHelper';
+
+const storeHeader = async (key, value) => {
+  try {
+    await AsyncStorage.setItem(key, value);
+  } catch (e) {
+    console.log(e);
+  }
+}
 
 export const doSignup =
   ({id, pw, name, ph}) =>
@@ -45,13 +55,29 @@ export const doLogin =
         id: id,
         password: pw,
       });
-      const [cookie] = res.headers['set-cookie'];
+      const cookie = res.config.headers.Cookie;
       const data = cookie.split(' ')[0];
       setCookie(data);
-      dispatch({type: LOGINSUCCESS, payload: data});
-      // dispatch({type: LOGINSUCCESS});
+      await storeHeader('cookie', data);
+      dispatch({type: LOGINSUCCESS, payload: cookie});
+      return data;
     } catch (err){
       console.log('ERROR', err);
+      dispatch({type: LOGINERROR});
+    }
+  };
+
+export const autoLogin =
+  ({data}) =>
+  async dispatch => {
+    try {
+      dispatch({type: LOGIN});
+      console.log('get???', data);
+      setCookie(data);
+      dispatch({type: LOGINSUCCESS, payload: data});
+      return data;
+    } catch (e) {
+      console.log('ERROR', e);
       dispatch({type: LOGINERROR});
     }
   };
@@ -99,12 +125,14 @@ export const getSession = () => async dispatch => {
   try {
     console.log(GETSESSION, 'session hi');
     dispatch({type: GETSESSION});
-    const res = APIHelper.get('/user/session');
-    console.log(SESSIONSUCCESS,res);
+    const res = await APIHelper.post('/user/session', {});
+    dispatch({type: GETSESSIONSUCCESS, payload: res.data});
+    return res;
   } catch (e) {
-    console.log(SESSIONERROR,e);
+    console.log(GETSESSIONERROR,e);
+    dispatch({type: GETSESSIONERROR});
   }
-}
+};
 
 export const test = () => async dispatch => {
   try {

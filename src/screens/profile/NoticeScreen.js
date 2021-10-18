@@ -8,14 +8,13 @@ import ListContainer from '../../components/ListContainer';
 const NoticeScreen = ({navigation}) => {
   const dispatch = useDispatch();
 
-  const [isLoading, setLoading] = React.useState(false);
+  const [isLoading, setLoading] = React.useState(true);
   const [data, setData] = React.useState([]);
 
   const dofun = () => {
     dispatch(getNoticeList({notiType: '전체'})).then(items => {
-      setData(items);
-    });
-    setLoading(false);
+      setData(items.reverse());
+    }).then(()=>setLoading(false));
   };
 
   React.useEffect(() => {
@@ -25,16 +24,15 @@ const NoticeScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
+      <View style={styles.border}>
+        <Text style={styles.headtxt}>공지사항</Text>
+      </View>
       {isLoading ? (
         <View style={styles.loading}>
           <ActivityIndicator size="large" />
-          <Button title="hi" onPress={dofun} />
         </View>
       ) : (
-        <React.Fragment>
-          <ListContainer data={data} />
-          <Button title="hi" onPress={dofun} />
-        </React.Fragment>
+        <ListContainer data={data} page={10} type={0} />
       )}
     </View>
   );
@@ -43,11 +41,19 @@ const NoticeScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FFFFFF',
   },
   loading: {
     alignItems: 'center',
     justifyContent: 'center',
   },
+  headtxt: {
+    fontSize: 20,
+    padding: 20,
+  },
+  border: {
+    borderBottomWidth: 0.2,
+  }
 });
 
 export default NoticeScreen;

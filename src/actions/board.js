@@ -1,68 +1,109 @@
-import {NOTICEPOST, NOTICELIST} from '../constants/actions';
+import {
+  NOTICEPOST,
+  NOTICELIST,
+  GETFAQLIST,
+  GETFAQLISTSUCCESS,
+  GETFAQLISTERROR,
+  GETQNALIST,
+  GETQNALISTSUCCESS,
+  GETQNALISTERROR,
+  INSERTQNA,
+  INSERTQNASUCCESS,
+  INSERTQNAERROR,
+} from '../constants/actions';
 import APIHelper from '../helpers/APIHelper';
 
-export const doSignup =
-  ({id, pw, name, ph}) =>
+export const getNoticeList =
+  ({notiType}) =>
   async dispatch => {
     try {
-      dispatch({type: SIGNUP});
-      const res = await APIHelper.post('/user/register', {
-        id: id,
-        password: pw,
-        name: name,
-        phone: ph,
+      dispatch({type: NOTICELIST});
+      const res = await APIHelper.post('/notice/getnoticelist', {
+        type: notiType,
       });
-    } catch (err) {
-      console.log('ERRPR', err, err.status);
-      if (err && err.status === 401) {
-        console.log(err);
-      }
-      dispatch({type: SIGNUPERROR});
+      return res.data;
+    } catch (e) {
+      console.log(e);
+      return [];
+    }
+  };
+
+export const doInsertNotice =
+  ({faqType}) =>
+  async dispatch => {
+    try {
+      dispatch({type: GETFAQLIST});
+      const res = await APIHelper.post('/faq/getfaqlist', {
+        type: faqType,
+      });
+      dispatch({type: GETFAQLISTSUCCESS});
+      return res.data;
+    } catch (e) {
+      console.log(e);
+      dispatch({type: GETFAQLISTERROR});
     }
   };
 
 export const getFaqList =
   ({faqType}) =>
   async dispatch => {
-    console.log('hihi', faqType);
     try {
-      dispatch({type: NOTICELIST});
+      dispatch({type: GETFAQLIST});
       const res = await APIHelper.post('/faq/getfaqlist', {
         type: faqType,
       });
-      console.log(res.data);
+      dispatch({type: GETFAQLISTSUCCESS});
       return res.data;
     } catch (e) {
-      console.log(e);
-      return [];
+      console.log(GETFAQLISTERROR, e);
+      dispatch({type: GETFAQLISTERROR});
     }
   };
 
-export const getNoticeList =
-  ({notiType}) =>
+export const getQnaList =
+  ({idx}) =>
   async dispatch => {
-    console.log('hihi', notiType);
     try {
-      dispatch({type: NOTICELIST});
-      const res = await APIHelper.post('/notice/getnoticelist', {
-        type: notiType,
+      dispatch({type: GETQNALIST});
+      const res = await APIHelper.post('/qna/getqnalist', {
+        userIdx: idx,
+      });
+      dispatch({type: GETQNALISTSUCCESS});
+      return res.data;
+    } catch (e) {
+      console.log(GETQNALISTERROR, e);
+      dispatch({type: GETQNALISTERROR});
+    }
+  };
+
+export const insertQng =
+  ({idx, title, content}) =>
+  async dispatch => {
+    try {
+      dispatch({type: INSERTQNA});
+      const res = await APIHelper.post('/qna/insertqna', {
+        userIdx: idx,
+        title: title,
+        content: content,
+      });
+      dispatch({type: INSERTQNASUCCESS});
+      return res.data;
+    } catch (e) {
+      console.log(INSERTQNAERROR, e);
+    }
+  };
+
+export const test =
+  () =>
+  async dispatch => {
+    console.log("testtest");
+    try {
+      const res = await APIHelper.post('/user/session', {
       });
       console.log(res.data);
-      return res.data;
+      return res;
     } catch (e) {
       console.log(e);
       return [];
     }
   };
-
-export const test = () => async dispatch => {
-  console.log('testtest');
-  try {
-    const res = await APIHelper.post('/user/session', {});
-    console.log(res.data);
-    return res;
-  } catch (e) {
-    console.log(e);
-    return [];
-  }
-};

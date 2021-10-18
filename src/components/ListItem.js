@@ -1,20 +1,81 @@
-import React, {Component} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
-//테스트
-const ListItem = props => {
+import React, { Component } from 'react';
+import {Text, View, StyleSheet, TouchableOpacity, Image} from 'react-native';
+
+export const ListItem = props => {
+  const [view, setView] = React.useState(false);
   return (
-    <TouchableOpacity style={styles.container}>
-      <View style={styles.title_container}>
-        <Text numberOfLines={1} style={styles.title}>
-          {`[${props.item.type}] ${props.item.title}`}
-        </Text>
+    <TouchableOpacity style={styles.container} onPress={() => setView(!view)}>
+      <View style={styles.touch}>
+        <Text style={styles.idx}>{props.item.idx}</Text>
+        <Text style={styles.title}>{props.item.title}</Text>
+        {view ? (
+          <Image source={require('../assets/downIcon.png')} />
+        ) : (
+          <Image source={require('../assets/upIcon.png')} />
+        )}
       </View>
-      <View style={styles.data_container}>
-        <Text style={styles.writer}>관리자</Text>
-        <Text style={styles.date}>
-          {props.item.date.slice(0, props.item.date.length - 3)}
-        </Text>
+      {view ? (
+        <View style={styles.content}>
+          <Text>{props.item.content}</Text>
+        </View>
+      ) : <></>}
+    </TouchableOpacity>
+  );
+};
+
+export const FaqListItem = props => {
+  const [view, setView] = React.useState(false);
+  return (
+    <TouchableOpacity style={styles.container} onPress={() => setView(!view)}>
+      <View style={styles.touch}>
+        <Text style={styles.idx}>{props.item.type}</Text>
+        <Text style={styles.title}>{props.item.title}</Text>
+        {view ? (
+          <Image source={require('../assets/downIcon.png')} />
+        ) : (
+          <Image source={require('../assets/upIcon.png')} />
+        )}
       </View>
+      {view ? (
+        <View style={styles.content}>
+          <Text>{props.item.content}</Text>
+        </View>
+      ) : <></>}
+    </TouchableOpacity>
+  );
+};
+
+export const QnaListItem = props => {
+  const [view, setView] = React.useState(false);
+  return (
+    <TouchableOpacity style={styles.container} onPress={() => setView(!view)}>
+      <View style={styles.touch}>
+        {props.item.answer === null ? (
+          <Text style={styles.qnaTitleFalse}>답변예정</Text>
+        ) : (
+          <Text style={styles.qnaTitleTrue}>답변완료</Text>
+        )}
+        <Text style={styles.title}>{props.item.title}</Text>
+        {view ? (
+          <Image source={require('../assets/downIcon.png')} />
+        ) : (
+          <Image source={require('../assets/upIcon.png')} />
+        )}
+      </View>
+      {view ? (
+        <View>
+          <View style={styles.content}>
+            <Text>{props.item.content}</Text>
+          </View>
+          {props.item.answer ? (
+            <View style={styles.answer}>
+              <Text>{props.item.answer}</Text>
+            </View>
+          ) : (
+            <></>
+          )}
+        </View>
+      ) : <></>}
     </TouchableOpacity>
   );
 };
@@ -22,34 +83,13 @@ const ListItem = props => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
-    borderTopWidth: 1,
-    borderTopColor: 'lightgray',
-    borderBottomColor: 'lightgray',
+    justifyContent: 'space-between',
     borderBottomWidth: 1,
-    height: 80,
-    backgroundColor: 'white',
-    paddingTop: 10,
-    paddingBottom: 10,
-    paddingLeft: 16,
-    paddingRight: 16,
+    padding: 20,
+    // height: 50,
   },
-  title_container: {
-    flex: 1,
-    width: '100%',
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-
-  title: {
-    fontSize: 16,
-    fontWeight: '700',
-  },
-
-  data_container: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
+  idx: {
+    color: '#008FFF',
   },
   writer: {
     marginRight: 12,
@@ -60,7 +100,33 @@ const styles = StyleSheet.create({
   },
   touch: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  content: {
+    backgroundColor: '#F8F8F8',
+    width: '100%',
+    padding: 20,
+    borderRadius: 10,
+    margin: 5,
+  },
+  answer: {
+    backgroundColor: '#F8F8F0',
+    width: '100%',
+    padding: 20,
+    borderRadius: 10,
+    margin: 5,
+  },
+  title: {
+    width: '60%',
+  },
+  qnaTitleTrue: {
+    backgroundColor: '#9DB4D6',
+    padding: 5,
+    color: 'white',
+  },
+  qnaTitleFalse: {
+    backgroundColor: '#F2C5A6',
+    padding: 5,
+    color: 'white',
   },
 });
-
-export default ListItem;

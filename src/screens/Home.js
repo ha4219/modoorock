@@ -6,18 +6,17 @@ import {
   Button,
   ActivityIndicator,
 } from 'react-native';
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector, useDispatch, connect} from 'react-redux';
 import {Tab, TabView} from '@ui-kitten/components';
 import {PERMISSIONS, RESULTS, request} from 'react-native-permissions';
 
 import styles from './Home.style';
 import TabBar from '../components/TabBar';
-import {doLogOut} from '../actions/auth';
+import {doLogOut, getSession} from '../actions/auth';
 import {test} from '../actions/board';
 
-const Home = ({navigation}) => {
+const Home = ({navigation, idx, name}) => {
   const dispatch = useDispatch();
-  const [idx, setIdx] = React.useState(0);
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
 
   const check = () => async() => {
@@ -44,7 +43,6 @@ const Home = ({navigation}) => {
         {isLoggedIn ? (
           <React.Fragment>
             <Button title="Test" onPress={() => navigation.navigate('Test')} />
-            <Button title="tab" onPress={() => navigation.navigate('Tab')} />
             <Button title="LOGOUT" onPress={() => dispatch(doLogOut())} />
             <Button
               title="CAMERA"
@@ -59,10 +57,12 @@ const Home = ({navigation}) => {
               title="Notice"
               onPress={() => navigation.navigate('Notice')}
             />
+            <Button title="session" onPress={() => dispatch(getSession())} />
             <Button
-              title="session"
-              onPress={() => dispatch(test())}
-            />
+              title="idx name"
+              onPress={() => {
+                console.log(idx, name);
+            }} />
           </React.Fragment>
         ) : (
           <Button title="login" onPress={() => navigation.navigate('Login')} />
@@ -72,4 +72,8 @@ const Home = ({navigation}) => {
   );
 };
 
-export default Home;
+const mapStateToProps = (state, props) => {
+  return {idx: state.auth.user.idx, name: state.auth.user.name};
+};
+
+export default connect(mapStateToProps)(Home);

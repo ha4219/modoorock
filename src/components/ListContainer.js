@@ -1,92 +1,121 @@
-import React, {Component, useState} from 'react';
-import {Text, View, FlatList, StyleSheet} from 'react-native';
-import {TextInput} from 'react-native-gesture-handler';
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {faSearch} from '@fortawesome/free-solid-svg-icons';
+import React, { Component } from 'react';
+import {
+  Text,
+  View,
+  ScrollView,
+  FlatList,
+  Button,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 
-import ListItem from './ListItem';
+import {ListItem, FaqListItem, QnaListItem} from './ListItem';
 
-const sixtyFivePercent = '65%';
+const ListContainer = ({data, page, type}) => {
+  const [offset, setOffset] = React.useState(0);
+  const [maxOffset, setMaxOffset] = React.useState(0);
+  const [show, setShow] = React.useState([]);
 
-const ListContainer = props => {
-  const reverseData = props.data.sort((a, b) => {
-    return b.idx - a.idx;
-  });
-  return (
-    <View>
-      <View style={styles.header}>
-        <Text style={styles.header_title}>공지사항</Text>
-        <View style={styles.search_container}>
-          <TextInput
-            style={styles.search}
-            placeholder="검색"
-            placeholderTextColor="white"
-          />
-          <FontAwesomeIcon
-            style={styles.search_icon}
-            icon={faSearch}
-            size={24}
-          />
-        </View>
+  React.useEffect(() => {
+    setMaxOffset(Math.ceil(data.length / page) - 1);
+  }, [data, page]);
+
+  React.useEffect(() => {
+    setShow(data.slice(offset * page, (offset + 1) * page));
+  }, [offset, page, data]);
+
+  const doPrev = () => {
+    if (offset === 0) {
+      return;
+    }
+    setOffset(offset - 1);
+    return;
+  };
+
+  const doNext = () => {
+    if (offset === maxOffset) {
+      return;
+    }
+    setOffset(offset + 1);
+    return;
+  };
+
+  const range = (start, end) => {
+    var res = [];
+    for (var i = start; i <= end; i++) {
+      res.push(i);
+    }
+    return res;
+  };
+
+  const getRange = () => {
+    if (offset <= 2) {
+      return range(0, maxOffset > 4 ? 4 : maxOffset);
+    } else if (offset >= maxOffset - 2) {
+      return range(maxOffset - 4>=0 ?maxOffset - 4:0, maxOffset);
+    }
+    return range(offset - 2, offset + 2);
+  };
+
+  const generateBtns = () => {
+    var items = getRange();
+    return (
+      <View style={styles.subBtns}>
+        {items.map(item => (
+          <TouchableOpacity key={item} onPress={() => setOffset(item)}>
+            <Text>{item + 1}</Text>
+          </TouchableOpacity>
+        ))}
       </View>
+    );
+  };
 
-      <FlatList
-        style={styles.list}
-        data={reverseData}
-        renderItem={ListItem}
-        keyExtractor={item => String(item.idx)}
-      />
-    </View>
+  const generateList = () => {
+    if (type === 0) {
+      return show.map(item => <ListItem key={item.idx} item={item} />);
+    } else if (type === 1) {
+      return show.map(item => <FaqListItem key={item.idx} item={item} />);
+    } else if (type === 2) {
+      return show.map(item => <QnaListItem key={item.idx} item={item} />);
+    } else {
+      return show.map(item => <ListItem key={item.idx} item={item} />);
+    }
+  };
+
+  return (
+    <ScrollView>
+      {generateList()}
+      <View style={styles.btns}>
+        <TouchableOpacity key={-999999} onPress={() => setOffset(0)}>
+          <Text>{"<<"}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity key={-1} onPress={doPrev}>
+          <Text>{"<"}</Text>
+        </TouchableOpacity>
+        {generateBtns()}
+        <TouchableOpacity key={999999} onPress={doNext}>
+          <Text>{">"}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity key={1000000} onPress={() => setOffset(maxOffset)}>
+          <Text>{">>"}</Text>
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  header: {
-    alignSelf: 'stretch',
-    height: 120,
-    backgroundColor: '#008FFF',
-    shadow: {
-      shadowOffset: {width: 0, height: 10},
-      shadowColor: 'black',
-      shadowOpacity: 1,
-      elevation: 3,
-      backgroundColor: '#0000',
-    },
-  },
-  header_title: {
-    textAlign: 'center',
-    lineHeight: 65,
-    fontSize: 24,
-    fontWeight: '700',
-    color: 'white',
-  },
-  search_container: {
-    flex: 1,
+  btns: {
     flexDirection: 'row',
-    justifyContent: 'center',
     alignItems: 'center',
+    justifyContent: 'space-around',
+    margin: 2,
   },
-  search: {
-    width: sixtyFivePercent,
-    height: 40,
-    borderWidth: 2,
-    borderColor: 'white',
-    marginBottom: 10,
-    marginLeft: 14,
-    paddingLeft: 8,
-    paddingRight: 8,
-    color: 'white',
-    borderRadius: 4,
-    fontSize: 20,
-    fontWeight: '500',
-  },
-  search_icon: {
-    marginLeft: 14,
-    marginBottom: 6,
-    color: 'white',
-  },
-  list: {
-    marginBottom: 65,
+  subBtns: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    margin: 2,
   },
 });
 
