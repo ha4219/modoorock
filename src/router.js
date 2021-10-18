@@ -168,8 +168,10 @@ const Router = () => {
           {isLoggedIn ? (
             <Tab.Navigator
               tabBar={state => (
-                <TabBar {...state} screenOptions={{headerMode: false}} />
-              )}>
+                <TabBar {...state} screenOptions={{headerShown: false}} />
+              )}
+              screenOptions={{headerShown: false}}
+              >
               <Tab.Screen
                 name="HomeStack"
                 component={HomeStack}

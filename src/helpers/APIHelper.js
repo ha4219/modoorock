@@ -2,7 +2,7 @@ import axios from 'axios';
 import Config from 'react-native-config';
 
 const API = axios.create({
-  baseURL: 'https://modoorock.kro.kr/modoorock',
+  baseURL: Config.API_URL,
   withCredentials: true,
 });
 
