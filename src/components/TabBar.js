@@ -18,13 +18,13 @@ const TabBar = ({navigation, state}) => {
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.item}
-        onPress={() => navigation.jumpTo('TestStack')}>
+        onPress={() => navigation.jumpTo('TourStack')}>
         <Image style={styles.img} source={require('../assets/mapIcon.png')} />
         <Text style={styles.txt}>관광지</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.item}
-        onPress={() => navigation.jumpTo('TestStack')}>
+        onPress={() => navigation.jumpTo('MapStack')}>
         <Image style={styles.img} source={require('../assets/gpsIcon.png')} />
         <Text style={styles.txt}>내근처</Text>
       </TouchableOpacity>

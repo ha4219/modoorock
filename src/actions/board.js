@@ -41,6 +41,7 @@ export const doInsertNotice =
     } catch (e) {
       console.log(e);
       dispatch({type: GETFAQLISTERROR});
+      return [];
     }
   };
 
@@ -57,6 +58,7 @@ export const getFaqList =
     } catch (e) {
       console.log(GETFAQLISTERROR, e);
       dispatch({type: GETFAQLISTERROR});
+      return [];
     }
   };
 
@@ -73,6 +75,7 @@ export const getQnaList =
     } catch (e) {
       console.log(GETQNALISTERROR, e);
       dispatch({type: GETQNALISTERROR});
+      return [];
     }
   };
 

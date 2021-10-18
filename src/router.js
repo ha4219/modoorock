@@ -18,6 +18,9 @@ import HomeScreen from './screens/HomeScreen';
 import LoginScreen from './screens/LoginScreen';
 import Test from './screens/Test';
 import TabBar from './components/TabBar';
+
+import TourAreaScreen from './screens/tour/TourAreaScreen';
+import TourThemeScreen from './screens/tour/TourThemeScreen';
 import SignupScreen from './screens/SignupScreen';
 import CameraScreen from './screens/CameraScreen';
 import {navigationRef} from './helpers/NavigationHelper';
@@ -66,6 +69,13 @@ const TestStack = () => (
       component={Test}
       screenOptions={{headerMode: false}}
     />
+  </Stack.Navigator>
+);
+
+const TourStack = () => (
+  <Stack.Navigator initialRouteName="Area" screenOptions={{headerMode: false}}>
+    <Stack.Screen name="Area" component={TourAreaScreen} />
+    <Stack.Screen name="Theme" component={TourThemeScreen} />
   </Stack.Navigator>
 );
 
@@ -156,15 +166,19 @@ const Router = () => {
               tabBar={state => (
                 <TabBar {...state} screenOptions={{headerShown: false}} />
               )}
-              screenOptions={{headerShown: false}}
-              >
+              screenOptions={{headerShown: false}}>
               <Tab.Screen
                 name="HomeStack"
                 component={HomeStack}
                 screenOptions={{headerMode: false}}
               />
               <Tab.Screen
-                name="TestStack"
+                name="TourStack"
+                component={TourStack}
+                screenOptions={{headerMode: false}}
+              />
+              <Tab.Screen
+                name="MapStack"
                 component={TestStack}
                 screenOptions={{headerMode: false}}
               />

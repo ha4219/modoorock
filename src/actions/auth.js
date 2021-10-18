@@ -128,16 +128,17 @@ export const getSession = () => async dispatch => {
     console.log(GETSESSION, 'session hi');
     dispatch({type: GETSESSION});
     const res = await APIHelper.post('/user/session', {});
-    const [cookie] = res.headers['set-cookie'];
-    const data = cookie.split(' ')[0];
-    if (APIHelper.defaults.headers.Cookie !== data) {
-      setCookie(data);
-      await storeHeader('cookie', data);
-    }
+    console.log('session last test', res.data);
+
+    // const data = cookie.split(' ')[0];
+    // if (APIHelper.defaults.headers.Cookie !== data) {
+    //   setCookie(data);
+    //   await storeHeader('cookie', data);
+    // }
     dispatch({type: GETSESSIONSUCCESS, payload: res.data});
     return res;
   } catch (e) {
-    console.log(GETSESSIONERROR,e);
+    console.log(GETSESSIONERROR, e, e.status);
     dispatch({type: GETSESSIONERROR});
   }
 };
