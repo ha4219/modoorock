@@ -4,6 +4,11 @@ import Config from 'react-native-config';
 const API = axios.create({
   baseURL: Config.API_URL,
   withCredentials: true,
+  headers: {
+    post: {
+      Cookie: '',
+    },
+  },
 });
 
 API.interceptors.request.use(
@@ -29,6 +34,11 @@ API.interceptors.response.use(
 export const setCookie = cookie => {
   console.log(cookie);
   API.defaults.headers.Cookie = cookie;
+};
+
+export const removeCookie = () => {
+  console.log('removeCookie');
+  API.defaults.headers.Cookie = '';
 };
 
 export default API;

@@ -7,13 +7,16 @@ import {
   ScrollView,
   FlatList,
 } from 'react-native';
+import {useDispatch} from 'react-redux';
 
+import {getTourData} from '../../actions/tour';
 import Header from '../../components/Header';
-import Card from '../../components/tour/Card';
+import {Card} from '../../components/tour/Card';
 
-const TourAreaScreen = () => {
+export const TourAreaScreen = ({navigation}) => {
   const AREA = ['전체','서울','강원','부산','인천','충남','충북','대전','경북','대구','경남','전북','전남','광주','울산','제주'];
   const [selectedValue, setSelectedValue] = React.useState(0);
+  const dispatch = useDispatch();
   const data = [
     {
       title: '월미도',
@@ -24,7 +27,8 @@ const TourAreaScreen = () => {
       products: [
         {
           title: '2021 월림픽에 도전하라!',
-          uri: 'https://www.ilyosisa.co.kr/data/photos/201712/138179_74289_19.jpg',          description:
+          uri: 'https://www.ilyosisa.co.kr/data/photos/201712/138179_74289_19.jpg',
+          description:
             '월미도를 소개합니다 짠짠짠, 월미도를 소개합니다 짠짠짠, 월미도를 소개합니다 짠짠짠, 월미도를 소개합니다 짠짠짠',
           price: 10000,
           reviews: [
@@ -42,6 +46,25 @@ const TourAreaScreen = () => {
               name: 'jeongha',
               comment: '중간잼',
               grade: 3,
+            },
+            {
+              name: 'jeongha',
+              comment: '조금잼',
+              grade: 4,
+            },
+          ],
+        },
+        {
+          title: '2021 해림픽에 도전하라!',
+          uri: 'https://www.busan.go.kr/resource/img/geopark/sub/busantour/busantour1.jpg',
+          description:
+            '경미도를 소개합니다 짠짠짠, 월미도를 소개합니다 짠짠짠, 월미도를 소개합니다 짠짠짠, 월미도를 소개합니다 짠짠짠',
+          price: 20000,
+          reviews: [
+            {
+              name: 'dongha',
+              comment: '씹꿀잼',
+              grade: 5,
             },
           ],
         },
@@ -68,6 +91,30 @@ const TourAreaScreen = () => {
             },
           ],
         },
+        {
+          title: '2021 월림픽에 도전하라!',
+          uri: 'https://www.ilyosisa.co.kr/data/photos/201712/138179_74289_19.jpg',
+          description:
+            '월미도를 소개합니다 짠짠짠, 월미도를 소개합니다 짠짠짠, 월미도를 소개합니다 짠짠짠, 월미도를 소개합니다 짠짠짠',
+          price: 10000,
+          reviews: [
+            {
+              name: 'dongha',
+              comment: '노잼',
+              grade: 1,
+            },
+            {
+              name: 'jeongdong',
+              comment: '꿀잼',
+              grade: 5,
+            },
+            {
+              name: 'jeongha',
+              comment: '중간잼',
+              grade: 3,
+            },
+          ],
+        },
       ],
     },
     {
@@ -88,6 +135,30 @@ const TourAreaScreen = () => {
               name: 'dongha',
               comment: '씹꿀잼',
               grade: 5,
+            },
+          ],
+        },
+        {
+          title: '2021 월림픽에 도전하라!',
+          uri: 'https://www.ilyosisa.co.kr/data/photos/201712/138179_74289_19.jpg',
+          description:
+            '월미도를 소개합니다 짠짠짠, 월미도를 소개합니다 짠짠짠, 월미도를 소개합니다 짠짠짠, 월미도를 소개합니다 짠짠짠',
+          price: 10000,
+          reviews: [
+            {
+              name: 'dongha',
+              comment: '노잼',
+              grade: 1,
+            },
+            {
+              name: 'jeongdong',
+              comment: '꿀잼',
+              grade: 5,
+            },
+            {
+              name: 'jeongha',
+              comment: '중간잼',
+              grade: 3,
             },
           ],
         },
@@ -166,6 +237,30 @@ const TourAreaScreen = () => {
           ],
         },
         {
+          title: '2021 월림픽에 도전하라!',
+          uri: 'https://www.ilyosisa.co.kr/data/photos/201712/138179_74289_19.jpg',
+          description:
+            '월미도를 소개합니다 짠짠짠, 월미도를 소개합니다 짠짠짠, 월미도를 소개합니다 짠짠짠, 월미도를 소개합니다 짠짠짠',
+          price: 10000,
+          reviews: [
+            {
+              name: 'dongha',
+              comment: '노잼',
+              grade: 1,
+            },
+            {
+              name: 'jeongdong',
+              comment: '꿀잼',
+              grade: 5,
+            },
+            {
+              name: 'jeongha',
+              comment: '중간잼',
+              grade: 3,
+            },
+          ],
+        },
+        {
           title: '2020 해림픽에 도전하라!',
           uri: 'https://www.busan.go.kr/resource/img/geopark/sub/busantour/busantour1.jpg',
           description:
@@ -187,6 +282,10 @@ const TourAreaScreen = () => {
       ],
     },
   ];
+
+  React.useEffect(() => {
+    dispatch(getTourData({tourType: data}));
+  }, []);
 
   const SmallBtn = ({item}) => {
     if (item.index === selectedValue) {
@@ -230,13 +329,16 @@ const TourAreaScreen = () => {
       <FlatList
         numColumns={2}
         data={data}
-        renderItem={item => <Card props={item} />}
+        renderItem={item => (
+          <Card
+            props={item}
+            onPress={() => navigation.navigate('AreaMore', {idx: item.index})}
+          />
+        )}
       />
     </View>
   );
 };
-
-export default TourAreaScreen;
 
 const styles = StyleSheet.create({
   container: {

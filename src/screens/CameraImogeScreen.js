@@ -23,7 +23,7 @@ const CameraImogeScreen = ({navigation}) => {
         flashMode={RNCamera.Constants.FlashMode.on}
         captureAudio={false}
       />
-      <Button title="test"/>
+      <Button title="test" />
     </View>
   );
 };
@@ -34,8 +34,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   camera: {
-    width: '100%',
-    height: '100%',
+    width: '50%',
+    height: '50%',
   },
   txt: {
     color: 'red',

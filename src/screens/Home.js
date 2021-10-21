@@ -30,8 +30,6 @@ const Home = ({navigation, idx, name}) => {
     }
   };
 
-
-
   React.useEffect(() => {
     check();
   }, []);

@@ -435,6 +435,7 @@
 			baseConfigurationReference = 4D66E778FF2849EBA845E7AC /* Pods-modoorock-modoorockTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 58QXQ8JAP9;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -463,6 +464,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = 58QXQ8JAP9;
 				INFOPLIST_FILE = modoorockTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -488,6 +490,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 58QXQ8JAP9;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = modoorock/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -514,6 +517,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 58QXQ8JAP9;
 				INFOPLIST_FILE = modoorock/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

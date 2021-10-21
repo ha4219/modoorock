@@ -1,10 +1,12 @@
 import React from 'react';
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 
-const Card = ({props}) => {
+import StarBar from './StarBar';
+
+export const Card = ({props, onPress}) => {
   const {title, products, uri, description} = props.item;
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <Image style={styles.img} source={{uri: uri}} />
       <View style={styles.subContainer}>
         <Text style={styles.title}>{title}</Text>
@@ -19,7 +21,29 @@ const Card = ({props}) => {
   );
 };
 
-export default Card;
+export const CardTour = ({props, onPress}) => {
+  const {title, reviews, price, uri} = props.item;
+  const [star, setStar] = React.useState(0);
+  React.useEffect(() => {
+    let value = 0;
+    reviews.forEach(element => {
+      value += element.grade;
+    });
+    setStar(Math.ceil(value / reviews.length));
+  }, []);
+  return (
+    <TouchableOpacity style={styles.container} onPress={onPress}>
+      <Image style={styles.img} source={{uri: uri}} />
+      <View style={styles.subContainer}>
+        <Text style={styles.title}>{title}</Text>
+        <StarBar value={star} />
+        <Text style={styles.price}>
+          {price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원
+        </Text>
+      </View>
+    </TouchableOpacity>
+  );
+};
 
 const styles = StyleSheet.create({
   img: {
@@ -51,5 +75,9 @@ const styles = StyleSheet.create({
   size: {
     fontSize: 10,
     color: '#008FFF',
+  },
+  price: {
+    fontSize: 16,
+    color: '#008fff',
   },
 });

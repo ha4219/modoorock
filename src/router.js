@@ -19,7 +19,8 @@ import LoginScreen from './screens/LoginScreen';
 import Test from './screens/Test';
 import TabBar from './components/TabBar';
 
-import TourAreaScreen from './screens/tour/TourAreaScreen';
+import {TourAreaScreen} from './screens/tour/TourAreaScreen';
+import TourAreaMoreScreen from './screens/tour/TourAreaMoreScreen';
 import TourThemeScreen from './screens/tour/TourThemeScreen';
 import SignupScreen from './screens/SignupScreen';
 import CameraScreen from './screens/CameraScreen';
@@ -75,6 +76,7 @@ const TestStack = () => (
 const TourStack = () => (
   <Stack.Navigator initialRouteName="Area" screenOptions={{headerMode: false}}>
     <Stack.Screen name="Area" component={TourAreaScreen} />
+    <Stack.Screen name="AreaMore" component={TourAreaMoreScreen} />
     <Stack.Screen name="Theme" component={TourThemeScreen} />
   </Stack.Navigator>
 );

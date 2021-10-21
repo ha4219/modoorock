@@ -43,7 +43,7 @@ export default (state = initialState, action) => {
     case LOGINERROR:
       return {...state, isLoggedIn: false};
     case LOGOUT:
-      return {...state, isLoggedIn: false};
+      return {...state, isLoggedIn: false, user: {}, header: ''};
     case FINDID:
       return {...state};
     case NOTICELIST:
@@ -56,7 +56,10 @@ export default (state = initialState, action) => {
         user: {idx: action.payload.idx, name: action.payload.name},
       };
     case GETSESSIONERROR:
-      return {...state};
+      return {
+        ...state,
+        user: {},
+      };
     default:
       return state;
   }

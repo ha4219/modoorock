@@ -13,7 +13,7 @@ import {
   GETSESSIONSUCCESS,
   GETSESSIONERROR,
 } from '../constants/actions';
-import APIHelper, {setCookie} from '../helpers/APIHelper';
+import APIHelper, {setCookie, removeCookie} from '../helpers/APIHelper';
 
 const storeHeader = async (key, value) => {
   try {
@@ -55,6 +55,8 @@ export const doLogin =
         id: id,
         password: pw,
       });
+      console.log('headers', res.headers);
+      console.log('data', res.data);
       const [cookie] = res.headers['set-cookie'];
       console.log(cookie);
       const data = cookie.split(' ')[0];
@@ -62,7 +64,8 @@ export const doLogin =
       setCookie(data);
       await storeHeader('cookie', data);
       dispatch({type: LOGINSUCCESS, payload: cookie});
-      return data;
+      // dispatch({type: LOGINSUCCESS, payload: 'cookie'});
+      return true;
     } catch (err){
       console.log('ERROR', err);
       dispatch({type: LOGINERROR});
@@ -117,6 +120,10 @@ export const doFindPw =
 
 export const doLogOut = () => async dispatch => {
   try {
+    await AsyncStorage.removeItem('cookie');
+    // removeCookie();
+    const res = await APIHelper.post('/user/logout', {});
+    console.log('logout test', res);
     dispatch({type: LOGOUT});
   } catch (e) {
     console.log(e);
