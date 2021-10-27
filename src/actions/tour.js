@@ -9,10 +9,14 @@ import APIHelper from '../helpers/APIHelper';
 export const getTourData =
   ({tourType}) =>
   async dispatch => {
+    console.log('apiTTTTEst',tourType);
     try {
       dispatch({type: GETTOURDATA});
-
-      dispatch({type: GETTOURDATASUCCESS, payload: tourType});
+      const res = await APIHelper.post('/attraction/getattractionlist', {
+        area: tourType,
+      });
+      dispatch({type: GETTOURDATASUCCESS});
+      return res.data;
     } catch (e) {
       console.log(e);
       dispatch({type: GETTOURDATAERROR});

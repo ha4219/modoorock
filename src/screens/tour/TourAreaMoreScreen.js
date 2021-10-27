@@ -7,8 +7,8 @@ import {CardTour} from '../../components/tour/Card';
 
 const TourAreaMoreScreen = ({route, data, navigation}) => {
   const {idx} = route.params;
-  const dataa = data[idx].products;
-  console.log(dataa, data.length);
+  console.log('TourAreaMoreScreen', idx);
+
   return (
     <View style={styles.container}>
       <Header />
@@ -23,7 +23,7 @@ const TourAreaMoreScreen = ({route, data, navigation}) => {
       <View style={styles.subContainer}>
         <Text style={styles.subContainerTxt}>관광지명 미션 투어</Text>
       </View>
-      <FlatList
+      {/* <FlatList
         numColumns={2}
         data={dataa}
         renderItem={item => (
@@ -32,7 +32,7 @@ const TourAreaMoreScreen = ({route, data, navigation}) => {
             onPress={() => navigation.navigate('Area', {idx: item.index})}
           />
         )}
-      />
+      /> */}
     </View>
   );
 };

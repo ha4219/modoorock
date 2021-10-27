@@ -18,7 +18,7 @@ export default (state = initialState, action) => {
     case GETTOURDATA:
       return {...state};
     case GETTOURDATASUCCESS:
-      return {...state, data: action.payload};
+      return {...state};
     case GETTOURDATAERROR:
       return {...state};
     default:

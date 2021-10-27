@@ -1,21 +1,27 @@
 import React from 'react';
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
+import Config from 'react-native-config';
 
 import StarBar from './StarBar';
 
 export const Card = ({props, onPress}) => {
-  const {title, products, uri, description} = props.item;
+  const {name, content, idx, photo, area} = props.item;
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
-      <Image style={styles.img} source={{uri: uri}} />
+      <Image
+        style={styles.img}
+        source={
+          photo === 'nothing'
+            ? require('../../assets/noImage.png')
+            : {uri: Config.IMG_URL + photo}
+        }
+      />
       <View style={styles.subContainer}>
-        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.title}>{name}</Text>
         <Text style={styles.content}>
-          {description.length > 27
-            ? description.slice(0, 27) + '...'
-            : description}
+          {content.length > 27 ? content.slice(0, 27) + '...' : content}
         </Text>
-        <Text style={styles.size}>{products.length}개의 상품</Text>
+        <Text style={styles.size}>{2}개의 상품</Text>
       </View>
     </TouchableOpacity>
   );
