@@ -6,6 +6,7 @@ import {
   Image,
   Pressable,
   TouchableOpacity,
+  ScrollView
 } from 'react-native';
 import {connect} from 'react-redux';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
@@ -17,9 +18,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 const ProfileScreen = ({navigation, name}) => {
-  console.log('nav', navigation);
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.subContainer}>
         <Image
           source={require('../../assets/profile_default.png')}
@@ -94,14 +94,13 @@ const ProfileScreen = ({navigation, name}) => {
           <FontAwesomeIcon size={10} icon={faChevronRight} />
         </TouchableOpacity>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
     paddingBottom: 50,
   },
   subContainer: {
