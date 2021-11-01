@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import {useDispatch} from 'react-redux';
 
-import {getTourData} from '../../actions/tour';
+import {getTourData, getExpData} from '../../actions/tour';
 import Header from '../../components/Header';
 import {Card} from '../../components/tour/Card';
 import Loading from '../../components/Loading';
@@ -34,21 +34,37 @@ export const TourAreaScreen = ({navigation}) => {
     '제주',
   ];
   const [selectedValue, setSelectedValue] = React.useState(0);
+  const [expType, setExpType] = React.useState('전체');
   const dispatch = useDispatch();
   const [data, setData] = React.useState([]);
+  const [exp, setExp] = React.useState([]);
   const [isLoading, setLoading] = React.useState(false);
-
+  const [cnts, setCnts] = React.useState([]);
   const doGetList = () => {
     setLoading(true);
     dispatch(getTourData({tourType: AREA[selectedValue]})).then(res => {
       setData(res);
+    });
+    dispatch(getExpData({expType: expType})).then(res => {
+      setExp(res);
+      let arr = [];
+      data.map(item => {
+        let cnt = 0;
+        res.map(item1 => {
+          if (item.idx === item1.attractionIdx) {
+            cnt++;
+          }
+          arr.push(cnt);
+        });
+      });
+      setCnts(arr);
       setLoading(false);
     });
   };
 
   React.useEffect(() => {
     doGetList();
-  }, [selectedValue]);
+  }, [selectedValue, expType]);
 
   const SmallBtn = ({item}) => {
     if (item.index === selectedValue) {
@@ -98,6 +114,7 @@ export const TourAreaScreen = ({navigation}) => {
           renderItem={item => (
             <Card
               props={item}
+              cnt={cnts[item.index]}
               onPress={() => navigation.navigate('AreaMore', {idx: item.idx})}
             />
           )}

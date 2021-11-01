@@ -4,8 +4,9 @@ import Config from 'react-native-config';
 
 import StarBar from './StarBar';
 
-export const Card = ({props, onPress}) => {
+export const Card = ({props, onPress, cnt}) => {
   const {name, content, idx, photo, area} = props.item;
+  console.log(name, cnt);
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
       <Image
@@ -21,7 +22,7 @@ export const Card = ({props, onPress}) => {
         <Text style={styles.content}>
           {content.length > 27 ? content.slice(0, 27) + '...' : content}
         </Text>
-        <Text style={styles.size}>{2}개의 상품</Text>
+        <Text style={styles.size}>{cnt}개의 상품</Text>
       </View>
     </TouchableOpacity>
   );
