@@ -13,10 +13,9 @@ import Config from 'react-native-config';
 import {getExpDetail, getExpReviews} from '../../actions/tour';
 import StarBar from '../../components/tour/StarBar';
 
-const TourDetailScreen = ({route}) => {
+const TourDetailScreen = ({route, navigation}) => {
   const {idx} = route.params;
   const dispatch = useDispatch();
-  const [data, setData] = React.useState({});
   const [photos, setPhotos] = React.useState([]);
   const [title, setTitle] = React.useState('');
   const [price, setPrice] = React.useState(0);

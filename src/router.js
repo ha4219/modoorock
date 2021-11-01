@@ -24,6 +24,8 @@ import TourAreaMoreScreen from './screens/tour/TourAreaMoreScreen';
 import TourThemeScreen from './screens/tour/TourThemeScreen';
 import TourDetailScreen from './screens/tour/TourDetailScreen';
 
+import MapScreen from './screens/MapScreen';
+
 import SignupScreen from './screens/SignupScreen';
 import CameraScreen from './screens/CameraScreen';
 import {navigationRef} from './helpers/NavigationHelper';
@@ -81,6 +83,12 @@ const TourStack = () => (
     <Stack.Screen name="AreaMore" component={TourAreaMoreScreen} />
     <Stack.Screen name="Theme" component={TourThemeScreen} />
     <Stack.Screen name="Detail" component={TourDetailScreen} />
+  </Stack.Navigator>
+);
+
+const MapStack = () => (
+  <Stack.Navigator initialRouteName="Map">
+    <Stack.Screen name="MapScreen" component={MapScreen} />
   </Stack.Navigator>
 );
 
@@ -184,7 +192,7 @@ const Router = () => {
               />
               <Tab.Screen
                 name="MapStack"
-                component={TestStack}
+                component={MapStack}
                 screenOptions={{headerMode: false}}
               />
               <Tab.Screen
