@@ -6,7 +6,6 @@ import StarBar from './StarBar';
 
 export const Card = ({props, onPress, cnt}) => {
   const {name, content, idx, photo, area} = props.item;
-  console.log(name, cnt);
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
       <Image
@@ -14,7 +13,7 @@ export const Card = ({props, onPress, cnt}) => {
         source={
           photo === 'nothing'
             ? require('../../assets/noImage.png')
-            : {uri: Config.IMG_URL + photo}
+            : {uri: Config.IMG_URL + 'Attraction/' + photo}
         }
       />
       <View style={styles.subContainer}>
@@ -44,6 +43,23 @@ export const CardTour = ({props, onPress}) => {
       <View style={styles.subContainer}>
         <Text style={styles.title}>{title}</Text>
         <StarBar value={star} />
+        <Text style={styles.price}>
+          {price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원
+        </Text>
+      </View>
+    </TouchableOpacity>
+  );
+};
+
+export const CardExp = ({props, onPress}) => {
+  const {title, content, price, photo, idx} = props.item;
+  const uri = photo.split('#')[0];
+  return (
+    <TouchableOpacity style={styles.container} onPress={onPress}>
+      <Image style={styles.img} source={{uri: Config.IMG_URL + 'Exp/' + uri}} />
+      <View style={styles.subContainer}>
+        <Text style={styles.title}>{title}</Text>
+        <Text>{content}</Text>
         <Text style={styles.price}>
           {price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원
         </Text>

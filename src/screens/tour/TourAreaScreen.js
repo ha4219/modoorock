@@ -11,7 +11,7 @@ import {useDispatch} from 'react-redux';
 
 import {getTourData, getExpData} from '../../actions/tour';
 import Header from '../../components/Header';
-import {Card} from '../../components/tour/Card';
+import {Card, CardExp} from '../../components/tour/Card';
 import Loading from '../../components/Loading';
 
 export const TourAreaScreen = ({navigation}) => {
@@ -33,8 +33,18 @@ export const TourAreaScreen = ({navigation}) => {
     '울산',
     '제주',
   ];
+  const THEME = [
+    '전체',
+    '농촌체험',
+    '액티비티',
+    '단체',
+    '친구',
+    '가족',
+    '연인',
+  ];
+  const [onArea, setOnArea] = React.useState(true);
   const [selectedValue, setSelectedValue] = React.useState(0);
-  const [expType, setExpType] = React.useState('전체');
+  const [expType, setExpType] = React.useState(0);
   const dispatch = useDispatch();
   const [data, setData] = React.useState([]);
   const [exp, setExp] = React.useState([]);
@@ -45,19 +55,22 @@ export const TourAreaScreen = ({navigation}) => {
     dispatch(getTourData({tourType: AREA[selectedValue]})).then(res => {
       setData(res);
     });
-    dispatch(getExpData({expType: expType})).then(res => {
+    dispatch(getExpData({expType: THEME[expType]})).then(res => {
       setExp(res);
-      let arr = [];
-      data.map(item => {
-        let cnt = 0;
-        res.map(item1 => {
-          if (item.idx === item1.attractionIdx) {
-            cnt++;
-          }
-          arr.push(cnt);
+      if (res) {
+        let arr = [];
+        console.log(res, data);
+        data.map(item => {
+          let cnt = 0;
+          res.map(item1 => {
+            if (item.idx === item1.attractionIdx) {
+              cnt++;
+            }
+            arr.push(cnt);
+          });
         });
-      });
-      setCnts(arr);
+        setCnts(arr);
+      }
       setLoading(false);
     });
   };
@@ -86,39 +99,103 @@ export const TourAreaScreen = ({navigation}) => {
     }
   };
 
+  const SmallBtn1 = ({item}) => {
+    if (item.index === expType) {
+      return (
+        <TouchableOpacity
+          style={styles.selecedBtn}
+          onPress={() => setExpType(item.index)}>
+          <Text style={{color:'#FFFFFF'}}>{item.item}</Text>
+        </TouchableOpacity>
+      );
+    } else {
+      return (
+        <TouchableOpacity
+          style={styles.nonSelecedBtn}
+          onPress={() => setExpType(item.index)}>
+          <Text>{item.item}</Text>
+        </TouchableOpacity>
+      );
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Header />
       <View style={styles.subHead}>
-        <TouchableOpacity style={styles.subHeadBtn1}>
+        <TouchableOpacity
+          style={onArea ? styles.subHeadBtn1 : styles.subHeadBtn2}
+          onPress={() => setOnArea(!onArea)}>
           <Text style={styles.subHeadTxt}>지역</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.subHeadBtn2}>
+        <TouchableOpacity
+          style={onArea ? styles.subHeadBtn2 : styles.subHeadBtn1}
+          onPress={() => setOnArea(!onArea)}>
           <Text style={styles.subHeadTxt}>테마</Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.subContainer}>
-        <Text style={styles.subContainerTxt}>여행 어디로 가시나요?</Text>
-        <FlatList
-          numColumns={6}
-          data={AREA}
-          renderItem={item=><SmallBtn item={item} />}
-        />
-      </View>
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <FlatList
-          numColumns={2}
-          data={data}
-          renderItem={item => (
-            <Card
-              props={item}
-              cnt={cnts[item.index]}
-              onPress={() => navigation.navigate('AreaMore', {idx: item.idx})}
+      {onArea ? (
+        <>
+          <View style={styles.subContainer}>
+            <Text style={styles.subContainerTxt}>여행 어디로 가시나요?</Text>
+            <FlatList
+              numColumns={6}
+              data={AREA}
+              renderItem={item => <SmallBtn item={item} />}
+            />
+          </View>
+          {isLoading ? (
+            <Loading />
+          ) : (
+            <FlatList
+              numColumns={2}
+              data={data}
+              renderItem={item => (
+                <Card
+                  props={item}
+                  cnt={cnts[item.index]}
+                  onPress={() =>
+                    navigation.navigate('AreaMore', {idx: item.idx})
+                  }
+                />
+              )}
             />
           )}
-        />
+        </>
+      ) : (
+        <>
+          <View style={styles.subContainer}>
+            <Text style={styles.subContainerTxt}>여행 어디로 가시나요?</Text>
+            <View style={styles.row}>
+              <SmallBtn1 item={{index: 0, item: THEME[0]}} />
+              <SmallBtn1 item={{index: 1, item: THEME[1]}} />
+              <SmallBtn1 item={{index: 2, item: THEME[2]}} />
+            </View>
+            <View style={styles.row}>
+              <SmallBtn1 item={{index: 3, item: THEME[3]}} />
+              <SmallBtn1 item={{index: 4, item: THEME[4]}} />
+              <SmallBtn1 item={{index: 5, item: THEME[5]}} />
+              <SmallBtn1 item={{index: 6, item: THEME[6]}} />
+            </View>
+          </View>
+          {isLoading ? (
+            <Loading />
+          ) : (
+            <FlatList
+              numColumns={2}
+              data={exp}
+              renderItem={item => (
+                <CardExp
+                  props={item}
+                  cnt={cnts[item.index]}
+                  onPress={() =>
+                    navigation.navigate('Detail', {idx: item.item.idx})
+                  }
+                />
+              )}
+            />
+          )}
+        </>
       )}
     </View>
   );
@@ -180,5 +257,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     margin: 2,
+  },
+  row: {
+    flexDirection: 'row',
   },
 });

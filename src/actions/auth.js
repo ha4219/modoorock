@@ -134,6 +134,7 @@ export const getSession = () => async dispatch => {
   try {
     console.log(GETSESSION, 'session hi');
     dispatch({type: GETSESSION});
+    console.log('preheader', APIHelper.defaults.headers);
     const res = await APIHelper.post('/user/session', {});
     console.log('session last test', res.data);
 
