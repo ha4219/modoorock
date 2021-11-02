@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {
   Image,
   ScrollView,
@@ -7,6 +7,8 @@ import {
   TextInput,
   View,
   TouchableOpacity,
+  Alert,
+  Linking,
   FlatList,
 } from 'react-native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
@@ -23,6 +25,19 @@ const HomeScreen = ({navigation}) => {
   const dispatch = useDispatch();
   const [exp, setExp] = React.useState([]);
   const [adv, setAdv] = React.useState([]);
+  const URL = 'https://www.youtube.com/channel/UCdTY_FXXLbtdNXXN9H3pXrg'
+  const handlePress = useCallback(async () => {
+    // Checking if the link is supported for links with custom URL scheme.
+    const supported = await Linking.canOpenURL(URL);
+
+    if (supported) {
+      // Opening the link with some app, if the URL scheme is "http" the web link should be opened
+      // by some browser in the mobile
+      await Linking.openURL(URL);
+    } else {
+      Alert.alert(`Don't know how to open this URL: ${URL}`);
+    }
+  }, [URL]);
 
   const getExp = () => {
     dispatch(getExpData({exp: '전체'})).then(res => setExp(res));
@@ -131,7 +146,10 @@ const HomeScreen = ({navigation}) => {
           renderItem={item => <HomeAdvertise item={item} />}
         />
         <View style={styles.seeMoreButtonContainer}>
-          <TouchableOpacity activeOpacity={0.5} style={styles.seeMoreButton}>
+          <TouchableOpacity
+            activeOpacity={0.5}
+            style={styles.seeMoreButton}
+            onPress={handlePress}>
             <Text style={styles.seeMoreButtonText}>영상 더보기</Text>
             <FontAwesomeIcon
               icon={faChevronRight}
