@@ -7,11 +7,11 @@ import {
   TextInput,
   View,
   TouchableOpacity,
-  Button,
 } from 'react-native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faSearch, faChevronRight} from '@fortawesome/free-solid-svg-icons';
-import HomeProgram from '../components/tour/HomeProgram';
+import HomeProgram from '../components/HomeProgram';
+import HomeAdvertise from '../components/HomeAdvertise';
 
 const HomeScreen = ({navigation}) => {
   const programList = React.useState([
@@ -88,8 +88,35 @@ const HomeScreen = ({navigation}) => {
       attraction_idx: 1,
     },
   ]);
+  const advertiseList = React.useState([
+    {
+      idx: 0,
+      title: '북촌 한옥마을 미션투어',
+      photo: 'd',
+    },
+    {
+      idx: 1,
+      title: '북촌 한옥마을 미션투어',
+      photo: 'd',
+    },
+    {
+      idx: 2,
+      title: '북촌 한옥마을 미션투어',
+      photo: 'd',
+    },
+    {
+      idx: 3,
+      title: '북촌 한옥마을 미션투어',
+      photo: 'd',
+    },
+    {
+      idx: 4,
+      title: '북촌 한옥마을 미션투어',
+      photo: 'd',
+    },
+  ]);
   {
-    /*임시데이터임, 서버요청해서 받아오는 법을 몰라서 일단 이렇게 해둠*/
+    /*프로그램, 홍보영상 둘 다 임시데이터임, 서버요청해서 받아오는 법을 몰라서 일단 이렇게 해둠*/
   }
 
   return (
@@ -116,9 +143,9 @@ const HomeScreen = ({navigation}) => {
         />
       </View>
       <View style={styles.programContainer}>
-        <View style={styles.programTitleContainer}>
-          <Text style={styles.programTitleBlue}>미션투어!</Text>
-          <Text style={styles.programTitle}>액티비티 체험상품</Text>
+        <View style={styles.titleContainer}>
+          <Text style={styles.titleBlue}>미션투어!</Text>
+          <Text style={styles.title}>액티비티 체험상품</Text>
         </View>
         <View style={styles.programList}>
           {programList[0] &&
@@ -126,14 +153,40 @@ const HomeScreen = ({navigation}) => {
               <HomeProgram key={item.idx} item={item} />
             ))}
         </View>
-        <TouchableOpacity activeOpacity={0.5} style={styles.seeMoreButton}>
-          <Text style={styles.seeMoreButtonText}>상품 더보기</Text>
-          <FontAwesomeIcon
-            icon={faChevronRight}
-            size={12}
-            style={styles.buttonIcon}
-          />
-        </TouchableOpacity>
+        <View style={styles.seeMoreButtonContainer}>
+          <TouchableOpacity activeOpacity={0.5} style={styles.seeMoreButton}>
+            <Text style={styles.seeMoreButtonText}>상품 더보기</Text>
+            <FontAwesomeIcon
+              icon={faChevronRight}
+              size={12}
+              style={styles.buttonIcon}
+            />
+          </TouchableOpacity>
+        </View>
+      </View>
+      <View style={styles.advertiseContainer}>
+        <View style={styles.titleContainer}>
+          <Text style={styles.titleBlue}>홍보영상</Text>
+          <Text style={styles.title}>보러가기</Text>
+        </View>
+        <ScrollView
+          style={styles.advertiseList}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}>
+          {advertiseList[0].map(item => (
+            <HomeAdvertise key={item.idx} item={item} />
+          ))}
+        </ScrollView>
+        <View style={styles.seeMoreButtonContainer}>
+          <TouchableOpacity activeOpacity={0.5} style={styles.seeMoreButton}>
+            <Text style={styles.seeMoreButtonText}>상품 더보기</Text>
+            <FontAwesomeIcon
+              icon={faChevronRight}
+              size={12}
+              style={styles.buttonIcon}
+            />
+          </TouchableOpacity>
+        </View>
       </View>
     </ScrollView>
   );
@@ -197,22 +250,18 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: -110,
   },
-  programContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  programTitleContainer: {
+  titleContainer: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     paddingLeft: 18,
   },
-  programTitleBlue: {
+  titleBlue: {
     color: '#008FFF',
     marginRight: 8,
     fontSize: 20,
   },
-  programTitle: {
+  title: {
     fontSize: 20,
   },
   programList: {
@@ -223,24 +272,36 @@ const styles = StyleSheet.create({
     paddingHorizontal: '1%',
     justifyContent: 'center',
   },
+  seeMoreButtonContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   seeMoreButton: {
-    borderWidth: 1,
+    borderWidth: 1.3,
     borderColor: '#2A9FDE',
     borderRadius: 32,
-    width: 110,
+    width: 120,
     height: 35,
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 20,
+    marginTop: 12,
   },
   seeMoreButtonText: {
     color: '#2A9FDE',
+    fontSize: 16,
   },
   buttonIcon: {
     marginLeft: 4,
     color: '#2A9FDE',
+  },
+  advertiseContainer: {
+    marginTop: 50,
+    marginBottom: 100,
+  },
+  advertiseList: {
+    margin: 20,
   },
 });
 

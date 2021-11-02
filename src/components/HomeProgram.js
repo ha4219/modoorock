@@ -6,7 +6,7 @@ const HomeProgram = ({item}) => {
     <TouchableOpacity style={styles.item} activeOpacity={0.6}>
       <Image
         style={styles.image}
-        source={require('../../assets/tempProgram.webp')}
+        source={require('../assets/tempProgram.webp')}
       />
       <View style={styles.dataContainer}>
         <Text style={styles.title}>{item.title}</Text>
