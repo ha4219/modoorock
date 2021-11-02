@@ -1,7 +1,12 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Image, Text, TouchableOpacity} from 'react-native';
 
+import Config from 'react-native-config';
+
 const HomeProgram = ({item}) => {
+  console.log(item);
+  const data = item.item;
+  console.log(data);
   return (
     <TouchableOpacity style={styles.item} activeOpacity={0.6}>
       <Image
@@ -9,10 +14,10 @@ const HomeProgram = ({item}) => {
         source={require('../assets/tempProgram.webp')}
       />
       <View style={styles.dataContainer}>
-        <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.area}>서울</Text>
+        <Text style={styles.title}>{data.item.title}</Text>
+        <Text style={styles.area}>지역</Text>
         {/*여기에 지역 넣는 것으로 되어있는데 지역은 attraction_idx로 찾아서 넣기*/}
-        <Text style={styles.price}>{`${item.price.toLocaleString(
+        <Text style={styles.price}>{`${data.item.price.toLocaleString(
           'ko-KR',
         )}원`}</Text>
       </View>

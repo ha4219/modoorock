@@ -11,6 +11,9 @@ import {
   GETTOUREXPREVIEWS,
   GETTOUREXPREVIEWSSUCCESS,
   GETTOUREXPREVIEWSERROR,
+  GETADLIST,
+  GETADLISTSUCCESS,
+  GETADLISTERROR,
 } from '../constants/actions';
 
 import APIHelper from '../helpers/APIHelper';
@@ -77,3 +80,14 @@ export const getExpReviews =
       dispatch({type: GETTOUREXPREVIEWSERROR});
     }
   };
+
+export const getAdList = () => async dispatch => {
+  try {
+    dispatch({type: GETADLIST});
+    const res = await APIHelper.post('/advertise/getadvertiselist', {});
+    dispatch({type: GETADLISTSUCCESS});
+    return res.data;
+  } catch (e) {
+    dispatch({type: GETADLISTERROR});
+  }
+};

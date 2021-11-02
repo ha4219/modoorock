@@ -1,6 +1,8 @@
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
+import Config from 'react-native-config';
+
 const HomeAdvertise = ({item}) => {
   return (
     <TouchableOpacity styles={styles.item} activeOpacity={0.7}>
@@ -8,7 +10,7 @@ const HomeAdvertise = ({item}) => {
         style={styles.image}
         source={require('../assets/tempAdvertise.jpeg')}
       />
-      <Text style={styles.title}>{item.title}</Text>
+      <Text style={styles.title}>{item.item.title}</Text>
     </TouchableOpacity>
   );
 };

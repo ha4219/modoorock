@@ -7,88 +7,34 @@ import {
   TextInput,
   View,
   TouchableOpacity,
+  FlatList,
 } from 'react-native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faSearch, faChevronRight} from '@fortawesome/free-solid-svg-icons';
-import HomeProgram from '../components/HomeProgram';
-import HomeAdvertise from '../components/HomeAdvertise';
-import Footer from '../components/Footer';
+import {useDispatch} from 'react-redux';
+
+import HomeProgram from '../../components/HomeProgram';
+import HomeAdvertise from '../../components/HomeAdvertise';
+import Footer from '../../components/Footer';
+
+import {getAdList, getExpData} from '../../actions/tour';
 
 const HomeScreen = ({navigation}) => {
-  const programList = React.useState([
-    {
-      idx: 0,
-      title: '2001 월림픽 랭킹에 도전하라!',
-      content: '월미도 월림픽에 도전해라',
-      user_idx: 1,
-      date: 'a',
-      price: 20000,
-      count: 'a',
-      theme: '친구',
-      photo: '../assets/tempProgram.webp',
-      attraction_idx: 1,
-    },
-    {
-      idx: 1,
-      title: '2011 월림픽 랭킹에 도전하라!',
-      content: '월미도 월림픽에 도전해라',
-      user_idx: 1,
-      date: 'a',
-      price: 20000,
-      count: 'a',
-      theme: '친구',
-      photo: '../assets/tempProgram.webp',
-      attraction_idx: 1,
-    },
-    {
-      idx: 2,
-      title: '2021 월림픽 랭킹에 도전하라!',
-      content: '월미도 월림픽에 도전해라',
-      user_idx: 1,
-      date: 'a',
-      price: 20000,
-      count: 'a',
-      theme: '친구',
-      photo: '../assets/tempProgram.webp',
-      attraction_idx: 1,
-    },
-    {
-      idx: 3,
-      title: '2031 월림픽 랭킹에 도전하라!',
-      content: '월미도 월림픽에 도전해라',
-      user_idx: 1,
-      date: 'a',
-      price: 20000,
-      count: 'a',
-      theme: '친구',
-      photo: '../assets/tempProgram.webp',
-      attraction_idx: 1,
-    },
-    {
-      idx: 4,
-      title: '2041 월림픽 랭킹에 도전하라!',
-      content: '월미도 월림픽에 도전해라',
-      user_idx: 1,
-      date: 'a',
-      price: 20000,
-      count: 'a',
-      theme: '친구',
-      photo: '../assets/tempProgram.webp',
-      attraction_idx: 1,
-    },
-    {
-      idx: 5,
-      title: '2051 월림픽 랭킹에 도전하라!',
-      content: '월미도 월림픽에 도전해라',
-      user_idx: 1,
-      date: 'a',
-      price: 20000,
-      count: 'a',
-      theme: '친구',
-      photo: '../assets/tempProgram.webp',
-      attraction_idx: 1,
-    },
-  ]);
+  const dispatch = useDispatch();
+  const [exp, setExp] = React.useState([]);
+  const [adv, setAdv] = React.useState([]);
+
+  const getExp = () => {
+    dispatch(getExpData({exp: '전체'})).then(res => setExp(res));
+  };
+
+  const getAdv = () => {
+    dispatch(getAdList()).then(res => setAdv(res));
+  };
+  React.useEffect(() => {
+    getExp();
+    getAdv();
+  }, []);
   const advertiseList = React.useState([
     {
       idx: 0,
@@ -119,11 +65,10 @@ const HomeScreen = ({navigation}) => {
   {
     /*프로그램, 홍보영상 둘 다 임시데이터임, 서버요청해서 받아오는 법을 몰라서 일단 이렇게 해둠*/
   }
-
   return (
     <ScrollView style={styles.main}>
       <View style={styles.header}>
-        <Image style={styles.logo} source={require('../assets/logo.png')} />
+        <Image style={styles.logo} source={require('../../assets/logo.png')} />
         <View style={styles.searchContainer}>
           <TextInput style={styles.searchInput} placeholder="검색" />
           <TouchableOpacity>
@@ -140,7 +85,7 @@ const HomeScreen = ({navigation}) => {
         <Text style={styles.bannerText}>즐기는 문화체험 여행</Text>
         <Image
           style={styles.bannerImage}
-          source={require('../assets/banner_image.png')}
+          source={require('../../assets/banner_image.png')}
         />
       </View>
       <View style={styles.programContainer}>
@@ -149,10 +94,11 @@ const HomeScreen = ({navigation}) => {
           <Text style={styles.title}>액티비티 체험상품</Text>
         </View>
         <View style={styles.programList}>
-          {programList[0] &&
-            programList[0].map(item => (
-              <HomeProgram key={item.idx} item={item} />
-            ))}
+          <FlatList
+            numColumns={2}
+            data={exp}
+            renderItem={item => <HomeProgram key={item.idx} item={{item}} />}
+          />
         </View>
         <View style={styles.seeMoreButtonContainer}>
           <TouchableOpacity activeOpacity={0.5} style={styles.seeMoreButton}>
@@ -165,19 +111,25 @@ const HomeScreen = ({navigation}) => {
           </TouchableOpacity>
         </View>
       </View>
+      
       <View style={styles.advertiseContainer}>
         <View style={styles.titleContainer}>
           <Text style={styles.titleBlue}>홍보영상</Text>
           <Text style={styles.title}>보러가기</Text>
         </View>
-        <ScrollView
+        {/* <ScrollView
           style={styles.advertiseList}
           horizontal={true}
           showsHorizontalScrollIndicator={false}>
           {advertiseList[0].map(item => (
             <HomeAdvertise key={item.idx} item={item} />
           ))}
-        </ScrollView>
+        </ScrollView> */}
+        <FlatList
+          horizontal={true}
+          data={adv}
+          renderItem={item => <HomeAdvertise item={item} />}
+        />
         <View style={styles.seeMoreButtonContainer}>
           <TouchableOpacity activeOpacity={0.5} style={styles.seeMoreButton}>
             <Text style={styles.seeMoreButtonText}>영상 더보기</Text>
@@ -271,7 +223,7 @@ const styles = StyleSheet.create({
   programList: {
     marginTop: 20,
     flex: 1,
-    flexDirection: 'row',
+    // flexDirection: 'row',
     flexWrap: 'wrap',
     paddingHorizontal: '1%',
     justifyContent: 'center',
