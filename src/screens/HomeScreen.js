@@ -12,6 +12,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faSearch, faChevronRight} from '@fortawesome/free-solid-svg-icons';
 import HomeProgram from '../components/HomeProgram';
 import HomeAdvertise from '../components/HomeAdvertise';
+import Footer from '../components/Footer';
 
 const HomeScreen = ({navigation}) => {
   const programList = React.useState([
@@ -179,7 +180,7 @@ const HomeScreen = ({navigation}) => {
         </ScrollView>
         <View style={styles.seeMoreButtonContainer}>
           <TouchableOpacity activeOpacity={0.5} style={styles.seeMoreButton}>
-            <Text style={styles.seeMoreButtonText}>상품 더보기</Text>
+            <Text style={styles.seeMoreButtonText}>영상 더보기</Text>
             <FontAwesomeIcon
               icon={faChevronRight}
               size={12}
@@ -188,6 +189,7 @@ const HomeScreen = ({navigation}) => {
           </TouchableOpacity>
         </View>
       </View>
+      <Footer />
     </ScrollView>
   );
 };
@@ -259,13 +261,15 @@ const styles = StyleSheet.create({
   titleBlue: {
     color: '#008FFF',
     marginRight: 8,
-    fontSize: 20,
+    fontSize: 22,
+    fontWeight: '500',
   },
   title: {
-    fontSize: 20,
+    fontSize: 22,
+    fontWeight: '500',
   },
   programList: {
-    marginTop: 30,
+    marginTop: 20,
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
