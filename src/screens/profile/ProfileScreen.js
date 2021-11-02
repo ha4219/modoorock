@@ -6,7 +6,7 @@ import {
   Image,
   Pressable,
   TouchableOpacity,
-  ScrollView
+  ScrollView,
 } from 'react-native';
 import {connect} from 'react-redux';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
