@@ -45,10 +45,14 @@ import AboutUsScreen from './screens/profile/AboutUsScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
-
+//<Stack.Screen name="Home" component={Home} options={{headerShown: false}} />
 const HomeStack = () => (
   <Stack.Navigator initialRouteName="Home" screenOptions={{headerMode: false}}>
-    <Stack.Screen name="Home" component={Home} options={{headerShown: false}} />
+    <Stack.Screen
+      name="Home"
+      component={HomeScreen}
+      options={{headerShown: false}}
+    />
     <Stack.Screen
       name="Camera"
       component={CameraScreen}
