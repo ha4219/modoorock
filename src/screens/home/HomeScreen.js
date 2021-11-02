@@ -50,38 +50,11 @@ const HomeScreen = ({navigation}) => {
     getExp();
     getAdv();
   }, []);
-  const advertiseList = React.useState([
-    {
-      idx: 0,
-      title: '북촌 한옥마을 미션투어',
-      photo: 'd',
-    },
-    {
-      idx: 1,
-      title: '북촌 한옥마을 미션투어',
-      photo: 'd',
-    },
-    {
-      idx: 2,
-      title: '북촌 한옥마을 미션투어',
-      photo: 'd',
-    },
-    {
-      idx: 3,
-      title: '북촌 한옥마을 미션투어',
-      photo: 'd',
-    },
-    {
-      idx: 4,
-      title: '북촌 한옥마을 미션투어',
-      photo: 'd',
-    },
-  ]);
   {
     /*프로그램, 홍보영상 둘 다 임시데이터임, 서버요청해서 받아오는 법을 몰라서 일단 이렇게 해둠*/
   }
   return (
-    <ScrollView style={styles.main}>
+    <ScrollView style={styles.main} nestedScrollEnabled={true}>
       <View style={styles.header}>
         <Image style={styles.logo} source={require('../../assets/logo.png')} />
         <View style={styles.searchContainer}>
@@ -110,13 +83,14 @@ const HomeScreen = ({navigation}) => {
         </View>
         <View style={styles.programList}>
           <FlatList
+            nestedScrollEnabled={true}
             numColumns={2}
             data={exp}
             renderItem={item => <HomeProgram key={item.idx} item={{item}} />}
           />
         </View>
         <View style={styles.seeMoreButtonContainer}>
-          <TouchableOpacity activeOpacity={0.5} style={styles.seeMoreButton}>
+          <TouchableOpacity activeOpacity={0.5} style={styles.seeMoreButton} onPress={()=>navigation.jumpTo('TourStack')}>
             <Text style={styles.seeMoreButtonText}>상품 더보기</Text>
             <FontAwesomeIcon
               icon={faChevronRight}
@@ -126,20 +100,11 @@ const HomeScreen = ({navigation}) => {
           </TouchableOpacity>
         </View>
       </View>
-      
       <View style={styles.advertiseContainer}>
         <View style={styles.titleContainer}>
           <Text style={styles.titleBlue}>홍보영상</Text>
           <Text style={styles.title}>보러가기</Text>
         </View>
-        {/* <ScrollView
-          style={styles.advertiseList}
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}>
-          {advertiseList[0].map(item => (
-            <HomeAdvertise key={item.idx} item={item} />
-          ))}
-        </ScrollView> */}
         <FlatList
           horizontal={true}
           data={adv}
