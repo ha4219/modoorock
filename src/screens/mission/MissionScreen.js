@@ -97,7 +97,9 @@ const MissionScreen = ({navigation}) => {
         <View style={styles.itemSubContainer}>
           <Text style={styles.itemTitle}>{item.title}</Text>
           <Text style={styles.itemContent}>{item.content}</Text>
-          <TouchableOpacity style={styles.itemRowRight}>
+          <TouchableOpacity
+            style={styles.itemRowRight}
+            onPress={() => navigation.navigate('Doing')}>
             <Text style={styles.itemBlue}>점수확인</Text>
           </TouchableOpacity>
         </View>

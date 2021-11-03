@@ -26,7 +26,7 @@ const ProfileScreen = ({navigation, name}) => {
           style={styles.profileImage}
         />
         <View style={styles.subContainer1}>
-          <Text style={styles.name}>dlwhd990</Text>
+          <Text style={styles.name}>{name}</Text>
           {/* 원래 {name} 들어가야되는데 아무것도 안나와서 임시로 씀*/}
           <Pressable style={styles.editInfoContainer}>
             <Text style={styles.editInfo}>개인정보수정</Text>
