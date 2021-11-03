@@ -25,7 +25,7 @@ const HomeScreen = ({navigation}) => {
   const dispatch = useDispatch();
   const [exp, setExp] = React.useState([]);
   const [adv, setAdv] = React.useState([]);
-  const URL = 'https://www.youtube.com/channel/UCdTY_FXXLbtdNXXN9H3pXrg'
+  const URL = 'https://www.youtube.com/channel/UCdTY_FXXLbtdNXXN9H3pXrg';
   const handlePress = useCallback(async () => {
     // Checking if the link is supported for links with custom URL scheme.
     const supported = await Linking.canOpenURL(URL);
@@ -53,6 +53,8 @@ const HomeScreen = ({navigation}) => {
   {
     /*프로그램, 홍보영상 둘 다 임시데이터임, 서버요청해서 받아오는 법을 몰라서 일단 이렇게 해둠*/
   }
+
+  //TODO scroll+flatlist => sectionlist
   return (
     <ScrollView style={styles.main} nestedScrollEnabled={true}>
       <View style={styles.header}>

@@ -107,9 +107,7 @@ const ProfileStack = () => (
 );
 
 const MissionStack = () => (
-  <Stack.Navigator
-    initialRouteName="Mission"
-    screenOptions={{headerMode: false}}>
+  <Stack.Navigator initialRouteName="Mission">
     <Stack.Screen
       name="Mission"
       component={MissionScreen}

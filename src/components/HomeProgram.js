@@ -4,9 +4,7 @@ import {StyleSheet, View, Image, Text, TouchableOpacity} from 'react-native';
 import Config from 'react-native-config';
 
 const HomeProgram = ({item}) => {
-  console.log(item);
   const data = item.item;
-  console.log(data);
   return (
     <TouchableOpacity style={styles.item} activeOpacity={0.6}>
       <Image
