@@ -36,7 +36,130 @@ const MissionDoingScreen = ({route, navigation}) => {
     require('../../assets/mission/7.png'),
     require('../../assets/mission/8.png'),
     require('../../assets/mission/9.png'),
-  ]
+  ];
+  const fakeData = [
+    {
+      idx: 0,
+      id: 'dongha',
+      score: 10000,
+      bonus: 3456,
+    },
+    {
+      idx: 1,
+      id: 'dongha',
+      score: 9999,
+      bonus: 3456,
+    },
+    {
+      idx: 2,
+      id: 'dongha',
+      score: 9998,
+      bonus: 3456,
+    },
+    {
+      idx: 3,
+      id: 'dongha',
+      score: 9997,
+      bonus: 3456,
+    },
+    {
+      idx: 4,
+      id: 'dongha',
+      score: 9996,
+      bonus: 3456,
+    },
+    {
+      idx: 5,
+      id: 'dongha',
+      score: 9995,
+      bonus: 3456,
+    },
+    {
+      idx: 6,
+      id: 'dongha',
+      score: 9994,
+      bonus: 3456,
+    },
+    {
+      idx: 7,
+      id: 'dongha',
+      score: 9993,
+      bonus: 3456,
+    },
+    {
+      idx: 8,
+      id: 'dongha',
+      score: 9992,
+      bonus: 3456,
+    },
+    {
+      idx: 9,
+      id: 'dongha',
+      score: 9991,
+      bonus: 3456,
+    },
+    {
+      idx: 10,
+      id: 'dongha',
+      score: 9990,
+      bonus: 3456,
+    },
+    {
+      idx: 11,
+      id: 'dongha',
+      score: 9989,
+      bonus: 3456,
+    },
+    {
+      idx: 12,
+      id: 'dongha',
+      score: 9988,
+      bonus: 3456,
+    },
+    {
+      idx: 13,
+      id: 'dongha',
+      score: 9987,
+      bonus: 3456,
+    },
+    {
+      idx: 14,
+      id: 'dongha',
+      score: 9992,
+      bonus: 3456,
+    },
+    {
+      idx: 15,
+      id: 'dongha',
+      score: 9991,
+      bonus: 3456,
+    },
+    {
+      idx: 16,
+      id: 'dongha',
+      score: 9990,
+      bonus: 3456,
+    },
+    {
+      idx: 17,
+      id: 'dongha',
+      score: 9989,
+      bonus: 3456,
+    },
+    {
+      idx: 18,
+      id: 'dongha',
+      score: 9988,
+      bonus: 3456,
+    },
+    {
+      idx: 19,
+      id: 'dongha',
+      score: 9987,
+      bonus: 3456,
+    },
+  ];
+
   const Card = ({item, onPress}) => {
     return (
       <TouchableOpacity style={styles.cardView} onPress={onPress}>
@@ -44,11 +167,92 @@ const MissionDoingScreen = ({route, navigation}) => {
         <Text style={styles.cardTitle}>{item.item.title}</Text>
         <View style={styles.row}>
           <Image source={require('../../assets/mission/point.png')} />
-          <Text style={styles.cardPoint}>{item.item.point}</Text>
+          <Text style={styles.cardPoint}>{item.item.score}</Text>
         </View>
       </TouchableOpacity>
     );
   };
+
+  const Td = ({item}) => {
+    if (item.item.idx === 0) {
+      return (
+        <View style={styles.tdView}>
+          <View style={styles.rank}>
+            <Image
+              style={{width: 19.9, height: 24.8}}
+              source={require('../../assets/mission/gold.png')}
+            />
+          </View>
+          <Text style={styles.user}>{item.item.id}</Text>
+          <Text style={styles.tdscore}>{item.item.score}</Text>
+          <Text style={styles.bonus}>{item.item.bonus}</Text>
+          <View style={styles.tdSubView}>
+            <Image source={require('../../assets/mission/point.png')} />
+            <Text style={styles.sum}>{item.item.bonus + item.item.score}</Text>
+          </View>
+        </View>
+      );
+    } else if (item.item.idx === 1) {
+      return (
+        <View style={styles.tdView}>
+          <View style={styles.rank}>
+            <Image
+              style={{width: 19.9, height: 24.8}}
+              source={require('../../assets/mission/silver.png')}
+            />
+          </View>
+          <Text style={styles.user}>{item.item.id}</Text>
+          <Text style={styles.tdscore}>{item.item.score}</Text>
+          <Text style={styles.bonus}>{item.item.bonus}</Text>
+          <View style={styles.tdSubView}>
+            <Image source={require('../../assets/mission/point.png')} />
+            <Text style={styles.sum}>{item.item.bonus + item.item.score}</Text>
+          </View>
+        </View>
+      );
+    } else if (item.item.idx === 2) {
+      return (
+        <View style={styles.tdView}>
+          <View style={styles.rank}>
+            <Image
+              style={{width: 19.9, height: 24.8}}
+              source={require('../../assets/mission/bronze.png')}
+            />
+          </View>
+          <Text style={styles.user}>{item.item.id}</Text>
+          <Text style={styles.tdscore}>{item.item.score}</Text>
+          <Text style={styles.bonus}>{item.item.bonus}</Text>
+          <View style={styles.tdSubView}>
+            <Image source={require('../../assets/mission/point.png')} />
+            <Text style={styles.sum}>{item.item.bonus + item.item.score}</Text>
+          </View>
+        </View>
+      );
+    }
+    return (
+      <View style={styles.tdView}>
+        <Text style={styles.rank}>{item.item.idx + 1}</Text>
+        <Text style={styles.user}>{item.item.id}</Text>
+        <Text style={styles.tdscore}>{item.item.score}</Text>
+        <Text style={styles.bonus}>{item.item.bonus}</Text>
+        <View style={styles.tdSubView}>
+          <Image source={require('../../assets/mission/point.png')} />
+          <Text style={styles.sum}>{item.item.bonus + item.item.score}</Text>
+        </View>
+      </View>
+    );
+  };
+
+  const Th = () => (
+    <View style={styles.tdView}>
+      <Text style={styles.rank}>순위</Text>
+      <Text style={styles.user}>아이디</Text>
+      <Text style={styles.tdscore}>점수</Text>
+      <Text style={styles.bonus}>보너스</Text>
+      <Text style={styles.sum}>합계</Text>
+    </View>
+  );
+
   return (
     <View style={styles.container}>
       <View style={styles.Head}>
@@ -89,7 +293,15 @@ const MissionDoingScreen = ({route, navigation}) => {
           </View>
         </>
       ) : (
-        <></>
+        <View style={styles.flat}>
+          <FlatList
+            key={'_'}
+            keyExtractor={item => '_' + item.idx}
+            ListHeaderComponent={Th}
+            data={fakeData}
+            renderItem={item => <Td item={item} />}
+          />
+        </View>
       )}
     </View>
   );
@@ -190,5 +402,62 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     fontSize: 16,
     textAlign: 'center',
+  },
+  tdView: {
+    flexDirection: 'row',
+    backgroundColor: '#ffffff',
+  },
+  tdSubView: {
+    flex: 1,
+    height: 30,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  rank: {
+    flex: 1,
+    fontSize: 14,
+    padding: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
+  },
+  user: {
+    flex: 1,
+    fontSize: 14,
+    padding: 1,
+    color: '#008fff',
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
+  },
+  tdscore: {
+    flex: 1,
+    fontSize: 14,
+    padding: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
+  },
+  bonus: {
+    flex: 1,
+    fontSize: 14,
+    padding: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
+  },
+  sum: {
+    flex: 1,
+    fontSize: 14,
+    padding: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
+  },
+  flat: {
+    width: '100%',
+    paddingHorizontal: 20,
+    marginBottom: 50,
   },
 });
