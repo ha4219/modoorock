@@ -42,7 +42,10 @@ const MissionDoingScreen = ({route, navigation}) => {
       <TouchableOpacity style={styles.cardView} onPress={onPress}>
         <Image source={IMAGE[item.item.idx]} />
         <Text style={styles.cardTitle}>{item.item.title}</Text>
-        <Text style={styles.cardPoint}>{item.item.point}</Text>
+        <View style={styles.row}>
+          <Image source={require('../../assets/mission/point.png')} />
+          <Text style={styles.cardPoint}>{item.item.point}</Text>
+        </View>
       </TouchableOpacity>
     );
   };
@@ -76,9 +79,12 @@ const MissionDoingScreen = ({route, navigation}) => {
           <View style={styles.totalScoreView}>
             <View style={styles.totalScore}>
               <Text style={styles.score}>통합 점수</Text>
-              <Text style={styles.total}>
-                {MISSION.reduce((sum, item) => sum + item.point, 0)}
-              </Text>
+              <View style={styles.total}>
+                <Image source={require('../../assets/mission/point.png')} />
+                <Text style={styles.totalTxt}>
+                  {MISSION.reduce((sum, item) => sum + item.point, 0)}
+                </Text>
+              </View>
             </View>
           </View>
         </>
@@ -122,6 +128,8 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   cardView: {
     width: 100,
@@ -140,6 +148,10 @@ const styles = StyleSheet.create({
     shadowOffset: {width: 8, height: 16},
     shadowOpacity: 0.3,
     shadowRadius: 4,
+  },
+  cardimg: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   cardTitle: {
     fontSize: 12,
@@ -169,10 +181,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   total: {
-    color: '#ffffff',
-    flex: 1,
-    fontSize: 16,
+    flex: 0.5,
+    flexDirection: 'row',
     justifyContent: 'center',
+    alignItems: 'center',
+  },
+  totalTxt: {
+    color: '#ffffff',
+    fontSize: 16,
     textAlign: 'center',
   },
 });
