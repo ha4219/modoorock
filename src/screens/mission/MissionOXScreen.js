@@ -39,7 +39,11 @@ const MissionOXScreen = ({route, navigation}) => {
           <View
             style={[
               styles.subContainer,
-              isCorrect ? {backgroundColor: 'rgba(255,119,0,0.07)'} : [],
+              isSubmit
+                ? isCorrect
+                  ? {backgroundColor: 'rgba(0,143,255,0.06)'}
+                  : {backgroundColor: 'rgba(255,119,0,0.07)'}
+                : {},
             ]}>
             <>
               {isSubmit ? (
