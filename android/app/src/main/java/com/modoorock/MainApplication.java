@@ -1,5 +1,6 @@
 package com.modoorock;
 
+import com.reactnativecommunity.cameraroll.CameraRollPackage;
 import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;

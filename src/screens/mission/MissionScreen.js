@@ -87,7 +87,6 @@ const MissionScreen = ({navigation}) => {
   };
 
   const Body = ({item}) => {
-    console.log('testtesttest', item.img);
     return (
       <View style={styles.itemView}>
         <Image
