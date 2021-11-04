@@ -4,11 +4,6 @@ import Config from 'react-native-config';
 const API = axios.create({
   baseURL: Config.API_URL,
   withCredentials: true,
-  headers: {
-    post: {
-      Cookie: '',
-    },
-  },
 });
 
 API.interceptors.request.use(
