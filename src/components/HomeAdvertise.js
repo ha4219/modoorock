@@ -28,7 +28,7 @@ const HomeAdvertise = ({item}) => {
       onPress={() => handlePress()}>
       <Image
         style={styles.image}
-        source={require('../assets/tempAdvertise.jpeg')}
+        source={{uri: Config.IMG_URL + 'Advertise/' + item.item.thumbnail}}
       />
       <Text style={styles.title}>{item.item.title}</Text>
     </TouchableOpacity>
