@@ -13,6 +13,18 @@ import StartModal from '../../components/mission/StartModal';
 
 const MissionDoingScreen = ({route, navigation}) => {
   const [tab, setTab] = React.useState(true);
+  const ROUTING = [
+    'OX',
+    'ShortAnswer',
+    'Filter',
+    'Camera',
+    'Video',
+    'Item',
+    'Instruction',
+    'Multi',
+    'Survay',
+    'Qr',
+  ];
   const MISSION = [
     {idx: 0, title: 'OX퀴즈', point: 100},
     {idx: 1, title: '단답형', point: 100},
@@ -167,7 +179,7 @@ const MissionDoingScreen = ({route, navigation}) => {
         <Text style={styles.cardTitle}>{item.item.title}</Text>
         <View style={styles.row}>
           <Image source={require('../../assets/mission/point.png')} />
-          <Text style={styles.cardPoint}>{item.item.score}</Text>
+          <Text style={styles.cardPoint}>{item.item.point}</Text>
         </View>
       </TouchableOpacity>
     );
@@ -277,7 +289,10 @@ const MissionDoingScreen = ({route, navigation}) => {
             numColumns={3}
             data={MISSION}
             renderItem={item => (
-              <Card item={item} onPress={() => console.log('hi')} />
+              <Card
+                item={item}
+                onPress={() => navigation.navigate(ROUTING[item.item.idx])}
+              />
             )}
           />
           <View style={styles.totalScoreView}>

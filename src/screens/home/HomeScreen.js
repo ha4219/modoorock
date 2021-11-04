@@ -61,7 +61,7 @@ const HomeScreen = ({navigation}) => {
         <Image style={styles.logo} source={require('../../assets/logo.png')} />
         <View style={styles.searchContainer}>
           <TextInput style={styles.searchInput} placeholder="검색" />
-          <TouchableOpacity>
+          <TouchableOpacity onPress={()=>navigation.navigate('Test')}>
             <FontAwesomeIcon
               size={20}
               style={styles.searchIcon}

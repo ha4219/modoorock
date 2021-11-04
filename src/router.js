@@ -68,6 +68,11 @@ const HomeStack = () => (
       component={CameraImogeScreen}
       options={{headerShown: false}}
     />
+    <Stack.Screen
+      name="Test"
+      component={Home}
+      options={{headerShown: false}}
+    />
   </Stack.Navigator>
 );
 
@@ -129,7 +134,7 @@ const MissionStack = () => (
       screenOptions={{headerMode: false}}
     />
     <Stack.Screen
-      name="MultipleChoice"
+      name="Multi"
       component={MissionMultipleChoiceScreen}
       screenOptions={{headerMode: false}}
     />
