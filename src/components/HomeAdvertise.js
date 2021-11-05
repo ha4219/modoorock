@@ -44,11 +44,14 @@ const styles = StyleSheet.create({
     width: 300,
     height: 200,
     borderRadius: 10,
-    marginRight: 20,
+    marginHorizontal: 12,
+    marginTop: 20,
   },
   title: {
     fontSize: 18,
     marginTop: 12,
+    marginHorizontal: 12,
+    marginBottom: 16,
   },
 });
 

@@ -50,9 +50,6 @@ const HomeScreen = ({navigation}) => {
     getExp();
     getAdv();
   }, []);
-  {
-    /*프로그램, 홍보영상 둘 다 임시데이터임, 서버요청해서 받아오는 법을 몰라서 일단 이렇게 해둠*/
-  }
 
   //TODO scroll+flatlist => sectionlist
   return (
@@ -92,7 +89,10 @@ const HomeScreen = ({navigation}) => {
           />
         </View>
         <View style={styles.seeMoreButtonContainer}>
-          <TouchableOpacity activeOpacity={0.5} style={styles.seeMoreButton} onPress={()=>navigation.jumpTo('TourStack')}>
+          <TouchableOpacity
+            activeOpacity={0.5}
+            style={styles.seeMoreButton}
+            onPress={() => navigation.jumpTo('TourStack')}>
             <Text style={styles.seeMoreButtonText}>상품 더보기</Text>
             <FontAwesomeIcon
               icon={faChevronRight}
@@ -110,6 +110,7 @@ const HomeScreen = ({navigation}) => {
         <FlatList
           horizontal={true}
           data={adv}
+          showsHorizontalScrollIndicator={false}
           renderItem={item => <HomeAdvertise item={item} />}
         />
         <View style={styles.seeMoreButtonContainer}>
