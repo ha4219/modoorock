@@ -15,9 +15,9 @@ const HomeProgram = ({item}) => {
         <Text style={styles.title}>{data.item.title}</Text>
         <Text style={styles.area}>지역</Text>
         {/*여기에 지역 넣는 것으로 되어있는데 지역은 attraction_idx로 찾아서 넣기*/}
-        <Text style={styles.price}>{`${data.item.price.toLocaleString(
-          'ko-KR',
-        )}원`}</Text>
+        <Text style={styles.price}>
+          {data.item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원
+        </Text>
       </View>
     </TouchableOpacity>
   );

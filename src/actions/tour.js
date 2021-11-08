@@ -40,7 +40,7 @@ export const getExpData =
   async dispatch => {
     try {
       dispatch({type: GETEXPDATA});
-      const res = await APIHelper.post('/exp/getexplist', {
+      const res = await APIHelper.post('/exp/getexpthemelist', {
         theme: expType,
       });
       dispatch({type: GETEXPDATASUCCESS});

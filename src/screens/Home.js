@@ -61,6 +61,10 @@ const Home = ({navigation, idx, name}) => {
               onPress={() => {
                 console.log(idx, name);
             }} />
+            <Button
+              title="video"
+              onPress={() => navigation.navigate('Video')}
+            />
           </React.Fragment>
         ) : (
           <Button title="login" onPress={() => navigation.navigate('Login')} />

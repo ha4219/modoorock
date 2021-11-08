@@ -18,6 +18,7 @@ import HomeScreen from './screens/home/HomeScreen';
 import LoginScreen from './screens/LoginScreen';
 import Test from './screens/Test';
 import TabBar from './components/TabBar';
+import VideoScreen from './screens/VideoScreen';
 
 import {TourAreaScreen} from './screens/tour/TourAreaScreen';
 import TourAreaMoreScreen from './screens/tour/TourAreaMoreScreen';
@@ -68,9 +69,10 @@ const HomeStack = () => (
       component={CameraImogeScreen}
       options={{headerShown: false}}
     />
+    <Stack.Screen name="Test" component={Home} options={{headerShown: false}} />
     <Stack.Screen
-      name="Test"
-      component={Home}
+      name="Video"
+      component={VideoScreen}
       options={{headerShown: false}}
     />
   </Stack.Navigator>
