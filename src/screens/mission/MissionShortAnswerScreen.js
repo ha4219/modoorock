@@ -9,10 +9,6 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import Button from '../../components/Button';
-import TextInputField from '../../components/TextInputField';
-import MissionImage from '../../components/mission/MissionImage';
-import MissionDescription from '../../components/mission/MissionDescription';
 import Loading from '../../components/Loading';
 import {toast} from '../../components/Toast';
 
@@ -67,9 +63,9 @@ const MissionShortAnswerScreen = ({route, navigation}) => {
                   <Text style={styles.answerTxt}>{data.answer}</Text>
                 </View>
                 {isCorrect ? (
-                  <Text style={styles.cor}>맞음</Text>
+                  <Text style={styles.cor}>정답입니다!</Text>
                 ) : (
-                  <Text style={styles.incor}>틀림</Text>
+                  <Text style={styles.incor}>틀렸습니다!</Text>
                 )}
               </>
             ) : (
