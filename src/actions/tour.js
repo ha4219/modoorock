@@ -72,7 +72,7 @@ export const getExpReviews =
     try {
       dispatch({type: GETTOUREXPREVIEWS});
       const res = await APIHelper.post('/review/getreviewlist', {
-        exp_idx: idx,
+        expIdx: idx,
       });
       dispatch({type: GETTOUREXPREVIEWSSUCCESS});
       return res.data;

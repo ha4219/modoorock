@@ -36,13 +36,14 @@ const TourDetailScreen = ({route, navigation}) => {
 
   const getReviews = () => {
     dispatch(getExpReviews({idx: idx})).then(res => {
-      console.log('hihihirewviewsdfasd',res);
+      setReviews(res);
+      console.log('reviews test', res);
     });
   };
 
   React.useEffect(() => {
     getDetail();
-    // getReviews();
+    getReviews();
   }, []);
 
   const createPhoto = () =>
@@ -90,7 +91,7 @@ const TourDetailScreen = ({route, navigation}) => {
         <TouchableOpacity
           style={styles.rowBetween}
           onPress={() => setShowReview(!showReview)}>
-          <Text style={styles.label}>리뷰(54)</Text>
+          <Text style={styles.label}>리뷰({reviews.length})</Text>
           {showReview ? (
             <Text style={styles.label}>-</Text>
           ) : (
