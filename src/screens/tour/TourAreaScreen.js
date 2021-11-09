@@ -7,14 +7,14 @@ import {
   ScrollView,
   FlatList,
 } from 'react-native';
-import {useDispatch} from 'react-redux';
+import {useDispatch, connect} from 'react-redux';
 
 import {getTourData, getExpData} from '../../actions/tour';
 import Header from '../../components/Header';
 import {Card, CardExp} from '../../components/tour/Card';
 import Loading from '../../components/Loading';
 
-export const TourAreaScreen = ({navigation}) => {
+const TourAreaScreen = ({navigation, exp}) => {
   const AREA = [
     '전체',
     '서울',
@@ -47,35 +47,22 @@ export const TourAreaScreen = ({navigation}) => {
   const [expType, setExpType] = React.useState(0);
   const dispatch = useDispatch();
   const [data, setData] = React.useState([]);
-  const [exp, setExp] = React.useState([]);
   const [isLoading, setLoading] = React.useState(false);
-  const [cnts, setCnts] = React.useState([]);
   const doGetList = () => {
     setLoading(true);
     dispatch(getTourData({tourType: AREA[selectedValue]})).then(res => {
-      setData(res);
+      let arr = [];
+      res.forEach(element => {
+        let len = exp.filter(item => item.attractionIdx === element.idx);
+        arr.push({...element, count: len.length});
+      });
+      setData(arr);
     });
-    dispatch(getExpData({expType: THEME[expType]})).then(res => {
-      setExp(res);
-      if (res) {
-        let arr = [];
-        console.log(res, data);
-        data.map(item => {
-          let cnt = 0;
-          res.map(item1 => {
-            if (item.idx === item1.attractionIdx) {
-              cnt++;
-            }
-            arr.push(cnt);
-          });
-        });
-        setCnts(arr);
-      }
-      setLoading(false);
-    });
+    setLoading(false);
   };
 
   React.useEffect(() => {
+    dispatch(getExpData({exp: '전체'}));
     doGetList();
   }, [selectedValue, expType]);
 
@@ -186,7 +173,6 @@ export const TourAreaScreen = ({navigation}) => {
               renderItem={item => (
                 <CardExp
                   props={item}
-                  cnt={cnts[item.index]}
                   onPress={() =>
                     navigation.navigate('Detail', {idx: item.item.idx})
                   }
@@ -198,6 +184,14 @@ export const TourAreaScreen = ({navigation}) => {
       )}
     </View>
   );
+};
+
+const mapStateToProps = (state, props) => {
+  return {
+    idx: state.auth.user.idx,
+    name: state.auth.user.name,
+    exp: state.tour.exp,
+  };
 };
 
 const styles = StyleSheet.create({
@@ -261,3 +255,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
 });
+
+export default connect(mapStateToProps)(TourAreaScreen);

@@ -20,7 +20,7 @@ import Test from './screens/Test';
 import TabBar from './components/TabBar';
 import VideoScreen from './screens/VideoScreen';
 
-import {TourAreaScreen} from './screens/tour/TourAreaScreen';
+import TourAreaScreen from './screens/tour/TourAreaScreen';
 import TourAreaMoreScreen from './screens/tour/TourAreaMoreScreen';
 import TourThemeScreen from './screens/tour/TourThemeScreen';
 import TourDetailScreen from './screens/tour/TourDetailScreen';

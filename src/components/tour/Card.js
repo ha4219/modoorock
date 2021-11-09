@@ -7,7 +7,7 @@ import StarBar from './StarBar';
 import {getExpReviews} from '../../actions/tour';
 
 export const Card = ({props, onPress, cnt}) => {
-  const {name, content, idx, photo, area} = props.item;
+  const {name, content, idx, photo, area, count} = props.item;
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
       <Image
@@ -23,7 +23,7 @@ export const Card = ({props, onPress, cnt}) => {
         <Text style={styles.content}>
           {content.length > 27 ? content.slice(0, 27) + '...' : content}
         </Text>
-        <Text style={styles.size}>{cnt}개의 상품</Text>
+        <Text style={styles.size}>{count}개의 상품</Text>
       </View>
     </TouchableOpacity>
   );

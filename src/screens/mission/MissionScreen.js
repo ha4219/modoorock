@@ -35,7 +35,12 @@ const MissionScreen = ({navigation, idx, exp}) => {
           uri = '';
         }
         if (element.clearDate) {
-          let box = [...complete];
+          let box;
+          try {
+            box = [...complete];
+          } catch (e) {
+            console.log(e);
+          }
           box[index] = {
             ...element,
             uri: uri,
@@ -44,7 +49,12 @@ const MissionScreen = ({navigation, idx, exp}) => {
           };
           setComplete(box);
         } else {
-          let box = [...usable];
+          let box;
+          try {
+            box = [...usable];
+          } catch (e) {
+            console.log(e);
+          }
           box[index] = {
             ...element,
             uri: uri,
@@ -53,19 +63,19 @@ const MissionScreen = ({navigation, idx, exp}) => {
           };
           setUsable(box);
         }
+        setLoading(false);
       });
-      return [usable, complete];
     });
   };
   React.useEffect(() => {
-    doAPI().then(() => {
-      setLoading(false);
-      if (usable || complete) {
-        setMergeData(doMerge());
-        setEmpty(false);
-      }
-    });
-  },[]);
+    if (usable || complete) {
+      setMergeData(doMerge());
+      setEmpty(false);
+    }
+    if (isLoading) {
+      doAPI();
+    }
+  },[isLoading]);
 
   const doMerge = () => {
     return [

@@ -1,7 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 
-import MissionImage from '../../components/mission/MissionImage';
 import MissionDescription from '../../components/mission/MissionDescription';
 import MissionFlatChoice from '../../components/mission/MissionFlatChoice';
 import Loading from '../../components/Loading';
