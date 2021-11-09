@@ -8,7 +8,7 @@ import Loading from '../../components/Loading';
 import {toast} from '../../components/Toast';
 
 const MissionMultipleChoiceScreen = ({route, navigation}) => {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(5);
   const [ptry, setpTry] = React.useState(0);
   const [isSubmit, setSubmit] = React.useState(false);
   const [isCorrect, setCorrect] = React.useState(false);
@@ -44,7 +44,7 @@ const MissionMultipleChoiceScreen = ({route, navigation}) => {
       setCorrect(true);
     } else {
       setpTry(ptry + 1);
-      if (ptry === data.answerTry) {
+      if (ptry === data.answerTry - 1) {
         setSubmit(true);
         setCorrect(false);
       }
@@ -79,6 +79,7 @@ const MissionMultipleChoiceScreen = ({route, navigation}) => {
                 </View>
                 <MissionDescription content={data.content} />
                 <MissionFlatChoice
+                  key={1}
                   contents={contents}
                   value={value}
                   setValue={setValue}
@@ -97,7 +98,9 @@ const MissionMultipleChoiceScreen = ({route, navigation}) => {
         </>
       )}
       {isSubmit ? (
-        <TouchableOpacity style={styles.submit}>
+        <TouchableOpacity
+          style={styles.submit}
+          onPress={() => navigation.goBack()}>
           <Text style={styles.submitTxt}>다음</Text>
         </TouchableOpacity>
       ) : (

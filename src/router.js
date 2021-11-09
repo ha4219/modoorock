@@ -35,11 +35,14 @@ import CameraImogeScreen from './screens/CameraImogeScreen';
 import QnaScreen from './screens/profile/QnaScreen';
 import NoticeScreen from './screens/profile/NoticeScreen';
 import FaqScreen from './screens/profile/FaqScreen';
+
 import MissionScreen from './screens/mission/MissionScreen';
 import MissionDoingScreen from './screens/mission/MissionDoingScreen';
+import MissionDoingDetailScreen from './screens/mission/MissionDoingDetailScreen';
 import MissionOXScreen from './screens/mission/MissionOXScreen';
 import MissionShortAnswerScreen from './screens/mission/MissionShortAnswerScreen';
 import MissionMultipleChoiceScreen from './screens/mission/MissionMultipleChoiceScreen';
+import MissionInstructionScreen from './screens/mission/MissionInstructionScreen';
 
 import ProfileScreen from './screens/profile/ProfileScreen';
 import AboutUsScreen from './screens/profile/AboutUsScreen';
@@ -126,6 +129,11 @@ const MissionStack = () => (
       screenOptions={{headerMode: false}}
     />
     <Stack.Screen
+      name="Detail"
+      component={MissionDoingDetailScreen}
+      screenOptions={{headerMode: false}}
+    />
+    <Stack.Screen
       name="ShortAnswer"
       component={MissionShortAnswerScreen}
       screenOptions={{headerMode: false}}
@@ -138,6 +146,11 @@ const MissionStack = () => (
     <Stack.Screen
       name="Multi"
       component={MissionMultipleChoiceScreen}
+      screenOptions={{headerMode: false}}
+    />
+    <Stack.Screen
+      name="Instruction"
+      component={MissionInstructionScreen}
       screenOptions={{headerMode: false}}
     />
   </Stack.Navigator>

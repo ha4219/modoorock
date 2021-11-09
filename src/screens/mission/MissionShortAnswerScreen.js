@@ -104,7 +104,9 @@ const MissionShortAnswerScreen = ({route, navigation}) => {
         </>
       )}
       {isSubmit ? (
-        <TouchableOpacity style={styles.submit}>
+        <TouchableOpacity
+          style={styles.submit}
+          onPress={() => navigation.goBack()}>
           <Text style={styles.submitTxt}>다음</Text>
         </TouchableOpacity>
       ) : (

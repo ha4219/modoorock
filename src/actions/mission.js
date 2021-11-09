@@ -28,7 +28,6 @@ export const uploadImage = data => async dispatch => {
       type: 'image/jpeg',
     });
     const res = await APIUploadHelper.post('/exp/insertexp', formData);
-    console.log('결과는??????\n', res);
     dispatch({type: UPLOADIMAGESUCCESS});
   } catch (e) {
     console.log(e);
@@ -84,6 +83,22 @@ export const getUserExpList =
       dispatch({type: GETUSEREXPLIST});
       const res = await APIHelper.post('/userexp/getuserexplist', {
         userIdx: idx,
+      });
+      dispatch({type: GETUSEREXPLISTSUCCESS});
+      return res.data;
+    } catch (e) {
+      console.log(GETUSEREXPLISTERROR, e);
+      dispatch({type: GETUSEREXPLISTERROR});
+    }
+  };
+
+export const getGameListByExp =
+  ({idx}) =>
+  async dispatch => {
+    try {
+      dispatch({type: GETUSEREXPLIST});
+      const res = await APIHelper.post('/game/getgamelist', {
+        expIdx: idx,
       });
       dispatch({type: GETUSEREXPLISTSUCCESS});
       return res.data;

@@ -22,12 +22,12 @@ const MissionDoingScreen = ({route, navigation}) => {
     '',
     '단답형',
     'OX퀴즈',
-    '4지선다',
+    '객관식',
     '지시미션',
     '설문',
-    '사진',
+    '카메라',
     '동영상',
-    '토퍼',
+    '필터미션',
     '아이템',
   ];
   const IMAGE = [
@@ -55,18 +55,6 @@ const MissionDoingScreen = ({route, navigation}) => {
     'Filter',
     'Item',
     'Qr',
-  ];
-  const MISSION = [
-    {idx: 0, title: 'OX퀴즈', point: 100},
-    {idx: 1, title: '단답형', point: 100},
-    {idx: 2, title: '필터미션', point: 100},
-    {idx: 3, title: '카메라', point: 100},
-    {idx: 4, title: '동영상', point: 100},
-    {idx: 5, title: '아이템획득', point: 100},
-    {idx: 6, title: '지시미션', point: 100},
-    {idx: 7, title: '객관식', point: 100},
-    {idx: 8, title: '설문', point: 100},
-    {idx: 9, title: 'QR코드', point: 100},
   ];
 
   const getData = () => {
