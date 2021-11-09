@@ -7,71 +7,65 @@ import {
   SectionList,
   TouchableOpacity,
 } from 'react-native';
+import {useDispatch, connect} from 'react-redux';
+import Config from 'react-native-config';
+
+import {getUserExpList} from '../../actions/mission';
+import {getExpDetail} from '../../actions/tour';
 
 import Box from '../../components/Box';
 import Loading from '../../components/Loading';
 
-const MissionScreen = ({navigation}) => {
-  const [contents, setContents] = React.useState([]);
+const MissionScreen = ({navigation, idx, exp}) => {
+  const dispatch = useDispatch();
+  const [usable, setUsable] = React.useState([]);
+  const [complete, setComplete] = React.useState([]);
   const [isLoading, setLoading] = React.useState(true);
   const [isEmpty, setEmpty] = React.useState(true);
   const [mergeData, setMergeData] = React.useState({});
 
-  const usable = [
-    {
-      idx: 0,
-      title: 'Dolore magna aliqua',
-      img: '../../assets/about_us_top.png',
-      content:
-        'Lorem ipsum dolor sit amet, ipsum labitur lucilius mel id, ad has appareat.',
-      user_idx: 0,
-      data: '2011-11-22',
-      price: 10000,
-      attraction_id: 0,
-    },
-    {
-      idx: 1,
-      img: '../../assets/about_us_top.png',
-      title: 'donghadongha',
-      content: 'asdfasdfasdfasdf',
-      user_idx: 0,
-      data: '2011-11-22',
-      price: 22222000,
-      attraction_id: 0,
-    },
-  ];
-
-  const complete = [
-    {
-      idx: 3,
-      img: '../../assets/about_us_top.png',
-      title: 'Dolore magna aliqua',
-      content:
-        'Lorem ipsum dolor sit amet, ipsum labitur lucilius mel id, ad has appareat.',
-      user_idx: 0,
-      data: '2011-11-22',
-      price: 10000,
-      attraction_id: 0,
-    },
-    {
-      idx: 4,
-      img: '../../assets/about_us_top.png',
-      title: 'asdfasdfdonghadongha',
-      content: 'aqqqqqqqqqqqqsdfasdfasdfasdf',
-      user_idx: 0,
-      data: '2011-11-22',
-      price: 22222000,
-      attraction_id: 0,
-    },
-  ];
-
+  const doAPI = () => {
+    return dispatch(getUserExpList({idx: idx})).then(res => {
+      res.forEach((element, index) => {
+        const tmp = exp.filter(item => item.idx === element.expIdx);
+        var uri = '';
+        try {
+          uri = tmp[0].photo.split('#')[0];
+        } catch (e) {
+          uri = '';
+        }
+        if (element.clearDate) {
+          let box = [...complete];
+          box[index] = {
+            ...element,
+            uri: uri,
+            title: tmp[0].title,
+            content: tmp[0].detailContent,
+          };
+          setComplete(box);
+        } else {
+          let box = [...usable];
+          box[index] = {
+            ...element,
+            uri: uri,
+            title: tmp[0].title,
+            content: tmp[0].detailContent,
+          };
+          setUsable(box);
+        }
+      });
+      return [usable, complete];
+    });
+  };
   React.useEffect(() => {
-    if (usable || complete) {
-      setMergeData(doMerge());
-      setEmpty(false);
-    }
-    setLoading(false);
-  }, []);
+    doAPI().then(() => {
+      setLoading(false);
+      if (usable || complete) {
+        setMergeData(doMerge());
+        setEmpty(false);
+      }
+    });
+  },[]);
 
   const doMerge = () => {
     return [
@@ -91,14 +85,14 @@ const MissionScreen = ({navigation}) => {
       <View style={styles.itemView}>
         <Image
           style={styles.itemImg}
-          source={require('../../assets/about_us_top.png')}
+          source={{uri: Config.IMG_URL + '/Exp/' + item.uri}}
         />
         <View style={styles.itemSubContainer}>
           <Text style={styles.itemTitle}>{item.title}</Text>
           <Text style={styles.itemContent}>{item.content}</Text>
           <TouchableOpacity
             style={styles.itemRowRight}
-            onPress={() => navigation.navigate('Doing', {idx: 28})}>
+            onPress={() => navigation.navigate('Doing', {idx: item.idx})}>
             <Text style={styles.itemBlue}>점수확인</Text>
           </TouchableOpacity>
         </View>
@@ -193,4 +187,12 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MissionScreen;
+const mapStateToProps = (state, props) => {
+  return {
+    idx: state.auth.user.idx,
+    name: state.auth.user.name,
+    exp: state.tour.exp,
+  };
+};
+
+export default connect(mapStateToProps)(MissionScreen);

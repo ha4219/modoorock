@@ -43,7 +43,7 @@ export const getExpData =
       const res = await APIHelper.post('/exp/getexpthemelist', {
         theme: expType,
       });
-      dispatch({type: GETEXPDATASUCCESS});
+      dispatch({type: GETEXPDATASUCCESS, payload: res.data});
       return res.data;
     } catch (e) {
       console.log(GETEXPDATAERROR, e);

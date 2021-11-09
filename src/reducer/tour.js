@@ -2,10 +2,13 @@ import {
   GETTOURDATA,
   GETTOURDATASUCCESS,
   GETTOURDATAERROR,
+  GETEXPDATA,
+  GETEXPDATASUCCESS,
+  GETEXPDATAERROR,
 } from '../constants/actions';
 
 export const initialState = {
-  data: {},
+  exp: [],
   isUpdating: true,
   header: '',
   error: {},
@@ -13,7 +16,6 @@ export const initialState = {
 };
 
 export default (state = initialState, action) => {
-  console.log('tour', state, action);
   switch (action.type) {
     case GETTOURDATA:
       return {...state};
@@ -21,6 +23,8 @@ export default (state = initialState, action) => {
       return {...state};
     case GETTOURDATAERROR:
       return {...state};
+    case GETEXPDATASUCCESS:
+      return {...state, exp: action.payload};
     default:
       return state;
   }

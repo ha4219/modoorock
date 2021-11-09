@@ -5,6 +5,9 @@ import {
   GETMISSIONLIST,
   GETMISSIONLISTSUCCESS,
   GETMISSIONLISTERROR,
+  GETUSEREXPLIST,
+  GETUSEREXPLISTSUCCESS,
+  GETUSEREXPLISTERROR,
 } from '../constants/actions';
 import APIUploadHelper from '../helpers/APIUploadHelper';
 import APIHelper from '../helpers/APIHelper';
@@ -61,7 +64,6 @@ export const uploadVideo = data => async dispatch => {
 export const getMissionList =
   ({idx}) =>
   async dispatch => {
-    console.log(idx, idx, idx);
     try {
       dispatch({type: GETMISSIONLIST});
       const res = await APIHelper.post('/mission/getmissionlist', {
@@ -72,5 +74,21 @@ export const getMissionList =
     } catch (e) {
       console.log(e);
       dispatch({type: GETMISSIONLISTERROR});
+    }
+  };
+
+export const getUserExpList =
+  ({idx}) =>
+  async dispatch => {
+    try {
+      dispatch({type: GETUSEREXPLIST});
+      const res = await APIHelper.post('/userexp/getuserexplist', {
+        userIdx: idx,
+      });
+      dispatch({type: GETUSEREXPLISTSUCCESS});
+      return res.data;
+    } catch (e) {
+      console.log(GETUSEREXPLISTERROR, e);
+      dispatch({type: GETUSEREXPLISTERROR});
     }
   };

@@ -328,7 +328,7 @@ const MissionDoingScreen = ({route, navigation}) => {
               <View style={styles.total}>
                 <Image source={require('../../assets/mission/point.png')} />
                 <Text style={styles.totalTxt}>
-                  {MISSION.reduce((sum, item) => sum + item.point, 0)}
+                  {data.reduce((sum, item) => sum + item.point, 0)}
                 </Text>
               </View>
             </View>
