@@ -153,9 +153,8 @@ export const TourAreaScreen = ({navigation}) => {
               renderItem={item => (
                 <Card
                   props={item}
-                  cnt={cnts[item.index]}
                   onPress={() =>
-                    navigation.navigate('AreaMore', {idx: item.idx})
+                    navigation.navigate('AreaMore', {idx: item.item.idx})
                   }
                 />
               )}

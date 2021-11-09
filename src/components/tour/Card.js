@@ -1,8 +1,10 @@
 import React from 'react';
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import Config from 'react-native-config';
+import {useDispatch} from 'react-redux';
 
 import StarBar from './StarBar';
+import {getExpReviews} from '../../actions/tour';
 
 export const Card = ({props, onPress, cnt}) => {
   const {name, content, idx, photo, area} = props.item;
@@ -28,18 +30,38 @@ export const Card = ({props, onPress, cnt}) => {
 };
 
 export const CardTour = ({props, onPress}) => {
-  const {title, reviews, price, uri} = props.item;
+  const dispatch = useDispatch();
+  const {title, price, photo, idx} = props.item;
+  const uri = photo.split('#')[0];
   const [star, setStar] = React.useState(0);
-  React.useEffect(() => {
-    let value = 0;
-    reviews.forEach(element => {
-      value += element.grade;
+  console.log(uri);
+  const getStar = () => {
+    dispatch(getExpReviews({idx: idx})).then(res => {
+      if (res.length) {
+        let value = 0;
+        res.forEach(element => {
+          value += element.stars;
+        });
+        setStar(Math.ceil(value / res.length));
+      } else {
+        setStar(5);
+      }
     });
-    setStar(Math.ceil(value / reviews.length));
+  };
+  React.useEffect(() => {
+    // let value = 0;
+    // reviews.forEach(element => {
+    //   value += element.grade;
+    // });
+    // setStar(Math.ceil(value / reviews.length));
+    getStar();
   }, []);
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
-      <Image style={styles.img} source={{uri: uri}} />
+      <Image
+        style={styles.img}
+        source={{uri: Config.IMG_URL + 'Exp/' + uri}}
+      />
       <View style={styles.subContainer}>
         <Text style={styles.title}>{title}</Text>
         <StarBar value={star} />

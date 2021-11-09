@@ -1,13 +1,23 @@
 import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity, FlatList} from 'react-native';
-import {connect} from 'react-redux';
+import {connect, useDispatch} from 'react-redux';
 
 import Header from '../../components/Header';
 import {CardTour} from '../../components/tour/Card';
 
-const TourAreaMoreScreen = ({route, data, navigation}) => {
+import {getExpDataByAtt} from '../../actions/tour';
+
+const TourAreaMoreScreen = ({route, navigation}) => {
   const {idx} = route.params;
-  console.log('TourAreaMoreScreen', idx);
+  const dispatch = useDispatch();
+  const [data, setData] = React.useState([]);
+  const getExp = () => {
+    dispatch(getExpDataByAtt({idx: idx})).then(res => setData(res));
+  };
+
+  React.useEffect(() => {
+    getExp();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -23,16 +33,16 @@ const TourAreaMoreScreen = ({route, data, navigation}) => {
       <View style={styles.subContainer}>
         <Text style={styles.subContainerTxt}>관광지명 미션 투어</Text>
       </View>
-      {/* <FlatList
+      <FlatList
         numColumns={2}
-        data={dataa}
+        data={data}
         renderItem={item => (
           <CardTour
             props={item}
-            onPress={() => navigation.navigate('Area', {idx: item.index})}
+            onPress={() => navigation.navigate('Detail', {idx: item.item.idx})}
           />
         )}
-      /> */}
+      />
     </View>
   );
 };

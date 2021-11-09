@@ -13,6 +13,7 @@ import Config from 'react-native-config';
 import {getExpDetail, getExpReviews} from '../../actions/tour';
 import StarBar from '../../components/tour/StarBar';
 
+// TODO MainTourScreen 과  무조건 합쳐야함@!!!!!!
 const TourDetailScreen = ({route, navigation}) => {
   const {idx} = route.params;
   const dispatch = useDispatch();
@@ -70,7 +71,7 @@ const TourDetailScreen = ({route, navigation}) => {
         <Text style={styles.title}>{title}</Text>
         <View style={styles.row}>
           <StarBar value={5} />
-          <Text style={styles.review}>54 Reviews</Text>
+          <Text style={styles.review}>{reviews.length} Reviews</Text>
         </View>
         <Text style={styles.price}>
           {price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원

@@ -51,6 +51,23 @@ export const getExpData =
     }
   };
 
+export const getExpDataByAtt =
+  ({idx}) =>
+  async dispatch => {
+    try {
+      dispatch({type: GETEXPDATA});
+      const res = await APIHelper.post('/exp/getexpattractionlist', {
+        attractionIdx: idx,
+      });
+      console.log('asdfasdf', res.data);
+      dispatch({type: GETEXPDATASUCCESS});
+      return res.data;
+    } catch (e) {
+      console.log(GETEXPDATAERROR, e);
+      dispatch({type: GETEXPDATAERROR});
+    }
+  };
+
 export const getExpDetail =
   ({idx}) =>
   async dispatch => {
