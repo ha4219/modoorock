@@ -45,6 +45,7 @@ const TourAreaScreen = ({navigation, exp}) => {
   const [onArea, setOnArea] = React.useState(true);
   const [selectedValue, setSelectedValue] = React.useState(0);
   const [expType, setExpType] = React.useState(0);
+  const [exps, setExps] = React.useState([]);
   const dispatch = useDispatch();
   const [data, setData] = React.useState([]);
   const [isLoading, setLoading] = React.useState(false);
@@ -61,8 +62,12 @@ const TourAreaScreen = ({navigation, exp}) => {
     setLoading(false);
   };
 
+  const getExps = () => {
+    dispatch(getExpData({exp: THEME[expType]})).then(res => setExps(res));
+  };
+
   React.useEffect(() => {
-    dispatch(getExpData({exp: '전체'}));
+    getExps();
     doGetList();
   }, [selectedValue, expType]);
 
@@ -169,7 +174,7 @@ const TourAreaScreen = ({navigation, exp}) => {
           ) : (
             <FlatList
               numColumns={2}
-              data={exp}
+              data={exps}
               renderItem={item => (
                 <CardExp
                   props={item}

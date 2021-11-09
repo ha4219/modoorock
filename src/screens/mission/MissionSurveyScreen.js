@@ -1,24 +1,47 @@
 import React from 'react';
-import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  Linking,
+  Alert,
+} from 'react-native';
 import Config from 'react-native-config';
 
 import Loading from '../../components/Loading';
 import MissionDescription from '../../components/mission/MissionDescription';
 
-const MissionInstructionScreen = ({route, navigation}) => {
+const MissionSurveyScreen = ({route, navigation}) => {
   const [data, setData] = React.useState({});
   const [isLoading, setLoading] = React.useState(true);
   const [isSubmit, setSubmit] = React.useState(false);
+  const [URL, setURL] = React.useState(false);
   const DATA = {
     title: 'Dolore magna aliqua',
     content: 'Lorem ipsum dolor sit amet, ipsum labitur',
     uri: '/Exp/2021-11-09-91272_1.png',
+    url: 'https://www.panel.co.kr/user/join',
   };
-
   const getData = () => {
     setData(DATA);
+    setURL(DATA.url);
     setLoading(false);
   };
+  const handlePress = React.useCallback(async () => {
+    // Checking if the link is supported for links with custom URL scheme.
+    const supported = await Linking.canOpenURL(URL);
+
+    if (supported) {
+      // Opening the link with some app, if the URL scheme is "http" the web link should be opened
+      // by some browser in the mobile
+      await Linking.openURL(URL);
+    } else {
+      Alert.alert(`Don't know how to open this URL: ${URL}`);
+    }
+    setSubmit(true);
+  }, [URL]);
 
   React.useEffect(() => {
     getData();
@@ -29,16 +52,16 @@ const MissionInstructionScreen = ({route, navigation}) => {
         <Loading />
       ) : (
         <>
-          {isSubmit ? (
-            <></>
-          ) : (
-            <Image
-              style={styles.img}
-              source={{uri: Config.IMG_URL + data.uri}}
-            />
-          )}
+          <Image style={styles.img} source={{uri: Config.IMG_URL + data.uri}} />
           <View style={styles.subContainer}>
             <MissionDescription content={data.content} />
+            {isSubmit ? (
+              <></>
+            ) : (
+              <TouchableOpacity style={styles.click} onPress={handlePress}>
+                <Text style={styles.submitTxt}>설문조사 하러가기</Text>
+              </TouchableOpacity>
+            )}
           </View>
         </>
       )}
@@ -49,9 +72,7 @@ const MissionInstructionScreen = ({route, navigation}) => {
           <Text style={styles.submitTxt}>다음</Text>
         </TouchableOpacity>
       ) : (
-        <TouchableOpacity
-          style={styles.nonSubmit}
-          onPress={() => setSubmit(!isSubmit)}>
+        <TouchableOpacity style={styles.nonSubmit}>
           <Text style={styles.nonSubmitTxt}>다음</Text>
         </TouchableOpacity>
       )}
@@ -59,7 +80,7 @@ const MissionInstructionScreen = ({route, navigation}) => {
   );
 };
 
-export default MissionInstructionScreen;
+export default MissionSurveyScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -77,6 +98,15 @@ const styles = StyleSheet.create({
     borderWidth: 0.2,
     width: 320,
     backgroundColor: '#ffffff',
+  },
+  click: {
+    height: 44,
+    borderWidth: 0.1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#008fff',
+    marginTop: 40,
+    borderRadius: 24,
   },
   submit: {
     width: 320,

@@ -43,6 +43,7 @@ import MissionOXScreen from './screens/mission/MissionOXScreen';
 import MissionShortAnswerScreen from './screens/mission/MissionShortAnswerScreen';
 import MissionMultipleChoiceScreen from './screens/mission/MissionMultipleChoiceScreen';
 import MissionInstructionScreen from './screens/mission/MissionInstructionScreen';
+import MissionSurveyScreen from './screens/mission/MissionSurveyScreen';
 
 import ProfileScreen from './screens/profile/ProfileScreen';
 import AboutUsScreen from './screens/profile/AboutUsScreen';
@@ -151,6 +152,11 @@ const MissionStack = () => (
     <Stack.Screen
       name="Instruction"
       component={MissionInstructionScreen}
+      screenOptions={{headerMode: false}}
+    />
+    <Stack.Screen
+      name="Survey"
+      component={MissionSurveyScreen}
       screenOptions={{headerMode: false}}
     />
   </Stack.Navigator>

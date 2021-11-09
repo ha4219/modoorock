@@ -49,7 +49,7 @@ const MissionDoingScreen = ({route, navigation}) => {
     'OX',
     'Multi',
     'Instruction',
-    'Survay',
+    'Survey',
     'Camera',
     'Video',
     'Filter',
