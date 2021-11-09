@@ -34,7 +34,6 @@ export const CardTour = ({props, onPress}) => {
   const {title, price, photo, idx} = props.item;
   const uri = photo.split('#')[0];
   const [star, setStar] = React.useState(0);
-  console.log(uri);
   const getStar = () => {
     dispatch(getExpReviews({idx: idx})).then(res => {
       if (res.length) {
@@ -58,10 +57,7 @@ export const CardTour = ({props, onPress}) => {
   }, []);
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
-      <Image
-        style={styles.img}
-        source={{uri: Config.IMG_URL + 'Exp/' + uri}}
-      />
+      <Image style={styles.img} source={{uri: Config.IMG_URL + 'Exp/' + uri}} />
       <View style={styles.subContainer}>
         <Text style={styles.title}>{title}</Text>
         <StarBar value={star} />

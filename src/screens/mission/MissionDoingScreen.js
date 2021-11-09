@@ -7,22 +7,53 @@ import {
   FlatList,
   Image,
 } from 'react-native';
+import {useDispatch} from 'react-redux';
 
+import {getMissionList} from '../../actions/mission';
 import Button from '../../components/Button';
 import StartModal from '../../components/mission/StartModal';
 
 const MissionDoingScreen = ({route, navigation}) => {
+  const {idx} = route.params;
   const [tab, setTab] = React.useState(true);
+  const [data, setData] = React.useState([]);
+  const dispatch = useDispatch();
+  const TITLE = [
+    '',
+    '단답형',
+    'OX퀴즈',
+    '4지선다',
+    '지시미션',
+    '설문',
+    '사진',
+    '동영상',
+    '토퍼',
+    '아이템',
+  ];
+  const IMAGE = [
+    require('../../assets/mission/0.png'), // zero is none
+    require('../../assets/mission/1.png'),
+    require('../../assets/mission/0.png'),
+    require('../../assets/mission/7.png'),
+    require('../../assets/mission/6.png'),
+    require('../../assets/mission/8.png'),
+    require('../../assets/mission/3.png'),
+    require('../../assets/mission/4.png'),
+    require('../../assets/mission/2.png'),
+    require('../../assets/mission/5.png'),
+    require('../../assets/mission/9.png'),
+  ];
   const ROUTING = [
-    'OX',
+    'Doing',
     'ShortAnswer',
-    'Filter',
+    'OX',
+    'Multi',
+    'Instruction',
+    'Survay',
     'Camera',
     'Video',
+    'Filter',
     'Item',
-    'Instruction',
-    'Multi',
-    'Survay',
     'Qr',
   ];
   const MISSION = [
@@ -37,18 +68,14 @@ const MissionDoingScreen = ({route, navigation}) => {
     {idx: 8, title: '설문', point: 100},
     {idx: 9, title: 'QR코드', point: 100},
   ];
-  const IMAGE = [
-    require('../../assets/mission/0.png'),
-    require('../../assets/mission/1.png'),
-    require('../../assets/mission/2.png'),
-    require('../../assets/mission/3.png'),
-    require('../../assets/mission/4.png'),
-    require('../../assets/mission/5.png'),
-    require('../../assets/mission/6.png'),
-    require('../../assets/mission/7.png'),
-    require('../../assets/mission/8.png'),
-    require('../../assets/mission/9.png'),
-  ];
+
+  const getData = () => {
+    dispatch(getMissionList({idx: idx})).then(res => setData(res));
+  };
+  React.useEffect(() => {
+    getData();
+  }, []);
+
   const fakeData = [
     {
       idx: 0,
@@ -175,8 +202,8 @@ const MissionDoingScreen = ({route, navigation}) => {
   const Card = ({item, onPress}) => {
     return (
       <TouchableOpacity style={styles.cardView} onPress={onPress}>
-        <Image source={IMAGE[item.item.idx]} />
-        <Text style={styles.cardTitle}>{item.item.title}</Text>
+        <Image source={IMAGE[item.item.typeIdx]} />
+        <Text style={styles.cardTitle}>{TITLE[item.item.typeIdx]}</Text>
         <View style={styles.row}>
           <Image source={require('../../assets/mission/point.png')} />
           <Text style={styles.cardPoint}>{item.item.point}</Text>
@@ -287,11 +314,11 @@ const MissionDoingScreen = ({route, navigation}) => {
         <>
           <FlatList
             numColumns={3}
-            data={MISSION}
-            renderItem={item => (
+            data={data}
+            renderItem={(item, idx) => (
               <Card
                 item={item}
-                onPress={() => navigation.navigate(ROUTING[item.item.idx])}
+                onPress={() => navigation.navigate(ROUTING[item.item.typeIdx])}
               />
             )}
           />

@@ -54,5 +54,5 @@ const styles = StyleSheet.create({
   txtselected: {
     fontSize: 13,
     color: '#ffffff',
-  }
+  },
 });

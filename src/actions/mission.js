@@ -2,8 +2,12 @@ import {
   UPLOADIMAGE,
   UPLOADIMAGESUCCESS,
   UPLOADIMAGEERROR,
+  GETMISSIONLIST,
+  GETMISSIONLISTSUCCESS,
+  GETMISSIONLISTERROR,
 } from '../constants/actions';
 import APIUploadHelper from '../helpers/APIUploadHelper';
+import APIHelper from '../helpers/APIHelper';
 
 export const uploadImage = data => async dispatch => {
   try {
@@ -53,3 +57,20 @@ export const uploadVideo = data => async dispatch => {
     dispatch({type: UPLOADIMAGEERROR});
   }
 };
+
+export const getMissionList =
+  ({idx}) =>
+  async dispatch => {
+    console.log(idx, idx, idx);
+    try {
+      dispatch({type: GETMISSIONLIST});
+      const res = await APIHelper.post('/mission/getmissionlist', {
+        gameIdx: idx,
+      });
+      dispatch({type: GETMISSIONLISTSUCCESS});
+      return res.data;
+    } catch (e) {
+      console.log(e);
+      dispatch({type: GETMISSIONLISTERROR});
+    }
+  };
