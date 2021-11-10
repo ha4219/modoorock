@@ -3,21 +3,16 @@ import {StyleSheet, Text, View} from 'react-native';
 import {RNCamera} from 'react-native-camera';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 
-const QrScanner = ({onRead}) => {
+const QrScanner = ({onRead, style}) => {
   return (
     <QRCodeScanner
-      cameraStyle={styles.qr}
+      cameraStyle={style}
       onRead={onRead}
       flashMode={RNCamera.Constants.FlashMode.torch}
     />
   );
 };
 
-const styles = StyleSheet.create({
-  qr: {
-    width: 200,
-    height: 200,
-  },
-});
+const styles = StyleSheet.create({});
 
 export default QrScanner;

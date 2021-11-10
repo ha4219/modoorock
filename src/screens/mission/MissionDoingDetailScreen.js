@@ -11,10 +11,13 @@ import {
 } from 'react-native';
 import {useDispatch} from 'react-redux';
 import Config from 'react-native-config';
+import QRCodeScanner from 'react-native-qrcode-scanner';
+import {RNCamera} from 'react-native-camera';
 
 import {getGameListByExp} from '../../actions/mission';
 import Loading from '../../components/Loading';
 import {toast} from '../../components/Toast';
+import QrScanner from '../../components/mission/QrScanner';
 
 const MissionDoingDetailScreen = ({route, navigation}) => {
   const {expIdx} = route.params;
@@ -34,14 +37,8 @@ const MissionDoingDetailScreen = ({route, navigation}) => {
     getData();
   }, []);
 
-  const Body = ({item}) => {
-    return (
-      <TouchableOpacity
-        style={styles.itemView}
-        onPress={() => navigation.navigate('Doing', {idx: item.idx})}>
-        <Text>{item.idx}</Text>
-      </TouchableOpacity>
-    );
+  const onRead = e => {
+    console.log(e);
   };
 
   const onCheck = () => {
@@ -64,22 +61,32 @@ const MissionDoingDetailScreen = ({route, navigation}) => {
         {isLoading ? (
           <Loading />
         ) : (
-          <>
-            <Text style={styles.title}>MISSION START</Text>
-            {/* camera */}
-            <TextInput
-              style={styles.input}
-              value={value}
-              onChangeText={setValue}
-              placeholder={'미션 번호 입력'}
-            />
-            <Text style={styles.description}>
-              QR CODE를 스캔하거나{'\n'}미션 번호를 입력해주세요.
-            </Text>
-            <TouchableOpacity style={styles.btn} onPress={() => onCheck()}>
-              <Text style={styles.btnTxt}>START</Text>
-            </TouchableOpacity>
-          </>
+          <QRCodeScanner
+            containerStyle={styles.qrContainer}
+            onRead={onRead}
+            cameraStyle={styles.qr}
+            flashMode={RNCamera.Constants.FlashMode.torch}
+            topContent={
+              <View>
+                <Text style={styles.title}>MISSION START</Text>
+              </View>
+            }
+            bottomContent={
+              <>
+                <TextInput
+                  style={styles.input}
+                  value={value}
+                  onChangeText={setValue}
+                />
+                <Text style={styles.description}>
+                  QR CODE를 스캔하거나{'\n'}미션 번호를 입력해주세요.
+                </Text>
+                <TouchableOpacity style={styles.btn} onPress={() => onCheck()}>
+                  <Text style={styles.btnTxt}>START</Text>
+                </TouchableOpacity>
+              </>
+            }
+          />
         )}
       </ImageBackground>
     </View>
@@ -130,5 +137,22 @@ const styles = StyleSheet.create({
   btnTxt: {
     fontSize: 21,
     color: '#f8f8f8',
-  }
+  },
+  input: {
+    color: '#080808',
+    textAlign: 'center',
+    borderBottomWidth: 0.5,
+    borderColor: 'rgba(255,255,255,0.32)',
+    marginBottom: 50,
+    marginTop: 40,
+  },
+  qr: {
+    left: 45,
+    width: 210,
+    height: 210,
+    alignItems: 'center',
+  },
+  qrContainer: {
+    paddingHorizontal: 35,
+  },
 });
