@@ -3,13 +3,21 @@ import {StyleSheet, View, Image, Text, TouchableOpacity} from 'react-native';
 
 import Config from 'react-native-config';
 
-const HomeProgram = ({item}) => {
+const HomeProgram = ({item, onPress}) => {
   const data = item.item;
+  let photo = '';
+  try {
+    const photos = data.item.photo.split('#');
+    photo = photos[0];
+  } catch (e) {
+    photo = '';
+  }
+  console.log(data, photo);
   return (
-    <TouchableOpacity style={styles.item} activeOpacity={0.6}>
+    <TouchableOpacity style={styles.item} activeOpacity={0.6} onPress={onPress}>
       <Image
         style={styles.image}
-        source={require('../assets/tempProgram.webp')}
+        source={{uri: Config.IMG_URL + 'Exp/' + photo}}
       />
       <View style={styles.dataContainer}>
         <Text style={styles.title}>{data.item.title}</Text>

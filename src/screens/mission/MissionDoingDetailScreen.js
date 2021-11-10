@@ -141,7 +141,8 @@ const styles = StyleSheet.create({
   input: {
     color: '#080808',
     textAlign: 'center',
-    borderBottomWidth: 0.5,
+    width: 290,
+    borderBottomWidth: 1,
     borderColor: 'rgba(255,255,255,0.32)',
     marginBottom: 50,
     marginTop: 40,

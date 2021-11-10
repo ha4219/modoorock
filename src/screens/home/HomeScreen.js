@@ -61,7 +61,7 @@ const HomeScreen = ({navigation}) => {
         <Image style={styles.logo} source={require('../../assets/logo.png')} />
         <View style={styles.searchContainer}>
           <TextInput style={styles.searchInput} placeholder="검색" />
-          <TouchableOpacity onPress={()=>navigation.navigate('Test')}>
+          <TouchableOpacity onPress={() => navigation.navigate('Test')}>
             <FontAwesomeIcon
               size={20}
               style={styles.searchIcon}
@@ -88,7 +88,14 @@ const HomeScreen = ({navigation}) => {
             nestedScrollEnabled={true}
             numColumns={2}
             data={exp}
-            renderItem={item => <HomeProgram key={item.idx} item={{item}} />}
+            renderItem={item => (
+              <HomeProgram
+                key={item.idx}
+                item={{item}}
+                // onPress={() => navigation.navigate('Detail', {idx: item.idx})}
+                onPress={() => navigation.jumpTo('TourStack')}
+              />
+            )}
           />
         </View>
         <View style={styles.seeMoreButtonContainer}>
