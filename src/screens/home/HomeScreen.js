@@ -92,7 +92,10 @@ const HomeScreen = ({navigation}) => {
           />
         </View>
         <View style={styles.seeMoreButtonContainer}>
-          <TouchableOpacity activeOpacity={0.5} style={styles.seeMoreButton} onPress={()=>navigation.jumpTo('TourStack')}>
+          <TouchableOpacity
+            activeOpacity={0.5}
+            style={styles.seeMoreButton}
+            onPress={() => navigation.jumpTo('TourStack')}>
             <Text style={styles.seeMoreButtonText}>상품 더보기</Text>
             <FontAwesomeIcon
               icon={faChevronRight}

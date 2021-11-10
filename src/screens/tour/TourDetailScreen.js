@@ -22,6 +22,7 @@ const TourDetailScreen = ({route, navigation}) => {
   const [price, setPrice] = React.useState(0);
   const [content, setContent] = React.useState('');
   const [reviews, setReviews] = React.useState([]);
+  const [star, setStar] = React.useState(5);
 
   const [showPhoto, setShowPhoto] = React.useState(false);
   const [showReview, setShowReview] = React.useState(false);
@@ -38,7 +39,11 @@ const TourDetailScreen = ({route, navigation}) => {
   const getReviews = () => {
     dispatch(getExpReviews({idx: idx})).then(res => {
       setReviews(res);
-      console.log('reviews test', res);
+      let tmp = 0;
+      res.forEach(element => {
+        tmp += element.stars;
+      });
+      setStar(Math.ceil(tmp / res.length));
     });
   };
 
@@ -56,7 +61,13 @@ const TourDetailScreen = ({route, navigation}) => {
       />
     ));
 
-  const createReview = () => reviews.map((item, index) => <Text>{index}</Text>);
+  const createReview = () =>
+    reviews.map((item, index) => (
+      <View style={styles.reviewContainer} key={index}>
+        <StarBar value={item.stars} />
+        <Text>{item.comment}</Text>
+      </View>
+    ));
   return (
     <ScrollView style={styles.container}>
       <Image
@@ -70,7 +81,7 @@ const TourDetailScreen = ({route, navigation}) => {
       <View style={styles.subContainer}>
         <Text style={styles.title}>{title}</Text>
         <View style={styles.row}>
-          <StarBar value={5} />
+          <StarBar value={star} />
           <Text style={styles.review}>{reviews.length} Reviews</Text>
         </View>
         <Text style={styles.price}>
@@ -99,7 +110,7 @@ const TourDetailScreen = ({route, navigation}) => {
             <Text style={styles.label}>+</Text>
           )}
         </TouchableOpacity>
-        {showPhoto ? createReview() : <></>}
+        {showReview ? createReview() : <></>}
       </View>
     </ScrollView>
   );
@@ -123,6 +134,12 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
+  },
+  reviewContainer: {
+    borderWidth: 0.5,
+    borderRadius: 10,
+    padding: 10,
+    marginBottom: 10,
   },
   price: {
     fontSize: 21,
